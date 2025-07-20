@@ -1,7 +1,7 @@
 ![Star Badge](https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=If%20Useful&style=style=flat&color=BC4E99)
 ![오픈 소스 사랑](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)
-[![내 프로필 보기](https://img.shields.io/badge/View-My_Profile-green?logo=GitHub)](https://github.com/ndleah)
-[![내 리포지토리 보기](https.img.shields.io/badge/View-My_Repositories-blue?logo=GitHub)](https://github.com/ndleah?tab=repositories)
+[![내 프로필 보기](https://img.shields.io/badge/View-My_Profile-green?logo=GitHub)](https://github.com/partrita)
+[![내 리포지토리 보기](https.img.shields.io/badge/View-My_Repositories-blue?logo=GitHub)](https://github.com/partrita?tab=repositories)
 
 [![forthebadge](https://forthebadge.com/images/badges/powered-by-coffee.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
@@ -12,11 +12,11 @@
 
 > 프로그래밍 기술을 향상시키는 데 도움이 되는 쉬운 파이썬 소규모 프로젝트 모음입니다.
 
-![문제](https://img.shields.io/github/issues/ndleah/python-mini-project?style=social&logo=github)
-![풀 리퀘스트](https://img.shields.io/github/issues-pr/ndleah/python-mini-project?style=social&logo=github)
-![포크](https://img.shields.io/github/forks/ndleah/python-mini-project?style=social&logo=github)
-![별](https://img.shields.io/github/stars/ndleah/python-mini-project?style=social&logo=github)
-[![라이선스](https://img.shields.io/github/license/ndleah/python-mini-project?style=social&logo=github)](https://github.com/ndleah/python-mini-project/blob/main/LICENSE)
+![문제](https://img.shields.io/github/issues/partrita/python-mini-project?style=social&logo=github)
+![풀 리퀘스트](https://img.shields.io/github/issues-pr/partrita/python-mini-project?style=social&logo=github)
+![포크](https://img.shields.io/github/forks/partrita/python-mini-project?style=social&logo=github)
+![별](https://img.shields.io/github/stars/partrita/python-mini-project?style=social&logo=github)
+[![라이선스](https://img.shields.io/github/license/partrita/python-mini-project?style=social&logo=github)](https://github.com/partrita/python-mini-project/blob/main/LICENSE)
 
 <!-- 목차에서 생략 -->
 
@@ -56,7 +56,7 @@
 2단계: 포크하기
 </summary>
 
-[이 리포지토리의 GitHub 페이지](https://github.com/ndleah/python-mini-project)에서 "**포크**" 버튼을 클릭하세요.
+[이 리포지토리의 GitHub 페이지](https://github.com/partrita/python-mini-project)에서 "**포크**" 버튼을 클릭하세요.
 
 ![포크 이미지](https://upload.wikimedia.org/wikipedia/commons/3/38/GitHub_Fork_Button.png)
 
@@ -135,7 +135,7 @@ git checkout -b <branch-name>
 
 이 단계를 완료하면 프로젝트에 기여하고 **풀 리퀘스트**를 만들 준비가 된 것입니다.
 
-- [프로젝트 디렉토리](https://github.com/ndleah/python-mini-project)에 프로젝트 이름에 따라 폴더를 만듭니다.
+- [프로젝트 디렉토리](https://github.com/partrita/python-mini-project)에 프로젝트 이름에 따라 폴더를 만듭니다.
   > 폴더 이름은 "Your_Project_Name_Here" 형식을 따라야 합니다. 예: Dice_Stimulator
 - 코드를 작성하고 로컬의 프로젝트 디렉토리에 있는 해당 폴더에 추가합니다.
 - [README_TEMPLATE](https://github.com/Python-World/python-mini-projects/blob/master/README_TEMPLATE.md)에 따라 폴더에 `README.md`를 추가하는 것을 잊지 마세요.
@@ -184,22 +184,22 @@ _포크_의 GitHub 페이지로 이동하여 **풀 리퀘스트를 만듭니다*
 
 일관성을 위해 이 템플릿과 동일한 구성을 따르는 `README.md` 파일을 추가해야 합니다.
 
-[README 템플릿](https://github.com/ndleah/python-mini-project/blob/master/README_TEMPLATE.md)
+[README 템플릿](https://github.com/partrita/python-mini-project/blob/master/README_TEMPLATE.md)
 
 ## ![이미지](IMG/like.svg) 우리의 기여자
 
-<a href="https://github.com/ndleah/python-mini-project/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=ndleah/python-mini-project" />
+<a href="https://github.com/partrita/python-mini-project/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=partrita/python-mini-project" />
 </a>
 
 ## ![이미지](IMG/muscle.svg) 피드백
 
 이 프로젝트를 개선하기 위한 피드백이나 아이디어가 있으면 다음을 통해 저에게 연락해 주세요.
 
-<a href="https://www.linkedin.com/in/ndleah/">
+<a href="https://www.linkedin.com/in/partrita/">
   <img align="left" alt="Reeha's Linkdein" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />
 
 </a>
-<a href="https://github.com/ndleah">
+<a href="https://github.com/partrita">
   <img align="left" alt="Reeha's Github" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/github.svg" />
 </a>
