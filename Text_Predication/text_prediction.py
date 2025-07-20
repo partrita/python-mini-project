@@ -9,15 +9,18 @@ from nltk.lm import Laplace
 def remove_html_tags(text):
     # Function to remove HTML tags from text
     import re
-    clean = re.compile('<.*?>')
-    return re.sub(clean, '', text)
+
+    clean = re.compile("<.*?>")
+    return re.sub(clean, "", text)
 
 
 def remap_corpus(path):
     # Read CSV file, preprocess the 'Body' column, and tokenize the text
     df_corpus = pd.read_csv(path)
-    df_corpus['Body'] = df_corpus['Body'].apply(lambda x: remove_html_tags(x))
-    df_corpus['Body_tokenized'] = df_corpus['Body'].apply(lambda x: WordPunctTokenizer().tokenize(x))
+    df_corpus["Body"] = df_corpus["Body"].apply(lambda x: remove_html_tags(x))
+    df_corpus["Body_tokenized"] = df_corpus["Body"].apply(
+        lambda x: WordPunctTokenizer().tokenize(x)
+    )
     return df_corpus
 
 
@@ -26,8 +29,17 @@ def padding_corpus(corpus):
     corpus_padding = []
     for sentence in corpus:
         corpus_padding.append(
-            list(pad_both_ends(sentence, pad_left=True, left_pad_symbol="<s>", pad_right=True, right_pad_symbol="</s>",
-                               n=2)))
+            list(
+                pad_both_ends(
+                    sentence,
+                    pad_left=True,
+                    left_pad_symbol="<s>",
+                    pad_right=True,
+                    right_pad_symbol="</s>",
+                    n=2,
+                )
+            )
+        )
     return corpus_padding
 
 
@@ -58,19 +70,21 @@ def prediction(train, prefix):
     score_list = {}
     for word in voc:
         score_list[word] = LaplaceModel.score(word, [prefix])
-    sorted_dict = dict(sorted(score_list.items(), key=lambda item: item[1], reverse=True))
+    sorted_dict = dict(
+        sorted(score_list.items(), key=lambda item: item[1], reverse=True)
+    )
     my_dict = {k: round(sorted_dict[k], 2) for k in list(sorted_dict.keys())[:3]}
     return my_dict
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Main execution
     print("Text Prediction using Laplace Smoothing")
     print("--------------------------------------")
     print("Reading training data...")
 
     path_train = "corpus/train.csv"
-    corpus_train = remap_corpus(path_train)['Body_tokenized']
+    corpus_train = remap_corpus(path_train)["Body_tokenized"]
     print("Training data is ready!")
     print("--------------------------------------")
     user_input = input("Enter a prefix for next-word prediction: ")

@@ -11,6 +11,7 @@ PLAYER_2 = 2
 board = [[EMPTY] * COLS for _ in range(ROWS)]
 current_player = PLAYER_1
 
+
 def drop_piece(col):
     global current_player
     row = get_next_open_row(col)
@@ -23,11 +24,13 @@ def drop_piece(col):
         else:
             current_player = 3 - current_player  # Switch player
 
+
 def get_next_open_row(col):
     for row in range(ROWS - 1, -1, -1):
         if board[row][col] == EMPTY:
             return row
     return None
+
 
 def check_winner(row, col):
     directions = [(0, 1), (1, 0), (1, 1), (-1, 1)]
@@ -37,14 +40,19 @@ def check_winner(row, col):
             return True
     return False
 
+
 def check_line(row, col, delta_row, delta_col):
     count = 0
-    while 0 <= row + delta_row < ROWS and 0 <= col + delta_col < COLS and \
-            board[row][col] == board[row + delta_row][col + delta_col]:
+    while (
+        0 <= row + delta_row < ROWS
+        and 0 <= col + delta_col < COLS
+        and board[row][col] == board[row + delta_row][col + delta_col]
+    ):
         count += 1
         row += delta_row
         col += delta_col
     return count
+
 
 def draw_board():
     canvas.delete("all")  # Clear previous drawings
@@ -55,14 +63,20 @@ def draw_board():
             x1, y1 = col * cell_size, row * cell_size
             x2, y2 = x1 + cell_size, y1 + cell_size
 
-            color = "white" if board[row][col] == EMPTY else ("red" if board[row][col] == PLAYER_1 else "yellow")
+            color = (
+                "white"
+                if board[row][col] == EMPTY
+                else ("red" if board[row][col] == PLAYER_1 else "yellow")
+            )
             canvas.create_oval(x1, y1, x2, y2, fill=color)
+
 
 def reset_board():
     global board, current_player
     board = [[EMPTY] * COLS for _ in range(ROWS)]
     current_player = PLAYER_1
     draw_board()
+
 
 # Create the main window
 root = tk.Tk()

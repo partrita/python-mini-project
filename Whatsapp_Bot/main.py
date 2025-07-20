@@ -2,14 +2,13 @@
 # in order to import pywhatkit...
 
 import pywhatkit
-from datetime import datetime
 
 PHONE_NUMBER = input("Enter Phone Number: ")
 # Must include all number info about region (and '+' sign).
 
 MESSAGE = input("Enter Message: ")
 
-HR = int(input("Enter Hour: "))     
+HR = int(input("Enter Hour: "))
 # 24 Hour Format
 
 MIN = int(input("Enter Minutes:"))

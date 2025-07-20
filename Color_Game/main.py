@@ -1,10 +1,20 @@
 import random
 import tkinter as tk
-from tkinter import messagebox
 
-colours = ['Red', 'Blue', 'Green', 'Yellow', 'Orange', 'Purple', 'Pink', 'Black', 'White']
+colours = [
+    "Red",
+    "Blue",
+    "Green",
+    "Yellow",
+    "Orange",
+    "Purple",
+    "Pink",
+    "Black",
+    "White",
+]
 score = 0
 timeleft = 30
+
 
 def next_colour():
     global score, timeleft
@@ -29,16 +39,15 @@ def countdown():
         time_label.config(text=f"Time left: {timeleft}")
         time_label.after(1000, countdown)
     else:
-    # messagebox.showwarning ('Attention', 'Your time is out!!')
+        # messagebox.showwarning ('Attention', 'Your time is out!!')
         scoreshow()
-        
+
 
 def record_highest_score():
     highest_score = load_highest_score()
     if score > highest_score:
         with open("highest_score.txt", "w") as file:
             file.write(str(score))
-    
 
 
 def load_highest_score():
@@ -59,11 +68,14 @@ def scoreshow():
     window2.title("HIGH SCORE")
     window2.geometry("300x200")
 
-    label = tk.Label(window2, text=f"Highest Score: {load_highest_score()}",font=(font, 12))
-   
+    label = tk.Label(
+        window2, text=f"Highest Score: {load_highest_score()}", font=(font, 12)
+    )
+
     label.pack()
 
     window2.mainloop()
+
 
 def start_game(event):
     global timeleft
@@ -71,19 +83,22 @@ def start_game(event):
         countdown()
     next_colour()
 
+
 window = tk.Tk()
-font = 'Helvetica'
+font = "Helvetica"
 window.title("Color Game")
 window.iconbitmap("color_game_icon.ico")
 window.geometry("375x250")
 window.resizable(False, False)
 
-instructions = tk.Label(window, text="Enter the color of the text, not the word!", font=(font, 12))
+instructions = tk.Label(
+    window, text="Enter the color of the text, not the word!", font=(font, 12)
+)
 instructions.pack(pady=10)
 
 score_label = tk.Label(window, text="Press Enter to start", font=(font, 12))
 score_label.pack()
- 
+
 time_label = tk.Label(window, text=f"Time left: {timeleft}", font=(font, 12))
 time_label.pack()
 
@@ -91,7 +106,7 @@ label = tk.Label(window, font=(font, 60))
 label.pack(pady=20)
 
 e = tk.Entry(window)
-window.bind('<Return>', start_game)
+window.bind("<Return>", start_game)
 e.pack()
 
 e.focus_set()

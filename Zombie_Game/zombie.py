@@ -25,7 +25,9 @@ print("""⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⣤�
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣧⠀⠘⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣶⠀⠹⠂⠀⣰⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠛⠛⠶⢦⣤⣀⣀⠀⠀⠀⠀⢀⣈⣛⣥⣤⠴⠾⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀""")
-print("Take this quiz and find out how long you would survive amongst the walking dead.")
+print(
+    "Take this quiz and find out how long you would survive amongst the walking dead."
+)
 print("There are easy, intermediate and hard questions all mixed together.")
 print("There may be more than one correct answer.\nGood luck!")
 
@@ -38,16 +40,18 @@ print("""(1) your dog
 answer = input(">")
 
 if answer == "1":
-  score += random.randint(10,20)
+    score += random.randint(10, 20)
 if answer == "2":
-  score += random.randint(5,10)
+    score += random.randint(5, 10)
 else:
-  score += 3
-  
+    score += 3
+
 print("")
 
 # ---- question 2 ----
-print("It is night, and you will freeze to death soon. Making too much noise/light will attract the zombies. What do you do?")
+print(
+    "It is night, and you will freeze to death soon. Making too much noise/light will attract the zombies. What do you do?"
+)
 print("""(1) keep moving around
 (2) build a tiny fire
 (3) build a normal fire
@@ -55,16 +59,18 @@ print("""(1) keep moving around
 answer = input(">")
 
 if answer == "2":
-  score += random.randint(10,20)
+    score += random.randint(10, 20)
 if answer == "4":
-  score += random.randint(5,10)
+    score += random.randint(5, 10)
 else:
-  score += 3
+    score += 3
 
 print("")
 
 # ---- question 3 ----
-print("You are cornered in a grocery store with only a knife. A horde is moving in from all sides. What do you do?")
+print(
+    "You are cornered in a grocery store with only a knife. A horde is moving in from all sides. What do you do?"
+)
 print("""(1) kill zombies to make a path
 (2) try to climb up on the wobbly shelves
 (3) shout for help
@@ -72,11 +78,11 @@ print("""(1) kill zombies to make a path
 answer = input(">")
 
 if answer == "2":
-  score += random.randint(10,20)
+    score += random.randint(10, 20)
 if answer == "1":
-  score += random.randint(5,10)
+    score += random.randint(5, 10)
 else:
-  score += 3
+    score += 3
 
 print("")
 
@@ -89,16 +95,18 @@ print("""(1) watch them for a while
 answer = input(">")
 
 if answer == "1":
-  score += random.randint(10,20)
+    score += random.randint(10, 20)
 if answer == "3":
-  score += random.randint(5,10)
+    score += random.randint(5, 10)
 else:
-  score += 3
-  
+    score += 3
+
 print("")
 
 # ---- question 5 ----
-print("A group of about 6 people take your stuff at gunpoint, then tell you to get in a storage container. What do you do?")
+print(
+    "A group of about 6 people take your stuff at gunpoint, then tell you to get in a storage container. What do you do?"
+)
 print("""(1) get in the container
 (2) try to reason with them
 (3) refuse
@@ -106,12 +114,12 @@ print("""(1) get in the container
 answer = input(">")
 
 if answer == "1":
-  score += random.randint(10,20)
+    score += random.randint(10, 20)
 if answer == "4":
-  score += random.randint(5,10)
+    score += random.randint(5, 10)
 else:
-  score += 3
-  
+    score += 3
+
 print("")
 
 # ---- question 6 ----
@@ -123,12 +131,12 @@ print("""(1) share it
 answer = input(">")
 
 if answer == "2":
-  score += random.randint(10,20)
+    score += random.randint(10, 20)
 if answer == "1":
-  score += random.randint(5,10)
+    score += random.randint(5, 10)
 else:
-  score += 3
-  
+    score += 3
+
 print("")
 
 # ---- question 7 ----
@@ -140,11 +148,11 @@ print("""(1) katana
 answer = input(">")
 
 if answer == "2":
-  score += random.randint(10,20)
+    score += random.randint(10, 20)
 if answer == "3":
-  score += random.randint(5,10)
+    score += random.randint(5, 10)
 else:
-  score += 3
+    score += 3
 
 print("")
 
@@ -157,11 +165,11 @@ print("""(1) trail mix
 answer = input(">")
 
 if answer == "3":
-  score += random.randint(10,20)
+    score += random.randint(10, 20)
 if answer == "4":
-  score += random.randint(5,10)
+    score += random.randint(5, 10)
 else:
-  score += 3  
+    score += 3
 
 print("")
 
@@ -174,16 +182,18 @@ print("""(1) next to the river
 answer = input(">")
 
 if answer == "1":
-  score += random.randint(10,20)
+    score += random.randint(10, 20)
 if answer == "2":
-  score += random.randint(5,10)
+    score += random.randint(5, 10)
 else:
-  score += 3  
+    score += 3
 
 print("")
 
 # ---- question 10 ----
-print("Your camp, with your group of ~20 people, has been overrun by a horde. What do you do?")
+print(
+    "Your camp, with your group of ~20 people, has been overrun by a horde. What do you do?"
+)
 print("""(1) follow your friends
 (2) run
 (3) try and save the camp
@@ -191,11 +201,11 @@ print("""(1) follow your friends
 answer = input(">")
 
 if answer == "3":
-  score += random.randint(10,20)
+    score += random.randint(10, 20)
 if answer == "4":
-  score += random.randint(5,10)
+    score += random.randint(5, 10)
 else:
-  score += 3  
+    score += 3
 
 print("")
 
@@ -203,19 +213,33 @@ print("")
 print("The results are in!")
 print("You scored a {}%".format(score))
 
-if score == (0,5):
-		print('You would be one of the first peopple to die in the apocalypse.\nYou panic at the sight of a zombie and have no survival skills, getting eaten within an hour.\nPathetic.')
+if score == (0, 5):
+    print(
+        "You would be one of the first peopple to die in the apocalypse.\nYou panic at the sight of a zombie and have no survival skills, getting eaten within an hour.\nPathetic."
+    )
 if score in range(6, 20):
-		print('You would live a few hours in the apocalypse.\nAs the chaos begins, you make a desperate attempt to save your stuff.\nGetting into the car, you get surrounded.\nThey break open the windows and eat you.\nThat must suck.')
+    print(
+        "You would live a few hours in the apocalypse.\nAs the chaos begins, you make a desperate attempt to save your stuff.\nGetting into the car, you get surrounded.\nThey break open the windows and eat you.\nThat must suck."
+    )
 if score in range(21, 50):
-		print('You would live a few days in the apocalypse.\nAs the chaos begins, you attempt to go to the emergency shelters.\nYou die when they get overcrowded and overrun.\nToo bad.')
+    print(
+        "You would live a few days in the apocalypse.\nAs the chaos begins, you attempt to go to the emergency shelters.\nYou die when they get overcrowded and overrun.\nToo bad."
+    )
 if score in range(51, 80):
-		print('You would live a month in the apocalypse.\nYou find a camp and manage to survive for a month, but when the camp gets overrun, you get bit.\nSo close, yet so far.')
+    print(
+        "You would live a month in the apocalypse.\nYou find a camp and manage to survive for a month, but when the camp gets overrun, you get bit.\nSo close, yet so far."
+    )
 if score in range(81, 110):
-		print('You would live a few months in the apocalypse.\nYour camp moves from place to place before settling at an old school building.\nAfter living there for a month, you accidentally shoot yourself with a crossbow while attempting to load it.\nAt least you tried.')
+    print(
+        "You would live a few months in the apocalypse.\nYour camp moves from place to place before settling at an old school building.\nAfter living there for a month, you accidentally shoot yourself with a crossbow while attempting to load it.\nAt least you tried."
+    )
 if score in range(111, 130):
-		print('You would live a few years in the apocalypse.\nYour group settles at a town in Tennessee, fortifying it so that it can withstand a horde.\nWhile on a run, you fall through a floor and break your leg, attracting zombies and getting eaten.\nYou will be remembered.')
+    print(
+        "You would live a few years in the apocalypse.\nYour group settles at a town in Tennessee, fortifying it so that it can withstand a horde.\nWhile on a run, you fall through a floor and break your leg, attracting zombies and getting eaten.\nYou will be remembered."
+    )
 if score in range(131, 1000):
-		print('You would live for a really long time in the apocalypse.\nBeing the leader of your group, you settle at a town near the beach, where hardly any hordes pass through.\nYou help build a utopia named Z-Land.\nAt the age of 79, you pass away in your sleep.\nThere was a statue of you built.')
+    print(
+        "You would live for a really long time in the apocalypse.\nBeing the leader of your group, you settle at a town near the beach, where hardly any hordes pass through.\nYou help build a utopia named Z-Land.\nAt the age of 79, you pass away in your sleep.\nThere was a statue of you built."
+    )
 
 exit()

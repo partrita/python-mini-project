@@ -10,7 +10,7 @@ def last(list):
 
 def music_name():
     global my_music, music_number
-    return last(my_music[music_number].split('/'))
+    return last(my_music[music_number].split("/"))
 
 
 def play_music():
@@ -42,20 +42,20 @@ def previous_music():
 music_number = 0
 
 window = Tk()
-window.geometry('330x120')
+window.geometry("330x120")
 window.resizable(False, False)
-window.title('Mp3 Player')
+window.title("Mp3 Player")
 
 instance = vlc.Instance()
 player = instance.media_player_new()
 
-my_music = glob.glob('/home/shitij_agrawal/Music/*.mp3')  # path to music folder
+my_music = glob.glob("/home/shitij_agrawal/Music/*.mp3")  # path to music folder
 
-play_image = PhotoImage(file='images/play.png')
-pause_image = PhotoImage(file='images/pause.png')
-forward_image = PhotoImage(file='images/forward.png')
-backward_image = PhotoImage(file='images/backward.png')
-stop_image = PhotoImage(file='images/stop.png')
+play_image = PhotoImage(file="images/play.png")
+pause_image = PhotoImage(file="images/pause.png")
+forward_image = PhotoImage(file="images/forward.png")
+backward_image = PhotoImage(file="images/backward.png")
+stop_image = PhotoImage(file="images/stop.png")
 
 music_label = tk.Label(window, text=music_name())
 

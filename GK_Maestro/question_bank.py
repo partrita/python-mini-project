@@ -1,4 +1,4 @@
-# Store all the easy questions to be asked, and returns the dictionary 
+# Store all the easy questions to be asked, and returns the dictionary
 def easy_question(num):
     easy_question_bank = {
         2: "COVID19 originated from which country?",
@@ -12,6 +12,7 @@ def easy_question(num):
     }
 
     return easy_question_bank[num]
+
 
 # Store all the hard questions to be asked, and returns the dictionary
 def hard_question(num):
@@ -27,4 +28,3 @@ def hard_question(num):
     }
 
     return hard_question_bank[num]
-    

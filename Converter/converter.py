@@ -1,5 +1,6 @@
 from converter_values import *  # import required files
 
+
 def main():
     print(options["help"])  # prints help menu
     res = input("Response: ")
@@ -20,17 +21,21 @@ def main():
 
         res = input("\nResponse: ")
 
+
 def display_help(command):
     """Display help menu."""
     print(options[command])
 
+
 def perform_conversion(res):
     """Perform unit conversion."""
-    for i in res[3].split(','):
-        value = round(eval("{} * {}['{}'] / {}['{}']".format(res[2], res[0], i, res[0], res[1])), 6)  # calculating
+    for i in res[3].split(","):
+        value = round(
+            eval("{} * {}['{}'] / {}['{}']".format(res[2], res[0], i, res[0], res[1])),
+            6,
+        )  # calculating
         print("{} \t : {}".format(i, value))  # displaying
+
 
 if __name__ == "__main__":
     main()
-
-

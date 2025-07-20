@@ -4,7 +4,7 @@ from moviepy.editor import *
 # Create array for clips
 videos = []
 # Assign directory
-directory = 'clips'
+directory = "clips"
 
 # Iterate over files in
 # that directory and add them
@@ -29,14 +29,18 @@ concated = []
 for path in videos:
     print(path)
     print(os.path.getmtime(path) - start)
-    concated.append(VideoFileClip(path, audio=True).set_start(
-        os.path.getmtime(path) - start))
+    concated.append(
+        VideoFileClip(path, audio=True).set_start(os.path.getmtime(path) - start)
+    )
 
 # Combine clips into one video
 output = CompositeVideoClip(concated)
 
 # Output
-output.write_videofile("output.mp4", codec='libx264',
-                       audio_codec='aac',
-                       temp_audiofile='temp-audio.m4a',
-                       remove_temp=True)
+output.write_videofile(
+    "output.mp4",
+    codec="libx264",
+    audio_codec="aac",
+    temp_audiofile="temp-audio.m4a",
+    remove_temp=True,
+)

@@ -15,9 +15,9 @@ import numpy as np
 def make_coordinate(image, line_parameters):
     slope, intercept = line_parameters
     y1 = image.shape[0]
-    y2 = int(y1*(3/5))
-    x1 = int((y1-intercept)/slope)
-    x2 = int((y2-intercept)/slope)
+    y2 = int(y1 * (3 / 5))
+    x1 = int((y1 - intercept) / slope)
+    x2 = int((y2 - intercept) / slope)
     return np.array([x1, y1, x2, y2])
 
 
@@ -57,9 +57,7 @@ def display_lines(image, lines):
 
 def roi(image):
     height = image.shape[0]
-    polygons = np.array([
-        [(200, height), (1100, height), (550, 250)]
-    ])
+    polygons = np.array([[(200, height), (1100, height), (550, 250)]])
     mask = np.zeros_like(image)
     cv2.fillPoly(mask, polygons, 255)
     masked_image = cv2.bitwise_and(image, mask)
@@ -68,17 +66,18 @@ def roi(image):
 
 cap = cv2.VideoCapture("Finding_Lanes/video.mp4")
 
-while(cap.isOpened()):
+while cap.isOpened():
     _, frame = cap.read()
     canny_image = canny(frame)
     cropped_image = roi(canny_image)
-    lines = cv2.HoughLinesP(cropped_image, 2, np.pi/180,
-                            100, np.array([]), minLineLength=40, maxLineGap=5)
+    lines = cv2.HoughLinesP(
+        cropped_image, 2, np.pi / 180, 100, np.array([]), minLineLength=40, maxLineGap=5
+    )
     averaged_lines = average_lines_intercept(frame, lines)
     line_image = display_lines(frame, averaged_lines)
     combo_image = cv2.addWeighted(frame, 0.8, line_image, 1, 1)
     cv2.imshow("result", combo_image)
-    if cv2.waitKey(10) == ord('q'):
+    if cv2.waitKey(10) == ord("q"):
         break
 
 cap.release()

@@ -1,12 +1,12 @@
 def parse_infix(input):
     ret = ""
     for i, tmp in enumerate(input):
-        if tmp == '.':
+        if tmp == ".":
             ret += tmp
         elif tmp.isdigit():
             ret += tmp
             if i < len(input) - 1:
-                if not input[i + 1].isdigit() and input[i + 1] != '.':
+                if not input[i + 1].isdigit() and input[i + 1] != ".":
                     ret += " "
         else:
             ret += tmp + " "
@@ -16,7 +16,7 @@ def parse_infix(input):
 def convert_to_postfix(infix):
     ret = ""
     infix = infix.strip()
-    infix_arr = infix.split(' ')
+    infix_arr = infix.split(" ")
     s = []
     for token in infix_arr:
         if token == "(":
@@ -53,7 +53,7 @@ def calculate_postfix(postfix):
     ret = ""
     s = []
     postfix = postfix.strip()
-    postfix_arr = postfix.split(' ')
+    postfix_arr = postfix.split(" ")
     for token in postfix_arr:
         if token in ["+", "-", "*", "/"]:
             b = s.pop()
@@ -70,6 +70,7 @@ def calculate_postfix(postfix):
             s.append(float(token))
     ret = str(s.pop())
     return ret
+
 
 from tkinter import *
 
@@ -106,6 +107,7 @@ result.pack()
 btn = Button(app, text="Calculate")
 btn.pack()
 
+
 def calculate():
     infix_str = infix.get()
     tempinfix_str = parse_infix(infix_str)
@@ -117,6 +119,7 @@ def calculate():
     postfix.insert(0, postfix_str)
     result.delete(0, END)
     result.insert(0, result_str)
+
 
 btn["command"] = calculate
 root.mainloop()

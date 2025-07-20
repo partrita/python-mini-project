@@ -1,74 +1,69 @@
-instruction = '''
-        firstly we have to take input of capital String/single word without spaces
-
-        game rules:
-        1) Both players are given the same string, .
-        2) Both players have to make substrings using the letters of the string .
-        3) Stuart has to make words starting with consonants.
-        4) Kevin has to make words starting with vowels.
-        5) The game ends when both players have made all possible substrings.
-
-        A player gets +1 point for each occurrence of the substring in the string .
-'''
-
-
-def check(alpha) :
-    vowels = ['a','e','i','o','u']
-    for vowel in vowels:
-        if alpha == vowel:
-            return True
-    return False
-
+def is_vowel(char):
+    """
+    Checks if a character is a vowel.
+    Args:
+        char (str): The character to check.
+    Returns:
+        bool: True if the character is a vowel, False otherwise.
+    """
+    return char.lower() in 'aeiou'
 
 def minion_game(s):
-    p1 = input("enter name of player 1 who is taken strings are starts from consonant: \n")
-    p2 = input("enter name of player 2 who is taken strings are starts from vowel: \n")
-    s.lower()
-    k =len(s)
-    v = []
-    c = []
-    vowel = 0
-    const = 0
-    for a in range(k):
-        if(check(s[a])):
-            v.append(a)
-            vowel += 1
+    """
+    Plays the Minion Game to determine the winner based on substrings.
+
+    Args:
+        s (str): The input string for the game.
+                 Assumed to be a single word without spaces.
+    """
+    # Game rules are already displayed to the user before this function is called.
+    # Player names are not strictly needed for the game logic itself,
+    # but we'll keep them for personalized output.
+    stuart_name = input("Enter name of player 1 (Stuart, forms words starting with consonants): \n")
+    kevin_name = input("Enter name of player 2 (Kevin, forms words starting with vowels): \n")
+
+    s = s.upper()  # Ensure string is uppercase for consistent indexing and comparison
+    n = len(s)
+    stuart_score = 0
+    kevin_score = 0
+
+    # Iterate through each possible starting position for substrings
+    for i in range(n):
+        if is_vowel(s[i]):
+            # If the character at index i is a vowel, Kevin gets points
+            # The number of substrings starting with s[i] is n - i
+            kevin_score += (n - i)
         else:
-            c.append(a)
-            const += 1
-    # print(c)
-    cPossible = []
-    vPossible = []
-    list = [c,v]
-    for i1 in list:
-        for value in i1:
-            l = value
-            i = 1
-            for _ in range(k-l):
-                temp = ''
-                for _ in range(k - (k - i)):
-                    # print(s[l], end="")
-                    temp = temp + s[l]
-                    l += 1
-                if i1 == c:
-                    cPossible.append(temp)
-                else:
-                    vPossible.append(temp)
-                temp = ''
-                l = value  
-                i += 1              
+            # If the character at index i is a consonant, Stuart gets points
+            # The number of substrings starting with s[i] is n - i
+            stuart_score += (n - i)
 
-    print('overall score is given by:')
-    print(f'{p1} : {cPossible}')
-    print(f'{p2} : {vPossible}')
+    print("\n--- Overall Score ---")
+    print(f"{stuart_name} (Consonants): {stuart_score} points")
+    print(f"{kevin_name} (Vowels): {kevin_score} points")
+    print("---------------------\n")
 
-    if len(cPossible) > len(vPossible):
-        print(f"{p1} wins with score {len(cPossible)}")
-    elif len(cPossible) < len(vPossible):
-        print(f"{p2} wins with score {len(vPossible)}")
+    if stuart_score > kevin_score:
+        print(f"🥳 {stuart_name} wins with a score of {stuart_score}!")
+    elif kevin_score > stuart_score:
+        print(f"🥳 {kevin_name} wins with a score of {kevin_score}!")
     else:
-        print("Draw")
+        print("🤝 It's a Draw!")
+
+# --- Game Start ---
+instruction = """
+Welcome to the Minion Game!
+
+**Game Rules:**
+1. Both players are given the same string (a single, capital word without spaces).
+2. Both players create substrings using letters from this string.
+3. Stuart makes words starting with **consonants**.
+4. Kevin makes words starting with **vowels**.
+5. The game ends when all possible substrings have been considered.
+
+A player gets +1 point for each **occurrence** of a valid substring in the original string.
+"""
 
 print(instruction)
-s = input("enter any String / single Word: \n")
-minion_game(s)
+initial_string = input("Please enter a single word (capital letters, no spaces): \n")
+minion_game(initial_string)

@@ -22,6 +22,7 @@ class ExpenseTracker:
         for category in self.expenses.keys():
             print(category)
 
+
 # Sample usage
 tracker = ExpenseTracker()
 

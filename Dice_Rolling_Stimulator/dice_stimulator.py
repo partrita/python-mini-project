@@ -1,7 +1,7 @@
 import random
-#CATEGORIZING OUTCOME INTO A LIST
+# CATEGORIZING OUTCOME INTO A LIST
 
-one =   """ 
+one = """ 
             ("===========")
             ("|         |")
             ("|    O    |")
@@ -10,7 +10,7 @@ one =   """
         
         """
 
-two =   """ 
+two = """ 
             ("===========")
             ("|         |")
             ("| O     O |")
@@ -20,8 +20,7 @@ two =   """
         """
 
 
-
-three =   """ 
+three = """ 
             ("===========")
             ("|    O    |")
             ("|    O    |")
@@ -30,7 +29,7 @@ three =   """
         
         """
 
-four =   """ 
+four = """ 
             ("===========")
             ("|  O    O |")
             ("|     0   |")
@@ -39,7 +38,7 @@ four =   """
         
         """
 
-five =   """ 
+five = """ 
             ("===========")
             ("| O     O |")
             ("|    0    |")
@@ -48,14 +47,13 @@ five =   """
         
         """
 
-six =  """
+six = """
             ("===========") 
             ("| O     O |")
             ("| O     O |")
             ("| O     O |")
             ("===========") \n      
         """
-
 
 
 outcomes_list = [one, two, three, four, five, six]
@@ -67,5 +65,5 @@ while x == "y":
     randon_outcome = random.sample(outcomes_list, 2)
     for outcome in randon_outcome:
         print(outcome)
-    
-    x =  input("Press y to roll again ")
+
+    x = input("Press y to roll again ")

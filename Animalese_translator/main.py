@@ -1,17 +1,16 @@
-import os 
-#it lets the user interact with the native OS Python is currently running on.
+import os
+# it lets the user interact with the native OS Python is currently running on.
 
-from pprint import pprint
-#pprint enables printing in situations where errors wouldn't let them print... or something like that
+# pprint enables printing in situations where errors wouldn't let them print... or something like that
 
 from playsound import playsound
-#playsound needs 1 argument in order to work: the sound file path.
+# playsound needs 1 argument in order to work: the sound file path.
 
 from scipy.io import wavfile
-#scipy.io (Input/Output)
+# scipy.io (Input/Output)
 
 from scipy.io.wavfile import write
-#import the function of writing a soundfile from a 1D or 2D Numpy array of either integer or float data-type.
+# import the function of writing a soundfile from a 1D or 2D Numpy array of either integer or float data-type.
 
 import numpy as np
 # if you pip install scipy numpy will come too
@@ -41,9 +40,9 @@ for file in files:
     #  [ 40  71]
     #  [ 26 108]
     #  [ 57 226]]
- 
+
     channel_one = data[:, 0]
-    #[-38 -21 -30 ...  40  26  57]
+    # [-38 -21 -30 ...  40  26  57]
 
     sounds[raw_name] = channel_one
 # pprint(sounds)
@@ -64,7 +63,7 @@ say_this = "i med somteng kul"
 # say_this = "ef yu wurk hard yu wel hav a gud lif"
 
 say = say_this.lower().strip()
-#lowercased, removes leading/trailing whitespaces.
+# lowercased, removes leading/trailing whitespaces.
 
 cursor = 0
 notes = []
@@ -100,11 +99,11 @@ for note in notes:
 
 output_dir = "output"
 if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+    os.makedirs(output_dir)
 
 name = say_this.replace(" ", "_")
-file_path = os.path.join(output_dir, name + '.wav')
-write_rate = int(sample_rate*speed_multiplier)
+file_path = os.path.join(output_dir, name + ".wav")
+write_rate = int(sample_rate * speed_multiplier)
 write(file_path, write_rate, base.astype(np.int16))
 playsound(file_path)
 # for file in files:

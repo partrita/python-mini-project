@@ -1,12 +1,14 @@
 # mHTTP - A simple HTTP server
 # Written by M.V.Harish Kumar on 24/10/2023
 
-import sys, socket
+import sys
+import socket
 from pathlib import Path
 
 HOST = "0.0.0.0"
 PORT = 1997
-FOLDER = '.' if len(sys.argv) < 2 else sys.argv[1]
+FOLDER = "." if len(sys.argv) < 2 else sys.argv[1]
+
 
 def get_content(path):
     ext = "html"
@@ -25,6 +27,7 @@ def get_content(path):
         except FileNotFoundError:
             return 404, "File not found", ext
     return 200, content, ext
+
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     try:
@@ -50,14 +53,12 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
                 sts_cd, content, ftype = get_content(path)
 
-                resp = f"HTTP/1.1 {sts_cd}\r\n" \
-                       f"Content-Type: text/{ftype}\r\n" \
-                       "\r\n" + content
+                resp = (
+                    f"HTTP/1.1 {sts_cd}\r\nContent-Type: text/{ftype}\r\n\r\n" + content
+                )
 
                 clnt.sendall(resp.encode())
                 print(f"mhttp: sent response({sts_cd}) to {caddr[0]}:{caddr[1]}")
     except KeyboardInterrupt:
         print("mhttp: Got Keyboard Interrupt", file=sys.stderr)
         print("mhttp: Closing Connection.", file=sys.stderr)
-            
-

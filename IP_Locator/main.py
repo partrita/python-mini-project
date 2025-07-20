@@ -25,6 +25,7 @@ def Display_Menu():
     """
     print(header)
 
+
 def option_1():
     """
     Option 1 --> IP Locater
@@ -33,6 +34,7 @@ def option_1():
     Display_Menu()
     Home()
 
+
 def option_2():
     """
     Option 2 --> IP Finder
@@ -40,6 +42,7 @@ def option_2():
     LocateIP.get_ip()
     Display_Menu()
     Home()
+
 
 def option_3():
     """
@@ -63,8 +66,8 @@ def Home():
             selected_option = input("\nEnter your option\n>>> ")
             # In order to clear the mess created by the previous commands,
             # we define 'clear' command to clear up the screen from previous commands.
-            if selected_option == 'clear':
-                subprocess.call('cls', shell=True)
+            if selected_option == "clear":
+                subprocess.call("cls", shell=True)
                 Display_Menu()
                 continue
             else:
@@ -79,7 +82,7 @@ def Home():
                 continue
             else:
                 break
-    
+
     # Operate the option related to the given number
     if selected_option == 1:
         option_1()
@@ -93,5 +96,6 @@ def Home():
 def Start_Program():
     Display_Menu()
     Home()
+
 
 Start_Program()

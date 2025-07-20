@@ -1,8 +1,10 @@
 import random
 
+
 # Function to check if a character is a valid lowercase letter
 def is_valid_guess(guess):
     return guess.isalpha() and guess.islower() and len(guess) == 1
+
 
 # Function to display the current state of the word with placeholders for unguessed letters
 def display_word(secret_word, guessed):
@@ -13,11 +15,13 @@ def display_word(secret_word, guessed):
             print("_", end=" ")
     print()
 
+
 # Function to generate a random word from a file
 def get_random_word_from_file(filename):
     with open(filename, "r") as file:
         words = file.readlines()
         return random.choice(words).strip().lower()
+
 
 def main():
     secret_word = get_random_word_from_file("words.txt")
@@ -55,10 +59,11 @@ def main():
         print("Sorry, you've run out of attempts. The word was:", secret_word)
 
     play_again = input("Do you want to play again? (Y/N): ").lower()
-    if play_again == 'y':
+    if play_again == "y":
         main()
     else:
         print("Thanks for playing!")
+
 
 if __name__ == "__main__":
     main()

@@ -1,6 +1,7 @@
 import pygame
 from Board import *
 
+
 # fade multiple surfaces on the screen
 def fade(*surfacencoords: tuple):
     for alpha in range(0, 257, 6):
@@ -10,6 +11,7 @@ def fade(*surfacencoords: tuple):
             screen.blit(surface, coordinates)
             pygame.time.delay(30)
         pygame.display.flip()
+
 
 # board initialisations
 game_board = Board()
@@ -37,11 +39,11 @@ pygame.Surface.set_alpha(possibleWhiteMove, 50)
 endScreenBlack = pygame.image.load("Othello-Reversi-Game/images/End_Screen_Black.png")
 endScreenWhite = pygame.image.load("Othello-Reversi-Game/images/End_Screen_White.png")
 endScreenDraw = pygame.image.load("Othello-Reversi-Game/images/End_Screen_Draw.png")
-endPrompt  = pygame.image.load("Othello-Reversi-Game/images/End_Prompt.png")
+endPrompt = pygame.image.load("Othello-Reversi-Game/images/End_Prompt.png")
 
 discCountFont = pygame.font.Font("Othello-Reversi-Game/Gotham-Font/GothamLight.ttf", 40)
 
-screen.blit(bBoard, (0,0))
+screen.blit(bBoard, (0, 0))
 screen.blit(blackDiscCounter, (775, 475))
 screen.blit(whiteDiscCounter, (950, 475))
 pygame.display.flip()
@@ -65,16 +67,18 @@ while running:
             my -= 100
             r = my // 75
             c = mx // 75
-            if (r,c) in possible_moves:
+            if (r, c) in possible_moves:
                 last_move = (r, c)
                 game_board.set_discs(r, c, turn)
                 shown_moves = False
-                possible_moves.remove((r,c))
+                possible_moves.remove((r, c))
                 for pos in possible_moves:
                     row, col = pos
                     x = 100 + 75 * col
                     y = 100 + 75 * row
-                    pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(x+4, y+4, 67, 67))
+                    pygame.draw.rect(
+                        screen, (255, 255, 255), pygame.Rect(x + 4, y + 4, 67, 67)
+                    )
                 turn *= -1
         elif game_end and event.type == pygame.KEYDOWN:
             if event.key == pygame.K_q:
@@ -87,28 +91,30 @@ while running:
                 dummy_surface.fill((255, 255, 255))
                 fade((dummy_surface, (0, 0)))
 
-                screen.blit(bBoard, (0,0))
+                screen.blit(bBoard, (0, 0))
                 screen.blit(blackDiscCounter, (775, 475))
                 screen.blit(whiteDiscCounter, (950, 475))
                 last_move = (20, 20)
 
-    if not game_end:           
+    if not game_end:
         # display all the dics present on the board
         for row in range(8):
             for col in range(8):
                 if game_board.board[row, col] == Board.BLACK:
                     x = 100 + 75 * col
                     y = 100 + 75 * row
-                    screen.blit(black_disc, (x,y))
+                    screen.blit(black_disc, (x, y))
 
                 elif game_board.board[row, col] == Board.WHITE:
                     x = 100 + 75 * col
                     y = 100 + 75 * row
-                    screen.blit(white_disc, (x,y))
-        
+                    screen.blit(white_disc, (x, y))
+
         # mark the last move made
         r, c = last_move
-        pygame.draw.circle(screen, (255, 0, 0), (c * 75 + 100 + 75/2, r * 75 + 100 + 75/2), 5)
+        pygame.draw.circle(
+            screen, (255, 0, 0), (c * 75 + 100 + 75 / 2, r * 75 + 100 + 75 / 2), 5
+        )
 
         if turn == Board.BLACK and not shown_moves:
             possible_moves = list(game_board.all_legal_moves(Board.BLACK))
@@ -120,7 +126,7 @@ while running:
             for pos in possible_moves:
                 r, c = pos
                 screen.blit(possibleBlackMove, (100 + 75 * c, 100 + 75 * r))
-            
+
             shown_moves = not hasBlackForfeited
 
         elif turn == Board.WHITE and not shown_moves:
@@ -133,7 +139,7 @@ while running:
             for pos in possible_moves:
                 r, c = pos
                 screen.blit(possibleWhiteMove, (100 + 75 * c, 100 + 75 * r))
-            
+
             shown_moves = not hasWhiteForfeited
 
         if hasBlackForfeited is True and hasWhiteForfeited is True:
@@ -152,11 +158,15 @@ while running:
         screen.blit(dummy_surface, (885, 510))
         screen.blit(dummy_surface, (1060, 510))
 
-        black_disc_count = discCountFont.render(f"{game_board.black_disc_count}", False, (0, 0, 0))
-        white_disc_count = discCountFont.render(f"{game_board.white_disc_count}", False, (0, 0, 0))
+        black_disc_count = discCountFont.render(
+            f"{game_board.black_disc_count}", False, (0, 0, 0)
+        )
+        white_disc_count = discCountFont.render(
+            f"{game_board.white_disc_count}", False, (0, 0, 0)
+        )
         screen.blit(black_disc_count, (885, 510))
         screen.blit(white_disc_count, (1060, 510))
-        
+
         pygame.display.flip()
 
 pygame.quit()

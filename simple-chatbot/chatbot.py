@@ -5,20 +5,20 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 # Load the model and tokenizer
 tokenizer = AutoTokenizer.from_pretrained("microsoft/phi-1_5")
 model = AutoModelForCausalLM.from_pretrained(
-    "microsoft/phi-1_5", trust_remote_code=True)
+    "microsoft/phi-1_5", trust_remote_code=True
+)
 
 # Function to generate a response from the model
 
 
 def generate_response(message):
-    inputs = tokenizer(message, return_tensors='pt', truncation=True)
+    inputs = tokenizer(message, return_tensors="pt", truncation=True)
     outputs = model.generate(
-        **inputs,
-        max_length=150,
-        pad_token_id=tokenizer.eos_token_id
+        **inputs, max_length=150, pad_token_id=tokenizer.eos_token_id
     )
     response = tokenizer.decode(outputs[0], skip_special_tokens=True)
     return response
+
 
 # Function to handle when the user sends a message
 
@@ -46,8 +46,7 @@ window = tk.Tk()
 window.title("WebIdeasBot")
 
 # Create the chat window
-chat_window = scrolledtext.ScrolledText(
-    window, width=80, height=20, state=tk.DISABLED)
+chat_window = scrolledtext.ScrolledText(window, width=80, height=20, state=tk.DISABLED)
 chat_window.pack()
 
 # Create the user input field

@@ -1,5 +1,5 @@
 import json
-import tkinter as tk 
+import tkinter as tk
 from tkinter import messagebox
 from difflib import get_close_matches
 
@@ -10,21 +10,21 @@ data = json.load(open("data.json"))
 file_path = "Enter the path of json file "
 
 
-
 def access_data(file_path):
     try:
-        with open(file_path, 'r') as file:
+        with open(file_path, "r") as file:
             return json.load(file)
     except FileNotFoundError:
-        print(f"Error: !!Oops... I guess you missed to keep things in same folder!!")
+        print("Error: !!Oops... I guess you missed to keep things in same folder!!")
         return {}
     except json.JSONDecodeError:
-        print(f"Error: !!Oops... I think I am old i cant decode this file is it really json file you programi...!!")
+        print(
+            "Error: !!Oops... I think I am old i cant decode this file is it really json file you programi...!!"
+        )
         return {}
-    
- 
-        
-#finding correct match 
+
+
+# finding correct match
 def translate(word, file):
     word = word.lower()
     if word in file:
@@ -40,17 +40,19 @@ def translate(word, file):
         else:
             return "The word does not exist. Please double-check it.", None
 
+
 def on_search():
     word = entry.get().strip()
     if word:
         output, suggestion = translate(word, file)
         if isinstance(output, list):
-            result_text = ' \n'.join(output)
+            result_text = " \n".join(output)
         else:
             result_text = output
         result_label.config(text=result_text)
-        
+
         if suggestion:
+
             def suggest():
                 suggested_output = translate(suggestion, file)[0]
                 result_label.config(text=suggested_output)
@@ -63,17 +65,18 @@ def on_search():
     else:
         messagebox.showwarning("Input Error", "Please enter a word to search.")
 
-#for data access
+
+# for data access
 file = access_data(file_path)
 
-#setting up GUI
+# setting up GUI
 root = tk.Tk()
 root.title("Dictionary")
 
-frame= tk.Frame(root, padx=10, pady=10)
+frame = tk.Frame(root, padx=10, pady=10)
 frame.pack(padx=10, pady=10)
 
-label=  tk.Label(frame, text="Enter a word:")
+label = tk.Label(frame, text="Enter a word:")
 label.pack()
 
 entry = tk.Entry(frame, width=50)
@@ -85,13 +88,13 @@ search_button.pack(pady=5)
 result_label = tk.Label(frame, text="", wraplength=400, justify="left")
 result_label.pack(pady=10)
 
-suggest_button = tk.Button(frame, text="", wraplength=400, justify= "left")
+suggest_button = tk.Button(frame, text="", wraplength=400, justify="left")
 
 root.mainloop()
 
-#main body of the program
-def main():    
-      
+
+# main body of the program
+def main():
     word = input("Enter the word you want to search: ")
     output = translate(word, file)
     if type(output) == list:
@@ -99,7 +102,8 @@ def main():
             print(item)
     else:
         print(output)
-        
-#setting default focus to main function
+
+
+# setting default focus to main function
 if __name__ == "__main__":
     main()

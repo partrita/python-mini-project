@@ -1,5 +1,5 @@
-""" 
-This game tests your general knowledge skills! 
+"""
+This game tests your general knowledge skills!
 You just need to answer the 10 questions correctly to become the winner!
 """
 
@@ -7,6 +7,7 @@ from question_bank import easy_question, hard_question
 from answer_bank import answer
 from random import randint, choice
 from art import *
+
 
 # Main functionality
 def main():
@@ -43,7 +44,7 @@ def main():
         # Alert about wrong answer, and display the score
         else:
             print(f"Wrong Answer. Your Score: {score}")
-    
+
     # Display final score on the screen
     print(f"Your final score: {score}")
 
@@ -51,7 +52,8 @@ def main():
     if score == 10:
         tprint("Congratulations!")
         print("You have answered all 10 questions correctly!")
-        
+
+
 # Generates question for the user
 def generate_question():
     # List the question numbers and their difficulty level
@@ -71,14 +73,16 @@ def generate_question():
         # Select a random question from the choices
         random_choice = choice(hard_qlist)
         ques = hard_question(random_choice)
-    
+
     # Return question number and the question
     return random_choice, ques
+
 
 # Generate and match answer of the user
 def generate_answer(num):
     actual_answer = answer(num)
     return actual_answer
+
 
 # When the program is run, main function is called
 if __name__ == "__main__":

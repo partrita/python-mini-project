@@ -12,8 +12,8 @@ def GameOfLife(stdscr):
     generations = 0
     grid = []
     height, width = stdscr.getmaxyx()
-    rows, cols = int(height-2), width
-    speed = .2
+    rows, cols = int(height - 2), width
+    speed = 0.2
     pause = False
 
     stdscr.clear()
@@ -43,14 +43,14 @@ def GameOfLife(stdscr):
         dC = [1, 0, -1, -1, 0, 1, 1, -1]
 
         def isValid(r, c) -> bool:
-            return (r >= 0 and r < rows and c >= 0 and c < cols)
+            return r >= 0 and r < rows and c >= 0 and c < cols
 
         for i in range(rows):
             for j in range(cols):
                 count = 0
                 for r1, c1 in zip(dR, dC):
-                    r = r1+i
-                    c = c1+j
+                    r = r1 + i
+                    c = c1 + j
 
                     if isValid(r, c) and grid[r][c]:
                         count += 1
@@ -76,23 +76,23 @@ def GameOfLife(stdscr):
         generations += 1
 
         # If windows dimension changes #responsive :)
-        if ((nHeight != height) or (nWidth != width)):
+        if (nHeight != height) or (nWidth != width):
             height, width = nHeight, nWidth
-            rows, cols = int(height-3), width
+            rows, cols = int(height - 3), width
             grid = seed()
 
         # Simulating Generations
         grid, noOfCellsAlive = play(grid)
 
         # Menu Cmds
-        if k == ord('q'):
+        if k == ord("q"):
             break
-        elif k == ord('r'):
+        elif k == ord("r"):
             grid = seed()
             generations = 0
-        elif k == ord('f'):
+        elif k == ord("f"):
             speed = 0.1
-        elif k == ord('s'):
+        elif k == ord("s"):
             speed = 1
 
         # Displaying grid
@@ -100,16 +100,17 @@ def GameOfLife(stdscr):
         stdscr.attron(curses.A_BOLD)
         for i in range(rows):
             for j in range(cols):
-                stdscr.addstr(i, j, chr(0x2B1A) if grid[i][j] else ' ')
+                stdscr.addstr(i, j, chr(0x2B1A) if grid[i][j] else " ")
 
         stdscr.attroff(curses.color_pair(1))
         stdscr.attroff(curses.A_BOLD)
 
         # Declaration of strings
-        title = 'Game Of Life'
-        credits = 'By @zeal2end'
+        title = "Game Of Life"
+        credits = "By @zeal2end"
         statusbarstr = "Exit: 'q' | Seed: 'r' | Fast: 'f' | Slow: 's' | Genration: {} | Alive Cells: {}".format(
-            generations, noOfCellsAlive)
+            generations, noOfCellsAlive
+        )
 
         # calculations
         start_x_title = 0
@@ -118,7 +119,7 @@ def GameOfLife(stdscr):
 
         # Render status bar
         stdscr.attron(curses.color_pair(3))
-        stdscr.addstr(height-1, 0, statusbarstr)
+        stdscr.addstr(height - 1, 0, statusbarstr)
         stdscr.attroff(curses.color_pair(3))
 
         # Turning on attributes for title

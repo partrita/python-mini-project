@@ -47,7 +47,7 @@ def get_pdf():
                 imgJPG = PIL.Image.open(f)
                 imagesJPG.append(imgJPG)
 
-            except Exception as e:
+            except Exception:
                 # Program will fail if the request isn't able to make a proper connection
                 info_label_2.configure(text="Some Connection ERROR")
 
@@ -57,7 +57,7 @@ def get_pdf():
         )
         info_label_2.configure(text=f"File Downloaded to\n{path}")
     else:
-        info_label_2.configure(text=f"Please provide a valid link")
+        info_label_2.configure(text="Please provide a valid link")
 
 
 # Basic Tkinter window setup

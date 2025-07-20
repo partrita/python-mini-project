@@ -12,8 +12,7 @@ def create_app():
     app.config.from_object(ProductionConfig)
 
     # Register the blueprint
-    app.register_blueprint(portfolio_routes.portfolio_bp,
-                           url_prefix='/portfolio')
+    app.register_blueprint(portfolio_routes.portfolio_bp, url_prefix="/portfolio")
 
     # Other app configuration and routes...
 

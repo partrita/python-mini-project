@@ -7,6 +7,7 @@ class TrieNode:
         self.children = {}
         self.is_end = False
 
+
 class Trie:
     def __init__(self):
         self.root = TrieNode()
@@ -14,6 +15,7 @@ class Trie:
     """
     Inserts the string word into the trie.
     """
+
     def insert(self, word: str) -> None:
         curr = self.root
         for c in word:
@@ -26,6 +28,7 @@ class Trie:
     Returns true if the string word is in the trie (i.e., was inserted before).
     Otherwise, returns false.
     """
+
     def search(self, word: str) -> bool:
         curr = self.root
         for c in word:
@@ -38,6 +41,7 @@ class Trie:
     Returns true if there is a previously inserted string word that has the prefix prefix.
     Otherwise, returns false.
     """
+
     def starts_with(self, prefix: str) -> bool:
         curr = self.root
         for c in prefix:
