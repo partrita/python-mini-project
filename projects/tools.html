@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; 🔧 유틸리티 도구 – 파이썬 미니 프로젝트 모음</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../projects/security.html" rel="next">
+<link href="../projects/games.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-803ae4f7a8810f475153517dc3c4ebae.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../projects/games.html">프로젝트</a></li><li class="breadcrumb-item"><a href="../projects/tools.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">🔧 유틸리티 도구</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">파이썬 미니 프로젝트 모음</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">서문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">소개</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">프로젝트</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/games.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">🎮 게임 프로젝트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/tools.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">🔧 유틸리티 도구</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/security.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">🔐 보안 및 암호화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/data_structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">📊 자료구조 및 알고리즘</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/web_network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">🌐 웹 및 네트워크</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/media_image.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">🖼️ 미디어 및 이미지 처리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/ai_ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">🤖 인공지능 및 머신러닝</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/text_speech.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">🗣️ 텍스트 및 음성 처리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/automation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">⚡ 자동화 및 봇</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects/other.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">📁 기타 프로젝트</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">마무리</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#주소-유효성-검사기" id="toc-주소-유효성-검사기" class="nav-link active" data-scroll-target="#주소-유효성-검사기"><span class="header-section-number">3.1</span> 주소 유효성 검사기</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지" id="toc-필요한-패키지" class="nav-link" data-scroll-target="#필요한-패키지"><span class="header-section-number">3.1.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법" id="toc-실행-방법" class="nav-link" data-scroll-target="#실행-방법"><span class="header-section-number">3.1.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드" id="toc-소스-코드" class="nav-link" data-scroll-target="#소스-코드"><span class="header-section-number">3.1.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#cat-명령어" id="toc-cat-명령어" class="nav-link" data-scroll-target="#cat-명령어"><span class="header-section-number">3.2</span> Cat 명령어</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-1" id="toc-필요한-패키지-1" class="nav-link" data-scroll-target="#필요한-패키지-1"><span class="header-section-number">3.2.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-1" id="toc-실행-방법-1" class="nav-link" data-scroll-target="#실행-방법-1"><span class="header-section-number">3.2.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-1" id="toc-소스-코드-1" class="nav-link" data-scroll-target="#소스-코드-1"><span class="header-section-number">3.2.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#단위-변환기" id="toc-단위-변환기" class="nav-link" data-scroll-target="#단위-변환기"><span class="header-section-number">3.3</span> 단위 변환기</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-2" id="toc-필요한-패키지-2" class="nav-link" data-scroll-target="#필요한-패키지-2"><span class="header-section-number">3.3.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-2" id="toc-실행-방법-2" class="nav-link" data-scroll-target="#실행-방법-2"><span class="header-section-number">3.3.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-2" id="toc-소스-코드-2" class="nav-link" data-scroll-target="#소스-코드-2"><span class="header-section-number">3.3.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#로마-숫자-변환기" id="toc-로마-숫자-변환기" class="nav-link" data-scroll-target="#로마-숫자-변환기"><span class="header-section-number">3.4</span> 로마 숫자 변환기</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-3" id="toc-필요한-패키지-3" class="nav-link" data-scroll-target="#필요한-패키지-3"><span class="header-section-number">3.4.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-3" id="toc-실행-방법-3" class="nav-link" data-scroll-target="#실행-방법-3"><span class="header-section-number">3.4.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-3" id="toc-소스-코드-3" class="nav-link" data-scroll-target="#소스-코드-3"><span class="header-section-number">3.4.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#csvjson-변환기" id="toc-csvjson-변환기" class="nav-link" data-scroll-target="#csvjson-변환기"><span class="header-section-number">3.5</span> CSV→JSON 변환기</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-4" id="toc-필요한-패키지-4" class="nav-link" data-scroll-target="#필요한-패키지-4"><span class="header-section-number">3.5.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-4" id="toc-실행-방법-4" class="nav-link" data-scroll-target="#실행-방법-4"><span class="header-section-number">3.5.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-4" id="toc-소스-코드-4" class="nav-link" data-scroll-target="#소스-코드-4"><span class="header-section-number">3.5.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#pdf-분할기" id="toc-pdf-분할기" class="nav-link" data-scroll-target="#pdf-분할기"><span class="header-section-number">3.6</span> PDF 분할기</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-5" id="toc-필요한-패키지-5" class="nav-link" data-scroll-target="#필요한-패키지-5"><span class="header-section-number">3.6.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-5" id="toc-실행-방법-5" class="nav-link" data-scroll-target="#실행-방법-5"><span class="header-section-number">3.6.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-5" id="toc-소스-코드-5" class="nav-link" data-scroll-target="#소스-코드-5"><span class="header-section-number">3.6.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#파일-비교-도구" id="toc-파일-비교-도구" class="nav-link" data-scroll-target="#파일-비교-도구"><span class="header-section-number">3.7</span> 파일 비교 도구</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-6" id="toc-필요한-패키지-6" class="nav-link" data-scroll-target="#필요한-패키지-6"><span class="header-section-number">3.7.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-6" id="toc-실행-방법-6" class="nav-link" data-scroll-target="#실행-방법-6"><span class="header-section-number">3.7.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-6" id="toc-소스-코드-6" class="nav-link" data-scroll-target="#소스-코드-6"><span class="header-section-number">3.7.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#클립보드-관리자" id="toc-클립보드-관리자" class="nav-link" data-scroll-target="#클립보드-관리자"><span class="header-section-number">3.8</span> 클립보드 관리자</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-7" id="toc-필요한-패키지-7" class="nav-link" data-scroll-target="#필요한-패키지-7"><span class="header-section-number">3.8.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-7" id="toc-실행-방법-7" class="nav-link" data-scroll-target="#실행-방법-7"><span class="header-section-number">3.8.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-7" id="toc-소스-코드-7" class="nav-link" data-scroll-target="#소스-코드-7"><span class="header-section-number">3.8.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#이메일-분리기" id="toc-이메일-분리기" class="nav-link" data-scroll-target="#이메일-분리기"><span class="header-section-number">3.9</span> 이메일 분리기</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-8" id="toc-필요한-패키지-8" class="nav-link" data-scroll-target="#필요한-패키지-8"><span class="header-section-number">3.9.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-8" id="toc-실행-방법-8" class="nav-link" data-scroll-target="#실행-방법-8"><span class="header-section-number">3.9.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-8" id="toc-소스-코드-8" class="nav-link" data-scroll-target="#소스-코드-8"><span class="header-section-number">3.9.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#셸-명령어-실행기" id="toc-셸-명령어-실행기" class="nav-link" data-scroll-target="#셸-명령어-실행기"><span class="header-section-number">3.10</span> 셸 명령어 실행기</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-9" id="toc-필요한-패키지-9" class="nav-link" data-scroll-target="#필요한-패키지-9"><span class="header-section-number">3.10.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-9" id="toc-실행-방법-9" class="nav-link" data-scroll-target="#실행-방법-9"><span class="header-section-number">3.10.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-9" id="toc-소스-코드-9" class="nav-link" data-scroll-target="#소스-코드-9"><span class="header-section-number">3.10.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#지출-추적기" id="toc-지출-추적기" class="nav-link" data-scroll-target="#지출-추적기"><span class="header-section-number">3.11</span> 지출 추적기</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-10" id="toc-필요한-패키지-10" class="nav-link" data-scroll-target="#필요한-패키지-10"><span class="header-section-number">3.11.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-10" id="toc-실행-방법-10" class="nav-link" data-scroll-target="#실행-방법-10"><span class="header-section-number">3.11.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-10" id="toc-소스-코드-10" class="nav-link" data-scroll-target="#소스-코드-10"><span class="header-section-number">3.11.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#재무-추적기" id="toc-재무-추적기" class="nav-link" data-scroll-target="#재무-추적기"><span class="header-section-number">3.12</span> 재무 추적기</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-11" id="toc-필요한-패키지-11" class="nav-link" data-scroll-target="#필요한-패키지-11"><span class="header-section-number">3.12.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-11" id="toc-실행-방법-11" class="nav-link" data-scroll-target="#실행-방법-11"><span class="header-section-number">3.12.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-11" id="toc-소스-코드-11" class="nav-link" data-scroll-target="#소스-코드-11"><span class="header-section-number">3.12.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#투자-계산기" id="toc-투자-계산기" class="nav-link" data-scroll-target="#투자-계산기"><span class="header-section-number">3.13</span> 투자 계산기</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-12" id="toc-필요한-패키지-12" class="nav-link" data-scroll-target="#필요한-패키지-12"><span class="header-section-number">3.13.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-12" id="toc-실행-방법-12" class="nav-link" data-scroll-target="#실행-방법-12"><span class="header-section-number">3.13.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-12" id="toc-소스-코드-12" class="nav-link" data-scroll-target="#소스-코드-12"><span class="header-section-number">3.13.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#삼각형-계산기" id="toc-삼각형-계산기" class="nav-link" data-scroll-target="#삼각형-계산기"><span class="header-section-number">3.14</span> 삼각형 계산기</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-13" id="toc-필요한-패키지-13" class="nav-link" data-scroll-target="#필요한-패키지-13"><span class="header-section-number">3.14.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-13" id="toc-실행-방법-13" class="nav-link" data-scroll-target="#실행-방법-13"><span class="header-section-number">3.14.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-13" id="toc-소스-코드-13" class="nav-link" data-scroll-target="#소스-코드-13"><span class="header-section-number">3.14.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#lorem-ipsum-생성기" id="toc-lorem-ipsum-생성기" class="nav-link" data-scroll-target="#lorem-ipsum-생성기"><span class="header-section-number">3.15</span> Lorem Ipsum 생성기</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-14" id="toc-필요한-패키지-14" class="nav-link" data-scroll-target="#필요한-패키지-14"><span class="header-section-number">3.15.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-14" id="toc-실행-방법-14" class="nav-link" data-scroll-target="#실행-방법-14"><span class="header-section-number">3.15.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-14" id="toc-소스-코드-14" class="nav-link" data-scroll-target="#소스-코드-14"><span class="header-section-number">3.15.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#스마트-계산기" id="toc-스마트-계산기" class="nav-link" data-scroll-target="#스마트-계산기"><span class="header-section-number">3.16</span> 스마트 계산기</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-15" id="toc-필요한-패키지-15" class="nav-link" data-scroll-target="#필요한-패키지-15"><span class="header-section-number">3.16.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-15" id="toc-실행-방법-15" class="nav-link" data-scroll-target="#실행-방법-15"><span class="header-section-number">3.16.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-15" id="toc-소스-코드-15" class="nav-link" data-scroll-target="#소스-코드-15"><span class="header-section-number">3.16.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#행성별-몸무게-계산기" id="toc-행성별-몸무게-계산기" class="nav-link" data-scroll-target="#행성별-몸무게-계산기"><span class="header-section-number">3.17</span> 행성별 몸무게 계산기</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-16" id="toc-필요한-패키지-16" class="nav-link" data-scroll-target="#필요한-패키지-16"><span class="header-section-number">3.17.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-16" id="toc-실행-방법-16" class="nav-link" data-scroll-target="#실행-방법-16"><span class="header-section-number">3.17.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-16" id="toc-소스-코드-16" class="nav-link" data-scroll-target="#소스-코드-16"><span class="header-section-number">3.17.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#xlsxlsx-변환기" id="toc-xlsxlsx-변환기" class="nav-link" data-scroll-target="#xlsxlsx-변환기"><span class="header-section-number">3.18</span> XLS→XLSX 변환기</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-17" id="toc-필요한-패키지-17" class="nav-link" data-scroll-target="#필요한-패키지-17"><span class="header-section-number">3.18.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-17" id="toc-실행-방법-17" class="nav-link" data-scroll-target="#실행-방법-17"><span class="header-section-number">3.18.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-17" id="toc-소스-코드-17" class="nav-link" data-scroll-target="#소스-코드-17"><span class="header-section-number">3.18.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#이미지pdf-변환기" id="toc-이미지pdf-변환기" class="nav-link" data-scroll-target="#이미지pdf-변환기"><span class="header-section-number">3.19</span> 이미지→PDF 변환기</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-18" id="toc-필요한-패키지-18" class="nav-link" data-scroll-target="#필요한-패키지-18"><span class="header-section-number">3.19.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-18" id="toc-실행-방법-18" class="nav-link" data-scroll-target="#실행-방법-18"><span class="header-section-number">3.19.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-18" id="toc-소스-코드-18" class="nav-link" data-scroll-target="#소스-코드-18"><span class="header-section-number">3.19.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#운동-타이머" id="toc-운동-타이머" class="nav-link" data-scroll-target="#운동-타이머"><span class="header-section-number">3.20</span> 운동 타이머</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-19" id="toc-필요한-패키지-19" class="nav-link" data-scroll-target="#필요한-패키지-19"><span class="header-section-number">3.20.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-19" id="toc-실행-방법-19" class="nav-link" data-scroll-target="#실행-방법-19"><span class="header-section-number">3.20.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-19" id="toc-소스-코드-19" class="nav-link" data-scroll-target="#소스-코드-19"><span class="header-section-number">3.20.3</span> 소스 코드</a></li>
+  </ul></li>
+  <li><a href="#할일-관리-앱" id="toc-할일-관리-앱" class="nav-link" data-scroll-target="#할일-관리-앱"><span class="header-section-number">3.21</span> 할일 관리 앱</a>
+  <ul class="collapse">
+  <li><a href="#필요한-패키지-20" id="toc-필요한-패키지-20" class="nav-link" data-scroll-target="#필요한-패키지-20"><span class="header-section-number">3.21.1</span> 필요한 패키지</a></li>
+  <li><a href="#실행-방법-20" id="toc-실행-방법-20" class="nav-link" data-scroll-target="#실행-방법-20"><span class="header-section-number">3.21.2</span> 실행 방법</a></li>
+  <li><a href="#소스-코드-20" id="toc-소스-코드-20" class="nav-link" data-scroll-target="#소스-코드-20"><span class="header-section-number">3.21.3</span> 소스 코드</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../projects/games.html">프로젝트</a></li><li class="breadcrumb-item"><a href="../projects/tools.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">🔧 유틸리티 도구</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">🔧 유틸리티 도구</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>일상적인 작업을 자동화하거나 편리하게 만들어주는 도구 프로젝트들입니다.</p>
+<section id="주소-유효성-검사기" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="주소-유효성-검사기"><span class="header-section-number">3.1</span> 주소 유효성 검사기</h2>
+<p>📁 <strong>폴더:</strong> <code>Address Validator</code></p>
+<p>이메일 또는 물리적 주소의 유효성을 검사하는 도구입니다.</p>
+<section id="필요한-패키지" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="필요한-패키지"><span class="header-section-number">3.1.1</span> 필요한 패키지</h3>
+<p>없음 (표준 라이브러리)</p>
+</section>
+<section id="실행-방법" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="실행-방법"><span class="header-section-number">3.1.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"Address Validator"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> AddressValidator.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="소스-코드"><span class="header-section-number">3.1.3</span> 소스 코드</h3>
+<p><code>AddressValidator.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> addressVal(address):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    dot <span class="op">=</span> address.find(<span class="st">"."</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    at <span class="op">=</span> address.find(<span class="st">"@"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> dot <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Invalid"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> at <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Invalid"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Valid"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"This program will decide if your input is a valid email address"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"A valid email address needs an '@' symbol and a '.'"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Input your email address:"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    addressVal(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="cat-명령어" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="cat-명령어"><span class="header-section-number">3.2</span> Cat 명령어</h2>
+<p>📁 <strong>폴더:</strong> <code>Cat_command</code></p>
+<p>리눅스의 <code>cat</code> 명령어를 파이썬으로 구현한 것입니다. 지정된 파일을 읽어 콘솔에 출력합니다.</p>
+<section id="필요한-패키지-1" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="필요한-패키지-1"><span class="header-section-number">3.2.1</span> 필요한 패키지</h3>
+<p>argparse, pathlib</p>
+</section>
+<section id="실행-방법-1" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="실행-방법-1"><span class="header-section-number">3.2.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"Cat_command"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> cat.py <span class="pp">[</span><span class="ss">경로</span><span class="pp">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-1" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="소스-코드-1"><span class="header-section-number">3.2.3</span> 소스 코드</h3>
+<p><code>cat.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/python</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> argparse</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CatError(<span class="pp">Exception</span>):</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Logger:</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, verbosity<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.verbose <span class="op">=</span> verbosity</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> error(<span class="va">self</span>, message):</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"ERROR: </span><span class="sc">{</span>message<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>logger <span class="op">=</span> Logger()</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co">    Read the selected text file </span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">    Example:</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co">    your/path/file.txt</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> readFile(src: Path):</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="co">    if the given path is a directory</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co">    ERROR the path is a directory</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> src.is_dir():</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        logger.error(<span class="ss">f"The path </span><span class="sc">{</span>src<span class="sc">}</span><span class="ss">: is a directory"</span>)</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(src, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> lines <span class="kw">in</span> f:</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(lines, end<span class="op">=</span><span class="st">""</span>)</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cli() <span class="op">-&gt;</span> argparse.Namespace:</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> argparse.ArgumentParser(</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>        prog<span class="op">=</span><span class="st">"cat"</span>,</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>        description<span class="op">=</span><span class="st">"cat command implementation in python"</span>,</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>        epilog<span class="op">=</span><span class="st">"Example: your/path/file.txt"</span>,</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">"source"</span>, <span class="bu">type</span><span class="op">=</span>Path, <span class="bu">help</span><span class="op">=</span><span class="st">"Source file"</span>)</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> parser.parse_args()</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    args <span class="op">=</span> cli()</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>        readFile(args.source)</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> CatError <span class="im">as</span> e:</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>        logger.error(e)</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>        exit(<span class="dv">1</span>)</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">KeyboardInterrupt</span>:</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>        logger.error(<span class="st">"</span><span class="ch">\n</span><span class="st">Interrupt"</span>)</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="co">    Start the program</span></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="단위-변환기" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="단위-변환기"><span class="header-section-number">3.3</span> 단위 변환기</h2>
+<p>📁 <strong>폴더:</strong> <code>Converter</code></p>
+<p>다양한 단위를 변환할 수 있는 간단한 변환기 앱입니다.</p>
+<section id="필요한-패키지-2" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="필요한-패키지-2"><span class="header-section-number">3.3.1</span> 필요한 패키지</h3>
+<p>없음 (표준 라이브러리)</p>
+</section>
+<section id="실행-방법-2" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="실행-방법-2"><span class="header-section-number">3.3.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"Converter"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> converter.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-2" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="소스-코드-2"><span class="header-section-number">3.3.3</span> 소스 코드</h3>
+<p><code>converter.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> converter_values <span class="im">import</span> <span class="op">*</span>  <span class="co"># import required files</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(options[<span class="st">"help"</span>])  <span class="co"># prints help menu</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Response: "</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> res.lower() <span class="op">!=</span> <span class="st">"q"</span>:  <span class="co"># program loop</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>            res <span class="op">=</span> res.strip().split(<span class="st">" "</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">len</span>(res) <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>                display_help(res[<span class="dv">0</span>])  <span class="co"># display help menu</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> <span class="bu">len</span>(res) <span class="op">==</span> <span class="dv">4</span>:</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                perform_conversion(res)  <span class="co"># perform unit conversion</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="st">"Invalid command"</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"Error:"</span>, e)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        res <span class="op">=</span> <span class="bu">input</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Response: "</span>)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> display_help(command):</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Display help menu."""</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(options[command])</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> perform_conversion(res):</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Perform unit conversion."""</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> res[<span class="dv">3</span>].split(<span class="st">","</span>):</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        value <span class="op">=</span> <span class="bu">round</span>(</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>            <span class="bu">eval</span>(<span class="st">"</span><span class="sc">{}</span><span class="st"> * </span><span class="sc">{}</span><span class="st">['</span><span class="sc">{}</span><span class="st">'] / </span><span class="sc">{}</span><span class="st">['</span><span class="sc">{}</span><span class="st">']"</span>.<span class="bu">format</span>(res[<span class="dv">2</span>], res[<span class="dv">0</span>], i, res[<span class="dv">0</span>], res[<span class="dv">1</span>])),</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>            <span class="dv">6</span>,</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>        )  <span class="co"># calculating</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"</span><span class="sc">{}</span><span class="st"> </span><span class="ch">\t</span><span class="st"> : </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(i, value))  <span class="co"># displaying</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="로마-숫자-변환기" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="로마-숫자-변환기"><span class="header-section-number">3.4</span> 로마 숫자 변환기</h2>
+<p>📁 <strong>폴더:</strong> <code>Converting_Roman_to_Integer</code></p>
+<p>로마 숫자를 정수로 변환하는 CLI 스크립트입니다.</p>
+<section id="필요한-패키지-3" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="필요한-패키지-3"><span class="header-section-number">3.4.1</span> 필요한 패키지</h3>
+<p>없음 (표준 라이브러리)</p>
+</section>
+<section id="실행-방법-3" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="실행-방법-3"><span class="header-section-number">3.4.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"Converting_Roman_to_Integer"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> Converting_Roman_to_Integer.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-3" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="소스-코드-3"><span class="header-section-number">3.4.3</span> 소스 코드</h3>
+<p><code>Converting_Roman_to_Integer.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>romanStr <span class="op">=</span> sys.argv[<span class="dv">1</span>]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>romanStr <span class="op">=</span> <span class="bu">str</span>(romanStr)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">dict</span> <span class="op">=</span> {<span class="st">"I"</span>: <span class="dv">1</span>, <span class="st">"V"</span>: <span class="dv">5</span>, <span class="st">"X"</span>: <span class="dv">10</span>, <span class="st">"L"</span>: <span class="dv">50</span>, <span class="st">"C"</span>: <span class="dv">100</span>, <span class="st">"D"</span>: <span class="dv">500</span>, <span class="st">"M"</span>: <span class="dv">1000</span>}</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>num <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>romanStr <span class="op">=</span> romanStr.replace(<span class="st">"IV"</span>, <span class="st">"IIII"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>romanStr <span class="op">=</span> romanStr.replace(<span class="st">"IX"</span>, <span class="st">"VIIII"</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>romanStr <span class="op">=</span> romanStr.replace(<span class="st">"XL"</span>, <span class="st">"XXXX"</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>romanStr <span class="op">=</span> romanStr.replace(<span class="st">"XC"</span>, <span class="st">"LXXXX"</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>romanStr <span class="op">=</span> romanStr.replace(<span class="st">"CD"</span>, <span class="st">"CCCC"</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>romanStr <span class="op">=</span> romanStr.replace(<span class="st">"CM"</span>, <span class="st">"DCCCC"</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>myStr <span class="op">=</span> <span class="bu">list</span>(romanStr)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> char <span class="kw">in</span> myStr:</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    num <span class="op">=</span> num <span class="op">+</span> <span class="bu">dict</span>[char]</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(num)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="csvjson-변환기" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="csvjson-변환기"><span class="header-section-number">3.5</span> CSV→JSON 변환기</h2>
+<p>📁 <strong>폴더:</strong> <code>csv_to_json</code></p>
+<p>CSV 파일을 JSON 파일로 변환하는 스크립트입니다.</p>
+<section id="필요한-패키지-4" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="필요한-패키지-4"><span class="header-section-number">3.5.1</span> 필요한 패키지</h3>
+<p>csv, json</p>
+</section>
+<section id="실행-방법-4" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="실행-방법-4"><span class="header-section-number">3.5.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"csv_to_json"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> csv_to_json.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-4" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="소스-코드-4"><span class="header-section-number">3.5.3</span> 소스 코드</h3>
+<p><code>csv_to_json.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to convert csv to json</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> csv_to_json(file_name):</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(file_name, <span class="st">"r"</span>) <span class="im">as</span> csv_file:</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        csv_data <span class="op">=</span> csv.DictReader(csv_file)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        data_list <span class="op">=</span> [row <span class="cf">for</span> row <span class="kw">in</span> csv_data]</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        json_data <span class="op">=</span> json.dumps(data_list, indent<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"data.json"</span>, <span class="st">"w"</span>) <span class="im">as</span> json_file:</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        json_file.write(json_data)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co"># main function</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    file_name <span class="op">=</span> <span class="bu">input</span>()</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    csv_to_json(file_name)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="pdf-분할기" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="pdf-분할기"><span class="header-section-number">3.6</span> PDF 분할기</h2>
+<p>📁 <strong>폴더:</strong> <code>Demerge_pdfs</code></p>
+<p>큰 PDF 파일을 여러 개의 작은 PDF 파일로 분할하는 프로그램입니다.</p>
+<section id="필요한-패키지-5" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="필요한-패키지-5"><span class="header-section-number">3.6.1</span> 필요한 패키지</h3>
+<p>PyPDF2</p>
+</section>
+<section id="실행-방법-5" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="실행-방법-5"><span class="header-section-number">3.6.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"Demerge_pdfs"</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> demerging_pdf.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-5" class="level3" data-number="3.6.3">
+<h3 data-number="3.6.3" class="anchored" data-anchor-id="소스-코드-5"><span class="header-section-number">3.6.3</span> 소스 코드</h3>
+<p><code>demerging_pdfs.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> PyPDF2</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_valid_filename(filename):</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    invalid_chars <span class="op">=</span> <span class="vs">r'</span><span class="pp">[/</span><span class="ch">\\</span><span class="pp">:*?"&lt;&gt;|]</span><span class="vs">'</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> re.search(invalid_chars, filename):</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'A file name cannot contain any of these characters / </span><span class="ch">\\</span><span class="st"> : * ? " &lt; &gt; |'</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: here instead of Python.pdf you should give the whole path to the pdf if the pdf is not present in the same directory where python program is present</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>merged_pdf <span class="op">=</span> <span class="bu">open</span>(<span class="st">"Python.pdf"</span>, mode<span class="op">=</span><span class="st">"rb"</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>pdf <span class="op">=</span> PyPDF2.PdfFileReader(merged_pdf)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>(u, ctr, x) <span class="op">=</span> <span class="bu">tuple</span>([<span class="dv">0</span>] <span class="op">*</span> <span class="dv">3</span>)</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, pdf.numPages <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> u <span class="op">&gt;=</span> pdf.numPages:</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Successfully done!"</span>)</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>        exit(<span class="dv">0</span>)</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>        name <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter the name of the pdf: "</span>)</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> check_valid_filename(name) <span class="op">==</span> <span class="va">True</span>:</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>        ctr <span class="op">=</span> <span class="bu">input</span>(<span class="ss">f"Enter the number of pages for </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">: "</span>)</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>            ctr <span class="op">=</span> <span class="bu">int</span>(ctr)</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> ctr <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>                <span class="cf">raise</span> <span class="pp">ValueError</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"Page number must be a positive integer"</span>)</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>    u <span class="op">+=</span> ctr</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> u <span class="op">&gt;</span> pdf.numPages:</span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Limit exceeded! "</span>)</span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note: In the braces you should give the desired path of where new files should be stored</span></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>    base_path <span class="op">=</span> <span class="st">"</span><span class="sc">{}</span><span class="st">.pdf"</span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If you want to store the new pdfs in the same directory, then leave the braces empty</span></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>    path <span class="op">=</span> base_path.<span class="bu">format</span>(name)</span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> <span class="bu">open</span>(path, mode<span class="op">=</span><span class="st">"wb"</span>)</span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>    pdf_writer <span class="op">=</span> PyPDF2.PdfFileWriter()</span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(x, x <span class="op">+</span> ctr):</span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>        page <span class="op">=</span> pdf.getPage(j)</span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a>        pdf_writer.addPage(page)</span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a>    x <span class="op">+=</span> ctr</span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>    pdf_writer.write(f)</span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>    f.close()</span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a>merged_pdf.close()</span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Successfully done!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="파일-비교-도구" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="파일-비교-도구"><span class="header-section-number">3.7</span> 파일 비교 도구</h2>
+<p>📁 <strong>폴더:</strong> <code>Diff_Utility</code></p>
+<p>두 파일을 비교하여 차이점을 보여주는 유틸리티입니다.</p>
+<section id="필요한-패키지-6" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="필요한-패키지-6"><span class="header-section-number">3.7.1</span> 필요한 패키지</h3>
+<p>없음 (표준 라이브러리)</p>
+</section>
+<section id="실행-방법-6" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="실행-방법-6"><span class="header-section-number">3.7.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"Diff_Utility"</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> diff.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-6" class="level3" data-number="3.7.3">
+<h3 data-number="3.7.3" class="anchored" data-anchor-id="소스-코드-6"><span class="header-section-number">3.7.3</span> 소스 코드</h3>
+<p><code>diff.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># sys: for reading command-line arguments.</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># rich: for coloring the text.</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rich <span class="im">import</span> <span class="bu">print</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Print Usage message if enough arguments are not passed.</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(sys.argv) <span class="op">&lt;</span> <span class="dv">3</span>:</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Usage:"</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st">Must provide two file names as command-line arguments."</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st">diff.py &lt;orignal_file&gt; &lt;changed_file&gt;"</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    exit(<span class="dv">1</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>orignal <span class="op">=</span> sys.argv[<span class="dv">1</span>]</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>changed <span class="op">=</span> sys.argv[<span class="dv">2</span>]</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the contents of the files in lists.</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>orignal_contents <span class="op">=</span> <span class="bu">open</span>(orignal, <span class="st">"r"</span>).readlines()</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>changed_contents <span class="op">=</span> <span class="bu">open</span>(changed, <span class="st">"r"</span>).readlines()</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> <span class="st">"green"</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>symbol <span class="op">=</span> <span class="ss">f"[bold </span><span class="sc">{</span>color<span class="sc">}</span><span class="ss">][+]"</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Determine which file has changed much.</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(changed_contents) <span class="op">&lt;=</span> <span class="bu">len</span>(orignal_contents):</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    color <span class="op">=</span> <span class="st">"red"</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    symbol <span class="op">=</span> <span class="ss">f"[bold </span><span class="sc">{</span>color<span class="sc">}</span><span class="ss">][-]"</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    smallest_sloc, largest_sloc <span class="op">=</span> changed_contents, orignal_contents</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>    smallest_sloc, largest_sloc <span class="op">=</span> orignal_contents, changed_contents</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Go over all the lines to check the changes.</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> line <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(smallest_sloc)):</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> orignal_contents[line] <span class="op">==</span> changed_contents[line]:</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Ignore if the lines are same.</span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Display the changes on the respective lines of the files.</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"[bold red][-] Line </span><span class="sc">{</span>line <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">:[/bold red] </span><span class="sc">{</span>orignal_contents[line]<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>            end<span class="op">=</span><span class="st">""</span>,</span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"[bold green][+] Line </span><span class="sc">{</span>line <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">:[/bold green] </span><span class="sc">{</span>changed_contents[line]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Show the additions [+] or deletions [-] for the file that is the largest.</span></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> line <span class="op">==</span> <span class="bu">len</span>(smallest_sloc) <span class="op">-</span> <span class="dv">1</span>:</span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> new_line <span class="kw">in</span> <span class="bu">range</span>(line <span class="op">+</span> <span class="dv">1</span>, <span class="bu">len</span>(largest_sloc)):</span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(</span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>                    <span class="ss">f"</span><span class="sc">{</span>symbol<span class="sc">}</span><span class="ss"> Line </span><span class="sc">{</span>new_line <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">:[/bold </span><span class="sc">{</span>color<span class="sc">}</span><span class="ss">] </span><span class="sc">{</span>largest_sloc[new_line]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>                )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="클립보드-관리자" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="클립보드-관리자"><span class="header-section-number">3.8</span> 클립보드 관리자</h2>
+<p>📁 <strong>폴더:</strong> <code>Clip_Organizer</code></p>
+<p>클립보드의 내용을 정리하고 관리하는 도구입니다.</p>
+<section id="필요한-패키지-7" class="level3" data-number="3.8.1">
+<h3 data-number="3.8.1" class="anchored" data-anchor-id="필요한-패키지-7"><span class="header-section-number">3.8.1</span> 필요한 패키지</h3>
+<p>없음</p>
+</section>
+<section id="실행-방법-7" class="level3" data-number="3.8.2">
+<h3 data-number="3.8.2" class="anchored" data-anchor-id="실행-방법-7"><span class="header-section-number">3.8.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"Clip_Organizer"</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> main.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-7" class="level3" data-number="3.8.3">
+<h3 data-number="3.8.3" class="anchored" data-anchor-id="소스-코드-7"><span class="header-section-number">3.8.3</span> 소스 코드</h3>
+<p><code>main.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> moviepy.editor <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create array for clips</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>videos <span class="op">=</span> []</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign directory</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>directory <span class="op">=</span> <span class="st">"clips"</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate over files in</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># that directory and add them</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># to the array</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> <span class="bu">sorted</span>(os.listdir(directory)):</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> os.path.join(directory, filename)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># checking if it is a file</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> os.path.isfile(f):</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(f)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>        videos.append(f)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Print list of clips for debugging purposes</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(videos)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup first clip and initialize array</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co"># for updated clips to be put in</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> os.path.getmtime(videos[<span class="dv">0</span>])</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>concated <span class="op">=</span> []</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="co"># For each clip, update its start and end time so that</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="co"># they play relative to the time they were recoreded</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> path <span class="kw">in</span> videos:</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(path)</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(os.path.getmtime(path) <span class="op">-</span> start)</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    concated.append(</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>        VideoFileClip(path, audio<span class="op">=</span><span class="va">True</span>).set_start(os.path.getmtime(path) <span class="op">-</span> start)</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine clips into one video</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>output <span class="op">=</span> CompositeVideoClip(concated)</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Output</span></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>output.write_videofile(</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"output.mp4"</span>,</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>    codec<span class="op">=</span><span class="st">"libx264"</span>,</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>    audio_codec<span class="op">=</span><span class="st">"aac"</span>,</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>    temp_audiofile<span class="op">=</span><span class="st">"temp-audio.m4a"</span>,</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>    remove_temp<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="이메일-분리기" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="이메일-분리기"><span class="header-section-number">3.9</span> 이메일 분리기</h2>
+<p>📁 <strong>폴더:</strong> <code>Email Slicer</code></p>
+<p>이메일 주소에서 사용자 이름과 도메인을 추출하는 도구입니다.</p>
+<section id="필요한-패키지-8" class="level3" data-number="3.9.1">
+<h3 data-number="3.9.1" class="anchored" data-anchor-id="필요한-패키지-8"><span class="header-section-number">3.9.1</span> 필요한 패키지</h3>
+<p>없음 (표준 라이브러리)</p>
+</section>
+<section id="실행-방법-8" class="level3" data-number="3.9.2">
+<h3 data-number="3.9.2" class="anchored" data-anchor-id="실행-방법-8"><span class="header-section-number">3.9.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"Email Slicer"</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> EmailSlicer.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-8" class="level3" data-number="3.9.3">
+<h3 data-number="3.9.3" class="anchored" data-anchor-id="소스-코드-8"><span class="header-section-number">3.9.3</span> 소스 코드</h3>
+<p><code>EmailSlicer.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> isValidEmail(email):</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Regular expression for validating an Email</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    regex <span class="op">=</span> <span class="vs">r"</span><span class="dv">\b</span><span class="pp">[A-Za-z0-9._%+-]</span><span class="op">+</span><span class="vs">@</span><span class="pp">[A-Za-z0-9.-]</span><span class="op">+</span><span class="ch">\.</span><span class="pp">[A-Z|a-z]</span><span class="op">{2,}</span><span class="dv">\b</span><span class="vs">"</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> re.fullmatch(regex, email):</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>email <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter your email id - "</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> isValidEmail(email):</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    username <span class="op">=</span> email[<span class="dv">0</span> : email.index(<span class="st">"@"</span>)]</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    domain <span class="op">=</span> email[email.index(<span class="st">"@"</span>) <span class="op">+</span> <span class="dv">1</span> :]</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Username - "</span>, username)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Domain - "</span>, domain)</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Invalid Email!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="셸-명령어-실행기" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="셸-명령어-실행기"><span class="header-section-number">3.10</span> 셸 명령어 실행기</h2>
+<p>📁 <strong>폴더:</strong> <code>Execute Shell Command</code></p>
+<p>파이썬에서 직접 셸 명령어를 실행하는 도구입니다.</p>
+<section id="필요한-패키지-9" class="level3" data-number="3.10.1">
+<h3 data-number="3.10.1" class="anchored" data-anchor-id="필요한-패키지-9"><span class="header-section-number">3.10.1</span> 필요한 패키지</h3>
+<p>subprocess</p>
+</section>
+<section id="실행-방법-9" class="level3" data-number="3.10.2">
+<h3 data-number="3.10.2" class="anchored" data-anchor-id="실행-방법-9"><span class="header-section-number">3.10.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"Execute Shell Command"</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> execute_shell_command.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-9" class="level3" data-number="3.10.3">
+<h3 data-number="3.10.3" class="anchored" data-anchor-id="소스-코드-9"><span class="header-section-number">3.10.3</span> 소스 코드</h3>
+<p><code>execute_shell_command_reference.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> execute_shell_command <span class="im">as</span> shell</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Shell command to execute</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    command <span class="op">=</span> <span class="st">"echo Khanna"</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Call execute_shell_command function from execute_shell_command.py script, result will have result return from shell command, status will have status of that command</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    result, status <span class="op">=</span> shell.execute_shell_command(command)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check status of command ran, status != 0 means command failed</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> status <span class="op">!=</span> <span class="dv">0</span>:</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Exception in running shell command"</span>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>        sys.exit(<span class="dv">1</span>)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Take required action on result return after running shell command</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>        command_result <span class="op">=</span> result.decode(<span class="st">"utf8"</span>).rstrip(<span class="st">"</span><span class="ch">\r\n</span><span class="st">"</span>)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(command_result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="지출-추적기" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="지출-추적기"><span class="header-section-number">3.11</span> 지출 추적기</h2>
+<p>📁 <strong>폴더:</strong> <code>Expense_Tracker</code></p>
+<p>일일 지출과 예산을 추적하는 도구입니다.</p>
+<section id="필요한-패키지-10" class="level3" data-number="3.11.1">
+<h3 data-number="3.11.1" class="anchored" data-anchor-id="필요한-패키지-10"><span class="header-section-number">3.11.1</span> 필요한 패키지</h3>
+<p>없음 (표준 라이브러리)</p>
+</section>
+<section id="실행-방법-10" class="level3" data-number="3.11.2">
+<h3 data-number="3.11.2" class="anchored" data-anchor-id="실행-방법-10"><span class="header-section-number">3.11.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"Expense_Tracker"</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> expense_tracker.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-10" class="level3" data-number="3.11.3">
+<h3 data-number="3.11.3" class="anchored" data-anchor-id="소스-코드-10"><span class="header-section-number">3.11.3</span> 소스 코드</h3>
+<p><code>expense_tracker.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ExpenseTracker:</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.expenses <span class="op">=</span> {}</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.categories <span class="op">=</span> {}</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add_expense(<span class="va">self</span>, date, amount, category):</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> category <span class="kw">not</span> <span class="kw">in</span> <span class="va">self</span>.expenses:</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.expenses[category] <span class="op">=</span> []</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.expenses[category].append((date, amount))</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add_category(<span class="va">self</span>, category):</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> category <span class="kw">not</span> <span class="kw">in</span> <span class="va">self</span>.categories:</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.categories[category] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> view_expenses(<span class="va">self</span>):</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> category, items <span class="kw">in</span> <span class="va">self</span>.expenses.items():</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>            total_amount <span class="op">=</span> <span class="bu">sum</span>(amount <span class="cf">for</span> _, amount <span class="kw">in</span> items)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>category<span class="sc">}</span><span class="ss">: $</span><span class="sc">{</span>total_amount<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> view_categories(<span class="va">self</span>):</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Categories:"</span>)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> category <span class="kw">in</span> <span class="va">self</span>.expenses.keys():</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(category)</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample usage</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>tracker <span class="op">=</span> ExpenseTracker()</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Expense Tracker Menu:"</span>)</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"1. Add Expense"</span>)</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"2. Add Category"</span>)</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"3. View Expenses"</span>)</span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"4. View Categories"</span>)</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"5. Exit"</span>)</span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>    choice <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter your choice: "</span>)</span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> choice <span class="op">==</span> <span class="st">"1"</span>:</span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>        date <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter date (YYYY-MM-DD): "</span>)</span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>        amount <span class="op">=</span> <span class="bu">float</span>(<span class="bu">input</span>(<span class="st">"Enter amount: $"</span>))</span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>        category <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter category: "</span>)</span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>        tracker.add_expense(date, amount, category)</span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> choice <span class="op">==</span> <span class="st">"2"</span>:</span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>        category <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter category: "</span>)</span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>        tracker.add_category(category)</span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> choice <span class="op">==</span> <span class="st">"3"</span>:</span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>        tracker.view_expenses()</span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> choice <span class="op">==</span> <span class="st">"4"</span>:</span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>        tracker.view_categories()</span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> choice <span class="op">==</span> <span class="st">"5"</span>:</span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Exiting Expense Tracker. Goodbye!"</span>)</span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Invalid choice. Please try again."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="재무-추적기" class="level2" data-number="3.12">
+<h2 data-number="3.12" class="anchored" data-anchor-id="재무-추적기"><span class="header-section-number">3.12</span> 재무 추적기</h2>
+<p>📁 <strong>폴더:</strong> <code>Finance_Tracker</code></p>
+<p>개인 재무를 더 세밀하게 추적하는 고급 도구입니다.</p>
+<section id="필요한-패키지-11" class="level3" data-number="3.12.1">
+<h3 data-number="3.12.1" class="anchored" data-anchor-id="필요한-패키지-11"><span class="header-section-number">3.12.1</span> 필요한 패키지</h3>
+<p>없음 (표준 라이브러리)</p>
+</section>
+<section id="실행-방법-11" class="level3" data-number="3.12.2">
+<h3 data-number="3.12.2" class="anchored" data-anchor-id="실행-방법-11"><span class="header-section-number">3.12.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"Finance_Tracker"</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> main.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-11" class="level3" data-number="3.12.3">
+<h3 data-number="3.12.3" class="anchored" data-anchor-id="소스-코드-11"><span class="header-section-number">3.12.3</span> 소스 코드</h3>
+<p>전체 소스 코드는 <code>Finance_Tracker/</code> 폴더를 참조하세요. (코드가 너무 길어 생략)</p>
+<hr>
+</section>
+</section>
+<section id="투자-계산기" class="level2" data-number="3.13">
+<h2 data-number="3.13" class="anchored" data-anchor-id="투자-계산기"><span class="header-section-number">3.13</span> 투자 계산기</h2>
+<p>📁 <strong>폴더:</strong> <code>Investment Calculator</code></p>
+<p>투자 수익률을 계산하는 도구입니다.</p>
+<section id="필요한-패키지-12" class="level3" data-number="3.13.1">
+<h3 data-number="3.13.1" class="anchored" data-anchor-id="필요한-패키지-12"><span class="header-section-number">3.13.1</span> 필요한 패키지</h3>
+<p>없음 (표준 라이브러리)</p>
+</section>
+<section id="실행-방법-12" class="level3" data-number="3.13.2">
+<h3 data-number="3.13.2" class="anchored" data-anchor-id="실행-방법-12"><span class="header-section-number">3.13.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"Investment Calculator"</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> Calc.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-12" class="level3" data-number="3.13.3">
+<h3 data-number="3.13.3" class="anchored" data-anchor-id="소스-코드-12"><span class="header-section-number">3.13.3</span> 소스 코드</h3>
+<p>전체 소스 코드는 <code>Investment Calculator/</code> 폴더를 참조하세요. (코드가 너무 길어 생략)</p>
+<hr>
+</section>
+</section>
+<section id="삼각형-계산기" class="level2" data-number="3.14">
+<h2 data-number="3.14" class="anchored" data-anchor-id="삼각형-계산기"><span class="header-section-number">3.14</span> 삼각형 계산기</h2>
+<p>📁 <strong>폴더:</strong> <code>Triangle Calculator</code></p>
+<p>삼각형의 다양한 속성(넓이, 둘레 등)을 계산하는 도구입니다.</p>
+<section id="필요한-패키지-13" class="level3" data-number="3.14.1">
+<h3 data-number="3.14.1" class="anchored" data-anchor-id="필요한-패키지-13"><span class="header-section-number">3.14.1</span> 필요한 패키지</h3>
+<p>없음 (표준 라이브러리)</p>
+</section>
+<section id="실행-방법-13" class="level3" data-number="3.14.2">
+<h3 data-number="3.14.2" class="anchored" data-anchor-id="실행-방법-13"><span class="header-section-number">3.14.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"Triangle Calculator"</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> main.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-13" class="level3" data-number="3.14.3">
+<h3 data-number="3.14.3" class="anchored" data-anchor-id="소스-코드-13"><span class="header-section-number">3.14.3</span> 소스 코드</h3>
+<p><code>TriangleCalculator.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>s1 <span class="op">=</span> <span class="bu">float</span>(<span class="bu">input</span>(<span class="st">"Enter the first side of the triangle: "</span>))</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>s2 <span class="op">=</span> <span class="bu">float</span>(<span class="bu">input</span>(<span class="st">"Enter the second side of the triangle: "</span>))</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>s3 <span class="op">=</span> <span class="bu">float</span>(<span class="bu">input</span>(<span class="st">"Enter the third side of the triangle: "</span>))</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the semi-perimeter</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>sp <span class="op">=</span> (s1 <span class="op">+</span> s2 <span class="op">+</span> s3) <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the area</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>area <span class="op">=</span> (sp <span class="op">*</span> (sp <span class="op">-</span> s1) <span class="op">*</span> (sp <span class="op">-</span> s2) <span class="op">*</span> (sp <span class="op">-</span> s3)) <span class="op">**</span> <span class="fl">0.5</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The area of the triangle is </span><span class="sc">%0.4f</span><span class="st">"</span> <span class="op">%</span> area)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="lorem-ipsum-생성기" class="level2" data-number="3.15">
+<h2 data-number="3.15" class="anchored" data-anchor-id="lorem-ipsum-생성기"><span class="header-section-number">3.15</span> Lorem Ipsum 생성기</h2>
+<p>📁 <strong>폴더:</strong> <code>lorem_in_python</code></p>
+<p>Lorem Ipsum 자리 표시자 텍스트를 생성하는 도구입니다.</p>
+<section id="필요한-패키지-14" class="level3" data-number="3.15.1">
+<h3 data-number="3.15.1" class="anchored" data-anchor-id="필요한-패키지-14"><span class="header-section-number">3.15.1</span> 필요한 패키지</h3>
+<p>lorem</p>
+</section>
+<section id="실행-방법-14" class="level3" data-number="3.15.2">
+<h3 data-number="3.15.2" class="anchored" data-anchor-id="실행-방법-14"><span class="header-section-number">3.15.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"lorem_in_python"</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> lorem.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-14" class="level3" data-number="3.15.3">
+<h3 data-number="3.15.3" class="anchored" data-anchor-id="소스-코드-14"><span class="header-section-number">3.15.3</span> 소스 코드</h3>
+<p><code>lorem.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_lorem_ipsum(num_lines, output_dir<span class="op">=</span><span class="st">"generated_text"</span>, filename<span class="op">=</span><span class="st">"lorem.txt"</span>, line_length<span class="op">=</span><span class="dv">70</span>):</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Generates a specified number of lines of random characters, mimicking Lorem Ipsum.</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co">        num_lines (int): The number of lines to generate in the output file.</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co">        output_dir (str): The directory where the output file will be saved.</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co">                          Defaults to "generated_text".</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="co">        filename (str): The name of the output text file. Defaults to "lorem.txt".</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co">        line_length (int): The maximum number of characters per line. Defaults to 70.</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Using string.ascii_lowercase for a cleaner character set</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Adding a space at the beginning to ensure spaces appear frequently</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># No need for extra spaces, random.choice will handle distribution</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    characters <span class="op">=</span> <span class="st">" "</span> <span class="op">+</span> <span class="st">"abcdefghijklmnopqrstuvwxyz"</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create the output directory if it doesn't exist</span></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>    os.makedirs(output_dir, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>    file_path <span class="op">=</span> os.path.join(output_dir, filename)</span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(file_path, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(num_lines): <span class="co"># Use '_' for unused loop variable</span></span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Use random.choices for a list of characters, then join them</span></span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>                <span class="co"># This is often more efficient for building strings than repeated concatenation</span></span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>                line <span class="op">=</span> <span class="st">''</span>.join(random.choices(characters, k<span class="op">=</span>line_length))</span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>                f.write(line <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Successfully generated </span><span class="sc">{</span>num_lines<span class="sc">}</span><span class="ss"> lines to '</span><span class="sc">{</span>file_path<span class="sc">}</span><span class="ss">'"</span>)</span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">IOError</span> <span class="im">as</span> e:</span>
+<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Error writing to file '</span><span class="sc">{</span>file_path<span class="sc">}</span><span class="ss">': </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"An unexpected error occurred: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a>        num_rows <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">"Enter the number of rows (lines) for your paragraph:</span><span class="ch">\n</span><span class="st">"</span>))</span>
+<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> num_rows <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
+<span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"Please enter a positive number of rows."</span>)</span>
+<span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a>            <span class="co"># You can customize these arguments if needed</span></span>
+<span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a>            generate_lorem_ipsum(num_rows)</span>
+<span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Invalid input. Please enter a valid integer for the number of rows."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="스마트-계산기" class="level2" data-number="3.16">
+<h2 data-number="3.16" class="anchored" data-anchor-id="스마트-계산기"><span class="header-section-number">3.16</span> 스마트 계산기</h2>
+<p>📁 <strong>폴더:</strong> <code>Smart_Calculator</code></p>
+<p>고급 기능을 갖춘 계산기입니다.</p>
+<section id="필요한-패키지-15" class="level3" data-number="3.16.1">
+<h3 data-number="3.16.1" class="anchored" data-anchor-id="필요한-패키지-15"><span class="header-section-number">3.16.1</span> 필요한 패키지</h3>
+<p>없음 (표준 라이브러리)</p>
+</section>
+<section id="실행-방법-15" class="level3" data-number="3.16.2">
+<h3 data-number="3.16.2" class="anchored" data-anchor-id="실행-방법-15"><span class="header-section-number">3.16.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"Smart_Calculator"</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> main.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-15" class="level3" data-number="3.16.3">
+<h3 data-number="3.16.3" class="anchored" data-anchor-id="소스-코드-15"><span class="header-section-number">3.16.3</span> 소스 코드</h3>
+<p><code>calculator.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tkinter <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sub(a, b):</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">-</span> b</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mul(a, b):</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">*</span> b</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> div(a, b):</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">/</span> b</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mod(a, b):</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">%</span> b</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lcm(a, b):</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> a <span class="op">&lt;</span> <span class="dv">0</span> <span class="kw">or</span> b <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>    L <span class="op">=</span> a <span class="cf">if</span> a <span class="op">&gt;</span> b <span class="cf">else</span> b</span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> L <span class="op">&lt;=</span> a <span class="op">*</span> b:</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> L <span class="op">%</span> a <span class="op">==</span> <span class="dv">0</span> <span class="kw">and</span> L <span class="op">%</span> b <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> L</span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>        L <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hcf(a, b):</span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> a <span class="op">&lt;</span> <span class="dv">0</span> <span class="kw">or</span> b <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
+<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a>    H <span class="op">=</span> a <span class="cf">if</span> a <span class="op">&lt;</span> b <span class="cf">else</span> b</span>
+<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> H <span class="op">&gt;=</span> <span class="dv">1</span>:</span>
+<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> a <span class="op">%</span> H <span class="op">==</span> <span class="dv">0</span> <span class="kw">and</span> b <span class="op">%</span> H <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> H</span>
+<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a>        H <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> extract_from_text(text):</span>
+<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a>    l <span class="op">=</span> []</span>
+<span id="cb30-46"><a href="#cb30-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> text.split(<span class="st">" "</span>):</span>
+<span id="cb30-47"><a href="#cb30-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb30-48"><a href="#cb30-48" aria-hidden="true" tabindex="-1"></a>            l.append(<span class="bu">float</span>(t))</span>
+<span id="cb30-49"><a href="#cb30-49" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb30-50"><a href="#cb30-50" aria-hidden="true" tabindex="-1"></a>            <span class="cf">pass</span></span>
+<span id="cb30-51"><a href="#cb30-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> l</span>
+<span id="cb30-52"><a href="#cb30-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-53"><a href="#cb30-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-54"><a href="#cb30-54" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate():</span>
+<span id="cb30-55"><a href="#cb30-55" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> textin.get()</span>
+<span id="cb30-56"><a href="#cb30-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> word <span class="kw">in</span> text.split(<span class="st">" "</span>):</span>
+<span id="cb30-57"><a href="#cb30-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> word.upper() <span class="kw">in</span> operations.keys():</span>
+<span id="cb30-58"><a href="#cb30-58" aria-hidden="true" tabindex="-1"></a>            <span class="cf">try</span>:</span>
+<span id="cb30-59"><a href="#cb30-59" aria-hidden="true" tabindex="-1"></a>                l <span class="op">=</span> extract_from_text(text)</span>
+<span id="cb30-60"><a href="#cb30-60" aria-hidden="true" tabindex="-1"></a>                r <span class="op">=</span> operations[word.upper()](l[<span class="dv">0</span>], l[<span class="dv">1</span>])</span>
+<span id="cb30-61"><a href="#cb30-61" aria-hidden="true" tabindex="-1"></a>                <span class="bu">list</span>.delete(<span class="dv">0</span>, END)</span>
+<span id="cb30-62"><a href="#cb30-62" aria-hidden="true" tabindex="-1"></a>                <span class="bu">list</span>.insert(END, r)</span>
+<span id="cb30-63"><a href="#cb30-63" aria-hidden="true" tabindex="-1"></a>            <span class="cf">except</span>:</span>
+<span id="cb30-64"><a href="#cb30-64" aria-hidden="true" tabindex="-1"></a>                <span class="bu">list</span>.delete(<span class="dv">0</span>, END)</span>
+<span id="cb30-65"><a href="#cb30-65" aria-hidden="true" tabindex="-1"></a>                <span class="bu">list</span>.insert(END, <span class="st">"something went wrong please enter again"</span>)</span>
+<span id="cb30-66"><a href="#cb30-66" aria-hidden="true" tabindex="-1"></a>            <span class="cf">finally</span>:</span>
+<span id="cb30-67"><a href="#cb30-67" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb30-68"><a href="#cb30-68" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> word.upper() <span class="kw">not</span> <span class="kw">in</span> operations.keys():</span>
+<span id="cb30-69"><a href="#cb30-69" aria-hidden="true" tabindex="-1"></a>            <span class="bu">list</span>.delete(<span class="dv">0</span>, END)</span>
+<span id="cb30-70"><a href="#cb30-70" aria-hidden="true" tabindex="-1"></a>            <span class="bu">list</span>.insert(END, <span class="st">"something went wrong please enter again"</span>)</span>
+<span id="cb30-71"><a href="#cb30-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-72"><a href="#cb30-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-73"><a href="#cb30-73" aria-hidden="true" tabindex="-1"></a>operations <span class="op">=</span> {</span>
+<span id="cb30-74"><a href="#cb30-74" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ADD"</span>: add,</span>
+<span id="cb30-75"><a href="#cb30-75" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ADDITION"</span>: add,</span>
+<span id="cb30-76"><a href="#cb30-76" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SUM"</span>: add,</span>
+<span id="cb30-77"><a href="#cb30-77" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PLUS"</span>: add,</span>
+<span id="cb30-78"><a href="#cb30-78" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SUB"</span>: sub,</span>
+<span id="cb30-79"><a href="#cb30-79" aria-hidden="true" tabindex="-1"></a>    <span class="st">"DIFFERENCE"</span>: sub,</span>
+<span id="cb30-80"><a href="#cb30-80" aria-hidden="true" tabindex="-1"></a>    <span class="st">"MINUS"</span>: sub,</span>
+<span id="cb30-81"><a href="#cb30-81" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SUBTRACT"</span>: sub,</span>
+<span id="cb30-82"><a href="#cb30-82" aria-hidden="true" tabindex="-1"></a>    <span class="st">"DIFF"</span>: sub,</span>
+<span id="cb30-83"><a href="#cb30-83" aria-hidden="true" tabindex="-1"></a>    <span class="st">"LCM"</span>: lcm,</span>
+<span id="cb30-84"><a href="#cb30-84" aria-hidden="true" tabindex="-1"></a>    <span class="st">"HCF"</span>: hcf,</span>
+<span id="cb30-85"><a href="#cb30-85" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PRODUCT"</span>: mul,</span>
+<span id="cb30-86"><a href="#cb30-86" aria-hidden="true" tabindex="-1"></a>    <span class="st">"MULTIPLICATION"</span>: mul,</span>
+<span id="cb30-87"><a href="#cb30-87" aria-hidden="true" tabindex="-1"></a>    <span class="st">"MULTIPLY"</span>: mul,</span>
+<span id="cb30-88"><a href="#cb30-88" aria-hidden="true" tabindex="-1"></a>    <span class="st">"DIVISION"</span>: div,</span>
+<span id="cb30-89"><a href="#cb30-89" aria-hidden="true" tabindex="-1"></a>    <span class="st">"DIV"</span>: div,</span>
+<span id="cb30-90"><a href="#cb30-90" aria-hidden="true" tabindex="-1"></a>    <span class="st">"DIVIDE"</span>: div,</span>
+<span id="cb30-91"><a href="#cb30-91" aria-hidden="true" tabindex="-1"></a>    <span class="st">"MOD"</span>: mod,</span>
+<span id="cb30-92"><a href="#cb30-92" aria-hidden="true" tabindex="-1"></a>    <span class="st">"REMAINDER"</span>: mod,</span>
+<span id="cb30-93"><a href="#cb30-93" aria-hidden="true" tabindex="-1"></a>    <span class="st">"MODULUS"</span>: mod,</span>
+<span id="cb30-94"><a href="#cb30-94" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-95"><a href="#cb30-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-96"><a href="#cb30-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-97"><a href="#cb30-97" aria-hidden="true" tabindex="-1"></a>win <span class="op">=</span> Tk()</span>
+<span id="cb30-98"><a href="#cb30-98" aria-hidden="true" tabindex="-1"></a>win.title(<span class="st">"Smart Calculator"</span>)</span>
+<span id="cb30-99"><a href="#cb30-99" aria-hidden="true" tabindex="-1"></a>win.geometry(<span class="st">"500x300"</span>)</span>
+<span id="cb30-100"><a href="#cb30-100" aria-hidden="true" tabindex="-1"></a>win.configure(bg<span class="op">=</span><span class="st">"lightskyblue"</span>)</span>
+<span id="cb30-101"><a href="#cb30-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-102"><a href="#cb30-102" aria-hidden="true" tabindex="-1"></a>win.resizable(<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb30-103"><a href="#cb30-103" aria-hidden="true" tabindex="-1"></a>win.columnconfigure(<span class="dv">0</span>, weight<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb30-104"><a href="#cb30-104" aria-hidden="true" tabindex="-1"></a>win.columnconfigure(<span class="dv">1</span>, weight<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb30-105"><a href="#cb30-105" aria-hidden="true" tabindex="-1"></a>win.columnconfigure(<span class="dv">2</span>, weight<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb30-106"><a href="#cb30-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-107"><a href="#cb30-107" aria-hidden="true" tabindex="-1"></a>l1 <span class="op">=</span> Label(win, text<span class="op">=</span><span class="st">"I am a smart calculator"</span>, width<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb30-108"><a href="#cb30-108" aria-hidden="true" tabindex="-1"></a>l1.grid(column<span class="op">=</span><span class="dv">1</span>, row<span class="op">=</span><span class="dv">1</span>, padx<span class="op">=</span><span class="dv">5</span>, pady<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb30-109"><a href="#cb30-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-110"><a href="#cb30-110" aria-hidden="true" tabindex="-1"></a>l2 <span class="op">=</span> Label(win, text<span class="op">=</span><span class="st">"My name is Leah"</span>, width<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb30-111"><a href="#cb30-111" aria-hidden="true" tabindex="-1"></a>l2.grid(column<span class="op">=</span><span class="dv">1</span>, row<span class="op">=</span><span class="dv">2</span>, padx<span class="op">=</span><span class="dv">5</span>, pady<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb30-112"><a href="#cb30-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-113"><a href="#cb30-113" aria-hidden="true" tabindex="-1"></a>l3 <span class="op">=</span> Label(win, text<span class="op">=</span><span class="st">"What can I help you?"</span>, width<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb30-114"><a href="#cb30-114" aria-hidden="true" tabindex="-1"></a>l3.grid(column<span class="op">=</span><span class="dv">1</span>, row<span class="op">=</span><span class="dv">3</span>, padx<span class="op">=</span><span class="dv">5</span>, pady<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb30-115"><a href="#cb30-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-116"><a href="#cb30-116" aria-hidden="true" tabindex="-1"></a>textin <span class="op">=</span> StringVar()</span>
+<span id="cb30-117"><a href="#cb30-117" aria-hidden="true" tabindex="-1"></a>e1 <span class="op">=</span> Entry(win, width<span class="op">=</span><span class="dv">30</span>, textvariable<span class="op">=</span>textin)</span>
+<span id="cb30-118"><a href="#cb30-118" aria-hidden="true" tabindex="-1"></a>e1.grid(column<span class="op">=</span><span class="dv">1</span>, row<span class="op">=</span><span class="dv">4</span>, padx<span class="op">=</span><span class="dv">5</span>, pady<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb30-119"><a href="#cb30-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-120"><a href="#cb30-120" aria-hidden="true" tabindex="-1"></a>b1 <span class="op">=</span> Button(win, text<span class="op">=</span><span class="st">"Just this"</span>, command<span class="op">=</span>calculate)</span>
+<span id="cb30-121"><a href="#cb30-121" aria-hidden="true" tabindex="-1"></a>b1.grid(column<span class="op">=</span><span class="dv">1</span>, row<span class="op">=</span><span class="dv">5</span>, padx<span class="op">=</span><span class="dv">5</span>, pady<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb30-122"><a href="#cb30-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-123"><a href="#cb30-123" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span> <span class="op">=</span> Listbox(win, width<span class="op">=</span><span class="dv">40</span>, height<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb30-124"><a href="#cb30-124" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>.grid(column<span class="op">=</span><span class="dv">1</span>, row<span class="op">=</span><span class="dv">6</span>, padx<span class="op">=</span><span class="dv">5</span>, pady<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb30-125"><a href="#cb30-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-126"><a href="#cb30-126" aria-hidden="true" tabindex="-1"></a>win.mainloop()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="행성별-몸무게-계산기" class="level2" data-number="3.17">
+<h2 data-number="3.17" class="anchored" data-anchor-id="행성별-몸무게-계산기"><span class="header-section-number">3.17</span> 행성별 몸무게 계산기</h2>
+<p>📁 <strong>폴더:</strong> <code>Weights_on_different_planets</code></p>
+<p>태양계의 다른 행성에서의 몸무게를 계산하는 재미있는 도구입니다.</p>
+<section id="필요한-패키지-16" class="level3" data-number="3.17.1">
+<h3 data-number="3.17.1" class="anchored" data-anchor-id="필요한-패키지-16"><span class="header-section-number">3.17.1</span> 필요한 패키지</h3>
+<p>없음 (표준 라이브러리)</p>
+</section>
+<section id="실행-방법-16" class="level3" data-number="3.17.2">
+<h3 data-number="3.17.2" class="anchored" data-anchor-id="실행-방법-16"><span class="header-section-number">3.17.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"Weights_on_different_planets"</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> main.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-16" class="level3" data-number="3.17.3">
+<h3 data-number="3.17.3" class="anchored" data-anchor-id="소스-코드-16"><span class="header-section-number">3.17.3</span> 소스 코드</h3>
+<p>전체 소스 코드는 <code>Weights_on_different_planets/</code> 폴더를 참조하세요. (코드가 너무 길어 생략)</p>
+<hr>
+</section>
+</section>
+<section id="xlsxlsx-변환기" class="level2" data-number="3.18">
+<h2 data-number="3.18" class="anchored" data-anchor-id="xlsxlsx-변환기"><span class="header-section-number">3.18</span> XLS→XLSX 변환기</h2>
+<p>📁 <strong>폴더:</strong> <code>xls_to_xlsx</code></p>
+<p>구형 Excel 파일(.xls)을 최신 형식(.xlsx)으로 변환하는 스크립트입니다.</p>
+<section id="필요한-패키지-17" class="level3" data-number="3.18.1">
+<h3 data-number="3.18.1" class="anchored" data-anchor-id="필요한-패키지-17"><span class="header-section-number">3.18.1</span> 필요한 패키지</h3>
+<p>pywin32</p>
+</section>
+<section id="실행-방법-17" class="level3" data-number="3.18.2">
+<h3 data-number="3.18.2" class="anchored" data-anchor-id="실행-방법-17"><span class="header-section-number">3.18.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"xls_to_xlsx"</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> xls_to_xlsx.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-17" class="level3" data-number="3.18.3">
+<h3 data-number="3.18.3" class="anchored" data-anchor-id="소스-코드-17"><span class="header-section-number">3.18.3</span> 소스 코드</h3>
+<p><code>xls_to_xlsx.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> win32com.client <span class="im">import</span> Dispatch</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> convert_xls_to_xlsx(file_path: <span class="bu">str</span>, file_format: <span class="bu">int</span> <span class="op">=</span> <span class="dv">51</span>):</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Convert an Excel file from '.xls' to '.xlsx' format.</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co">    - file_path (str): The path to the input '.xls' file.</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="co">    - file_format (int, optional): The file format code for '.xlsx'.</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co">    Default is 51.</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    excel_app <span class="op">=</span> Dispatch(<span class="st">"Excel.Application"</span>)</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    excel_app.Visible <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    output_path <span class="op">=</span> <span class="bu">str</span>(file_path) <span class="op">+</span> <span class="st">"x"</span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    workbook <span class="op">=</span> excel_app.Workbooks.Open(file_path)</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    workbook.SaveAs(output_path, FileFormat<span class="op">=</span>file_format)</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    workbook.Close()</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>    excel_app.Quit()</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> remove_old_file(file_path: <span class="bu">str</span>):</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Delete the old 'xls' file.</span></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a><span class="co">    - file_path (str): The path to the old 'xls' file.</span></span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>    Path(file_path).unlink(missing_ok<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>    file_path <span class="op">=</span> <span class="bu">str</span>(<span class="bu">input</span>(<span class="st">"Input the '.xls' file path:</span><span class="ch">\n</span><span class="st">"</span>))</span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a>    convert_xls_to_xlsx(file_path<span class="op">=</span>file_path)</span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>    file_name <span class="op">=</span> os.path.basename(file_path)</span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Successfully converts </span><span class="sc">{</span>file_name<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a>    is_delete <span class="op">=</span> <span class="bu">str</span>(</span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>        <span class="bu">input</span>(<span class="ss">f"Do you want to delete the old </span><span class="sc">{</span>file_name<span class="sc">}</span><span class="ss"> file (y/n)? "</span>)</span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>    ).lower()</span>
+<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> is_delete <span class="op">==</span> <span class="st">"y"</span>:</span>
+<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>        remove_old_file(file_path<span class="op">=</span>file_path)</span>
+<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Successfully removes </span><span class="sc">{</span>file_name<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">pass</span></span>
+<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="이미지pdf-변환기" class="level2" data-number="3.19">
+<h2 data-number="3.19" class="anchored" data-anchor-id="이미지pdf-변환기"><span class="header-section-number">3.19</span> 이미지→PDF 변환기</h2>
+<p>📁 <strong>폴더:</strong> <code>images_to_pdf_converter</code></p>
+<p>여러 장의 이미지를 하나의 PDF 문서로 변환합니다.</p>
+<section id="필요한-패키지-18" class="level3" data-number="3.19.1">
+<h3 data-number="3.19.1" class="anchored" data-anchor-id="필요한-패키지-18"><span class="header-section-number">3.19.1</span> 필요한 패키지</h3>
+<p>없음</p>
+</section>
+<section id="실행-방법-18" class="level3" data-number="3.19.2">
+<h3 data-number="3.19.2" class="anchored" data-anchor-id="실행-방법-18"><span class="header-section-number">3.19.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"images_to_pdf_converter"</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> Images_to_pdf.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-18" class="level3" data-number="3.19.3">
+<h3 data-number="3.19.3" class="anchored" data-anchor-id="소스-코드-18"><span class="header-section-number">3.19.3</span> 소스 코드</h3>
+<p><code>Images_to_pdf.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> img2pdf</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> images_to_pdf(image_folder_path):</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Verifying the give path exists or not</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> os.path.exists(image_folder_path):</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Given images folder path verified -- processing"</span>)</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Given images folder Not exist "</span>)</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>    images <span class="op">=</span> [</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>        imgs</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> imgs <span class="kw">in</span> os.listdir(image_folder_path)</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> imgs.endswith((<span class="st">".jpg"</span>, <span class="st">".jpeg"</span>, <span class="st">".png"</span>, <span class="st">".gif"</span>))</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>    images.sort()</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># List to store image bytes of images present in the directory</span></span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>    images_bytes <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># converting all the images to image-bytes and appending them to a list for further processing</span></span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> images:</span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(os.path.join(image_folder_path, i), <span class="st">"rb"</span>) <span class="im">as</span> im:</span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>            images_bytes.append(im.read())</span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># To convert image bytes to bytes for pdf</span></span>
+<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a>    pdf_image_bytes <span class="op">=</span> img2pdf.convert(images_bytes)</span>
+<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"Output.pdf"</span>, <span class="st">"wb"</span>) <span class="im">as</span> pdfFile:</span>
+<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a>        pdfFile.write(pdf_image_bytes)</span>
+<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Call the function to convert the images folder to pdf</span></span>
+<span id="cb35-37"><a href="#cb35-37" aria-hidden="true" tabindex="-1"></a>images_to_pdf(folder_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="운동-타이머" class="level2" data-number="3.20">
+<h2 data-number="3.20" class="anchored" data-anchor-id="운동-타이머"><span class="header-section-number">3.20</span> 운동 타이머</h2>
+<p>📁 <strong>폴더:</strong> <code>Exercise-Timer</code></p>
+<p>운동 루틴에 특화된 타이머 도구입니다.</p>
+<section id="필요한-패키지-19" class="level3" data-number="3.20.1">
+<h3 data-number="3.20.1" class="anchored" data-anchor-id="필요한-패키지-19"><span class="header-section-number">3.20.1</span> 필요한 패키지</h3>
+<p>없음</p>
+</section>
+<section id="실행-방법-19" class="level3" data-number="3.20.2">
+<h3 data-number="3.20.2" class="anchored" data-anchor-id="실행-방법-19"><span class="header-section-number">3.20.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"Exercise-Timer"</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> exercise_cli.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-19" class="level3" data-number="3.20.3">
+<h3 data-number="3.20.3" class="anchored" data-anchor-id="소스-코드-19"><span class="header-section-number">3.20.3</span> 소스 코드</h3>
+<p><code>exercise_cli.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> click</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time <span class="im">as</span> t</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"PYGAME_HIDE_SUPPORT_PROMPT"</span>] <span class="op">=</span> <span class="st">"hide"</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pygame</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>pygame.mixer.init()</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> play_audio_start():</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>    start_audio <span class="op">=</span> pygame.mixer.Sound(<span class="st">"beep_start.mp3"</span>)</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>    start_audio.play()</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>    pygame.time.wait(<span class="bu">int</span>(start_audio.get_length() <span class="op">*</span> <span class="dv">1000</span>))</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> play_audio_stop():</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>    stop_audio <span class="op">=</span> pygame.mixer.Sound(<span class="st">"beep_stop.mp3"</span>)</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>    stop_audio.play()</span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>    pygame.time.wait(<span class="bu">int</span>(stop_audio.get_length() <span class="op">*</span> <span class="dv">1000</span>))</span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a><span class="at">@click.command</span>()</span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a><span class="at">@click.option</span>(<span class="st">"--time"</span>, <span class="st">"-t"</span>, default<span class="op">=</span><span class="dv">10</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Time you want to exercise"</span>)</span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a><span class="at">@click.option</span>(<span class="st">"--interval"</span>, <span class="st">"-i"</span>, default<span class="op">=</span><span class="dv">3</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Interval you want for exercise"</span>)</span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a><span class="at">@click.option</span>(<span class="st">"--reps"</span>, <span class="st">"-r"</span>, default<span class="op">=</span><span class="dv">5</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"Reps you want to do"</span>)</span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> exercise(time: <span class="bu">int</span>, interval: <span class="bu">int</span>, reps: <span class="bu">int</span>):</span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(reps):</span>
+<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Interval"</span>)</span>
+<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a>        t.sleep(interval)</span>
+<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Start"</span>)</span>
+<span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a>        play_audio_start()</span>
+<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a>        t.sleep(time)</span>
+<span id="cb37-34"><a href="#cb37-34" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Stop"</span>)</span>
+<span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a>        play_audio_stop()</span>
+<span id="cb37-36"><a href="#cb37-36" aria-hidden="true" tabindex="-1"></a>        t.sleep(interval)</span>
+<span id="cb37-37"><a href="#cb37-37" aria-hidden="true" tabindex="-1"></a>        reps <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb37-38"><a href="#cb37-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> reps <span class="op">!=</span> <span class="dv">0</span>:</span>
+<span id="cb37-39"><a href="#cb37-39" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Reps left: </span><span class="sc">{</span>reps<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb37-40"><a href="#cb37-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb37-41"><a href="#cb37-41" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"Finished"</span>)</span>
+<span id="cb37-42"><a href="#cb37-42" aria-hidden="true" tabindex="-1"></a>            finish_audio <span class="op">=</span> pygame.mixer.Sound(<span class="st">"beep_finish.mp3"</span>)</span>
+<span id="cb37-43"><a href="#cb37-43" aria-hidden="true" tabindex="-1"></a>            finish_audio.play()</span>
+<span id="cb37-44"><a href="#cb37-44" aria-hidden="true" tabindex="-1"></a>            pygame.time.wait(<span class="bu">int</span>(finish_audio.get_length() <span class="op">*</span> <span class="dv">1500</span>))</span>
+<span id="cb37-45"><a href="#cb37-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-46"><a href="#cb37-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-47"><a href="#cb37-47" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb37-48"><a href="#cb37-48" aria-hidden="true" tabindex="-1"></a>    exercise()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="할일-관리-앱" class="level2" data-number="3.21">
+<h2 data-number="3.21" class="anchored" data-anchor-id="할일-관리-앱"><span class="header-section-number">3.21</span> 할일 관리 앱</h2>
+<p>📁 <strong>폴더:</strong> <code>Todo_App</code></p>
+<p>할 일을 관리하는 생산성 도구입니다.</p>
+<section id="필요한-패키지-20" class="level3" data-number="3.21.1">
+<h3 data-number="3.21.1" class="anchored" data-anchor-id="필요한-패키지-20"><span class="header-section-number">3.21.1</span> 필요한 패키지</h3>
+<p>없음</p>
+</section>
+<section id="실행-방법-20" class="level3" data-number="3.21.2">
+<h3 data-number="3.21.2" class="anchored" data-anchor-id="실행-방법-20"><span class="header-section-number">3.21.2</span> 실행 방법</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"Todo_App"</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> main.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="소스-코드-20" class="level3" data-number="3.21.3">
+<h3 data-number="3.21.3" class="anchored" data-anchor-id="소스-코드-20"><span class="header-section-number">3.21.3</span> 소스 코드</h3>
+<p><code>main.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> flask <span class="im">import</span> Flask, request, render_template, redirect, url_for</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> flask_bootstrap <span class="im">import</span> Bootstrap</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create the app</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>app <span class="op">=</span> Flask(<span class="va">__name__</span>)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>bootstrap <span class="op">=</span> Bootstrap(app)</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co"># the database</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>todos <span class="op">=</span> []</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="co"># routes</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="at">@app.route</span>(<span class="st">"/"</span>)</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> index():</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> render_template(<span class="st">"index.html"</span>, todos<span class="op">=</span>todos)</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a><span class="at">@app.route</span>(<span class="st">"/add"</span>, methods<span class="op">=</span>[<span class="st">"POST"</span>])</span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add():</span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>    task <span class="op">=</span> request.form[<span class="st">"todo"</span>]</span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>    todos.append({<span class="st">"task"</span>: task, <span class="st">"done"</span>: <span class="va">False</span>})</span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> redirect(url_for(<span class="st">"index"</span>))</span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a><span class="at">@app.route</span>(<span class="st">"/remove/&lt;int:index&gt;"</span>, methods<span class="op">=</span>[<span class="st">"GET"</span>])</span>
+<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> remove(index):</span>
+<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">del</span> todos[index]</span>
+<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> redirect(url_for(<span class="st">"index"</span>))</span>
+<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a><span class="at">@app.route</span>(<span class="st">"/edit/&lt;int:index&gt;"</span>, methods<span class="op">=</span>[<span class="st">"GET"</span>, <span class="st">"POST"</span>])</span>
+<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> edit(index):</span>
+<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> request.method <span class="op">==</span> <span class="st">"GET"</span>:</span>
+<span id="cb39-34"><a href="#cb39-34" aria-hidden="true" tabindex="-1"></a>        todo <span class="op">=</span> todos[index]</span>
+<span id="cb39-35"><a href="#cb39-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> render_template(<span class="st">"edit.html"</span>, todo<span class="op">=</span>todo, index<span class="op">=</span>index)</span>
+<span id="cb39-36"><a href="#cb39-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb39-37"><a href="#cb39-37" aria-hidden="true" tabindex="-1"></a>        task <span class="op">=</span> request.form[<span class="st">"todo"</span>]</span>
+<span id="cb39-38"><a href="#cb39-38" aria-hidden="true" tabindex="-1"></a>        todo <span class="op">=</span> todos[index]</span>
+<span id="cb39-39"><a href="#cb39-39" aria-hidden="true" tabindex="-1"></a>        todo[<span class="st">"task"</span>] <span class="op">=</span> task</span>
+<span id="cb39-40"><a href="#cb39-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> redirect(url_for(<span class="st">"index"</span>))</span>
+<span id="cb39-41"><a href="#cb39-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-42"><a href="#cb39-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-43"><a href="#cb39-43" aria-hidden="true" tabindex="-1"></a><span class="co"># run the app</span></span>
+<span id="cb39-44"><a href="#cb39-44" aria-hidden="true" tabindex="-1"></a>app.run(debug<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../projects/games.html" class="pagination-link" aria-label="🎮 게임 프로젝트">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">🎮 게임 프로젝트</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../projects/security.html" class="pagination-link" aria-label="🔐 보안 및 암호화">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">🔐 보안 및 암호화</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
