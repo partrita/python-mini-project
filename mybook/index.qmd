@@ -1,0 +1,13 @@
+# Preface {.unnumbered}
+
+Welcome to the **Python Mini Projects** collection! 👋
+
+This book serves as a comprehensive guide and repository for a variety of easy-to-understand Python small projects. Whether you are a beginner looking to improve your programming skills or an expert seeking a playground to share knowledge, this collection has something for you.
+
+## Aim of the Project
+
+As a Python newbie, I understand the problems that people face when they first begin studying and attempting to understand various Data Science concepts, particularly Python. This project is designed for folks who are just getting started with Python principles and exploring GitHub as "contributors."
+
+My goal is to build a common playground where everyone can learn and share knowledge.
+
+Let's "folk-ing" create amazing things together! 👉

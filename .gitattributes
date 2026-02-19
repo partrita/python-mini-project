@@ -1,3 +1,5 @@
 *.ipynb linguist-detectable=true
 *.ipynb linguist-language=python
 *.ipynb text
+# SCM syntax highlighting & preventing 3-way merges
+pixi.lock merge=binary linguist-language=YAML linguist-generated=true -diff

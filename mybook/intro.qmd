@@ -1,0 +1,19 @@
+# Introduction
+
+This book documents a collection of Python mini-projects. Each project is designed to be simple, educational, and easy to run.
+
+## How to use this book
+
+You can browse the [Projects list](projects.qmd) to find a project that interests you. Each project is located in its own directory in the GitHub repository.
+
+## Contributing
+
+We welcome contributions from everyone! If you have a simple Python project you'd like to share:
+
+1.  **Fork** the repository.
+2.  **Clone** your fork.
+3.  **Create a folder** for your project.
+4.  **Add your code** and a `README.md`.
+5.  **Submit a Pull Request**.
+
+For more detailed instructions, please refer to the [repository README](https://github.com/ndleah/python-mini-project).

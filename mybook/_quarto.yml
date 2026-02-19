@@ -1,0 +1,26 @@
+project:
+  type: book
+
+book:
+  title: "Python Mini Projects"
+  author: "ndleah"
+  date: "2/19/2026"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - projects.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+  pdf:
+    documentclass: scrreprt
+
+
+

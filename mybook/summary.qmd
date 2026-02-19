@@ -1,0 +1,5 @@
+# Summary
+
+In summary, this collection provides over 100 mini-projects to help you learn Python. From simple games like "Henman" and "Snake" to more advanced tools like "Address Validator" and "Face Recognition", there is plenty to explore and learn from.
+
+We hope you find these projects useful for your learning journey!
