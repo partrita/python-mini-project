@@ -12,7 +12,7 @@ class App(ctk.CTk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        def dispPie(self, M, N):
+        def dispPie(self, M: int, N: int) -> None:
             names = [
                 "Invested Amount\n(" + str(format(N, ",d")) + ")",
                 "Maturity Value\n(" + str(format(M, ",d")) + ")",
@@ -23,7 +23,7 @@ class App(ctk.CTk):
             plt.pie(pi, labels=names)
             plt.show()
 
-        def Display(self, M, N):
+        def Display(self, M: int, N: int) -> None:
             self.MatDisp.configure(text=str(format(M, ",d")))
             self.AmtDisp.configure(text=str(format(N, ",d")))
             self.Details = ctk.CTkButton(
@@ -36,7 +36,7 @@ class App(ctk.CTk):
             self.Details.grid(row=6, column=0, padx=20, pady=20, sticky="ew")
             # dispPie(self,M,N)
 
-        def getSip(self, amt, te, pe):
+        def getSip(self, amt: int, te: int, pe: float) -> None:
             P = amt
             i = float(pe / 12)
             n = te * 12
@@ -46,19 +46,19 @@ class App(ctk.CTk):
             print(M, N)
             Display(self, M, N)
 
-        def getLump(self, lsamt, te, pe):
+        def getLump(self, lsamt: int, te: int, pe: float) -> None:
             P = lsamt
             M = math.ceil(P * (pow(1 + pe, te)))
             print(M, P)
             Display(self, M, P)
 
-        def mixedletters(quant):
+        def mixedletters(quant: str) -> bool:
             for i in range(len(quant)):
                 if quant[i].isalpha():
                     return True
             return False
 
-        def pressedCalculate():
+        def pressedCalculate() -> None:
             global tenure
             if self.ten.get() == "":
                 messagebox.showerror(
@@ -125,7 +125,7 @@ class App(ctk.CTk):
                     "Please calculate either LumpSum or Sip not both at the same time",
                 )
 
-        def pressedReset():
+        def pressedReset() -> None:
             self.Amt.delete(0, "end")
             # self.ten.delete(0,'end')
             self.ls.delete(0, "end")

@@ -1,4 +1,4 @@
-def addressVal(address):
+def addressVal(address: str) -> None:
     dot = address.find(".")
     at = address.find("@")
     if dot == -1:
