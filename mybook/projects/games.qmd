@@ -1,0 +1,1586 @@
+# 🎮 게임 프로젝트
+
+
+파이썬으로 만든 다양한 게임 프로젝트들입니다. 간단한 텍스트 기반 게임부터 그래픽 게임까지 다양한 종류를 다룹니다.
+
+
+## 애벌레 게임
+
+
+📁 **폴더:** `Caterpillar_Game`
+
+
+turtle 모듈을 사용한 간단한 뱀 형태의 게임입니다. 키보드로 애벌레를 조종하여 먹이를 먹으면서 점수를 높이세요.
+
+
+### 필요한 패키지
+
+
+turtle
+
+
+### 실행 방법
+
+
+```bash
+cd "Caterpillar_Game"
+python Caterpillar.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `Caterpillar_Game/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## 체스 게임
+
+
+📁 **폴더:** `Chess_Game`
+
+
+친구와 함께 즐길 수 있는 체스 게임입니다. pygame을 사용하여 그래픽 인터페이스를 제공합니다.
+
+
+### 필요한 패키지
+
+
+pygame
+
+
+### 실행 방법
+
+
+```bash
+cd "Chess_Game"
+python ChessGame.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `Chess_Game/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## 색상 맞추기 게임
+
+
+📁 **폴더:** `Color_Game`
+
+
+표시된 단어의 **색상**을 맞추는 게임입니다 (텍스트 내용이 아님). 30초 안에 최대한 많은 정답을 맞추세요!
+
+
+### 필요한 패키지
+
+
+tkinter
+
+
+### 실행 방법
+
+
+```bash
+cd "Color_Game"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+import random
+import tkinter as tk
+
+colours = [
+    "Red",
+    "Blue",
+    "Green",
+    "Yellow",
+    "Orange",
+    "Purple",
+    "Pink",
+    "Black",
+    "White",
+]
+score = 0
+timeleft = 30
+
+
+def next_colour():
+    global score, timeleft
+
+    if timeleft > 0:
+        user_input = e.get().lower()
+        correct_color = colours[1].lower()
+
+        if user_input == correct_color:
+            score += 1
+
+        e.delete(0, tk.END)
+        random.shuffle(colours)
+        label.config(fg=colours[1], text=colours[0])
+        score_label.config(text=f"Score: {score}")
+
+
+def countdown():
+    global timeleft
+    if timeleft > 0:
+        timeleft -= 1
+        time_label.config(text=f"Time left: {timeleft}")
+        time_label.after(1000, countdown)
+    else:
+        # messagebox.showwarning ('Attention', 'Your time is out!!')
+        scoreshow()
+
+
+def record_highest_score():
+    highest_score = load_highest_score()
+    if score > highest_score:
+        with open("highest_score.txt", "w") as file:
+            file.write(str(score))
+
+
+def load_highest_score():
+    try:
+        with open("highest_score.txt", "r") as file:
+            data = file.read()
+            if data:
+                return int(data)
+            else:
+                return 0
+    except FileNotFoundError:
+        return 0
+
+
+def scoreshow():
+    record_highest_score()
+    window2 = tk.Tk()
+    window2.title("HIGH SCORE")
+    window2.geometry("300x200")
+
+    label = tk.Label(
+        window2, text=f"Highest Score: {load_highest_score()}", font=(font, 12)
+    )
+
+    label.pack()
+
+    window2.mainloop()
+
+
+def start_game(event):
+    global timeleft
+    if timeleft == 30:
+        countdown()
+    next_colour()
+
+
+window = tk.Tk()
+font = "Helvetica"
+window.title("Color Game")
+window.iconbitmap("color_game_icon.ico")
+window.geometry("375x250")
+window.resizable(False, False)
+
+instructions = tk.Label(
+    window, text="Enter the color of the text, not the word!", font=(font, 12)
+)
+instructions.pack(pady=10)
+
+score_label = tk.Label(window, text="Press Enter to start", font=(font, 12))
+score_label.pack()
+
+time_label = tk.Label(window, text=f"Time left: {timeleft}", font=(font, 12))
+time_label.pack()
+
+label = tk.Label(window, font=(font, 60))
+label.pack(pady=20)
+
+e = tk.Entry(window)
+window.bind("<Return>", start_game)
+e.pack()
+
+e.focus_set()
+
+window.mainloop()
+
+```
+
+
+---
+
+
+## 커넥트 포
+
+
+📁 **폴더:** `Connect-Four`
+
+
+Tkinter로 구현한 클래식 커넥트 포(4목) 게임입니다. 두 명의 플레이어가 번갈아가며 말을 놓습니다.
+
+
+### 필요한 패키지
+
+
+tkinter
+
+
+### 실행 방법
+
+
+```bash
+cd "Connect-Four"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+import tkinter as tk
+
+# Constants
+ROWS = 6
+COLS = 7
+EMPTY = 0
+PLAYER_1 = 1
+PLAYER_2 = 2
+
+# Initialize board
+board = [[EMPTY] * COLS for _ in range(ROWS)]
+current_player = PLAYER_1
+
+
+def drop_piece(col):
+    global current_player
+    row = get_next_open_row(col)
+    if row is not None:
+        board[row][col] = current_player
+        draw_board()
+        if check_winner(row, col):
+            print(f"Player {current_player} wins!")
+            reset_board()
+        else:
+            current_player = 3 - current_player  # Switch player
+
+
+def get_next_open_row(col):
+    for row in range(ROWS - 1, -1, -1):
+        if board[row][col] == EMPTY:
+            return row
+    return None
+
+
+def check_winner(row, col):
+    directions = [(0, 1), (1, 0), (1, 1), (-1, 1)]
+    for dr, dc in directions:
+        count = 1 + check_line(row, col, dr, dc) + check_line(row, col, -dr, -dc)
+        if count >= 4:
+            return True
+    return False
+
+
+def check_line(row, col, delta_row, delta_col):
+    count = 0
+    while (
+        0 <= row + delta_row < ROWS
+        and 0 <= col + delta_col < COLS
+        and board[row][col] == board[row + delta_row][col + delta_col]
+    ):
+        count += 1
+        row += delta_row
+        col += delta_col
+    return count
+
+
+def draw_board():
+    canvas.delete("all")  # Clear previous drawings
+
+    cell_size = 50
+    for row in range(ROWS):
+        for col in range(COLS):
+            x1, y1 = col * cell_size, row * cell_size
+            x2, y2 = x1 + cell_size, y1 + cell_size
+
+            color = (
+                "white"
+                if board[row][col] == EMPTY
+                else ("red" if board[row][col] == PLAYER_1 else "yellow")
+            )
+            canvas.create_oval(x1, y1, x2, y2, fill=color)
+
+
+def reset_board():
+    global board, current_player
+    board = [[EMPTY] * COLS for _ in range(ROWS)]
+    current_player = PLAYER_1
+    draw_board()
+
+
+# Create the main window
+root = tk.Tk()
+root.title("Connect 4")
+
+# Create buttons at the bottom
+buttons = []
+for col in range(COLS):
+    button = tk.Button(root, text=str(col + 1), command=lambda col=col: drop_piece(col))
+    button.grid(row=ROWS, column=col)
+    buttons.append(button)
+
+# Create the game board
+canvas = tk.Canvas(root, width=350, height=300)
+canvas.grid(row=0, column=0, rowspan=ROWS, columnspan=COLS)
+
+# Initial drawing of the board
+draw_board()
+
+# Run the main loop
+root.mainloop()
+
+```
+
+
+---
+
+
+## 에그 캐처
+
+
+📁 **폴더:** `Egg_Catcher`
+
+
+떨어지는 달걀을 바구니로 잡는 재미있는 게임입니다. tkinter를 사용하여 구현되었습니다.
+
+
+### 필요한 패키지
+
+
+tkinter
+
+
+### 실행 방법
+
+
+```bash
+cd "Egg_Catcher"
+python eggcatcher.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `Egg_Catcher/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## 행맨 게임
+
+
+📁 **폴더:** `HangMan`
+
+
+고전적인 단어 맞추기 게임입니다. 알파벳을 하나씩 추측하여 숨겨진 단어를 완성하세요.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "HangMan"
+python HangMan.py
+```
+
+
+### 소스 코드
+
+
+`HangMan.py`:
+
+
+```python
+import random
+
+
+# Function to check if a character is a valid lowercase letter
+def is_valid_guess(guess):
+    return guess.isalpha() and guess.islower() and len(guess) == 1
+
+
+# Function to display the current state of the word with placeholders for unguessed letters
+def display_word(secret_word, guessed):
+    for letter in secret_word:
+        if letter in guessed:
+            print(letter, end=" ")
+        else:
+            print("_", end=" ")
+    print()
+
+
+# Function to generate a random word from a file
+def get_random_word_from_file(filename):
+    with open(filename, "r") as file:
+        words = file.readlines()
+        return random.choice(words).strip().lower()
+
+
+def main():
+    secret_word = get_random_word_from_file("words.txt")
+    guessed = set()
+    max_attempts = 6
+    attempts = 0
+
+    print("Welcome to Hangman!")
+    print("Try to guess the word!")
+
+    while attempts < max_attempts:
+        print("Word:", end=" ")
+        display_word(secret_word, guessed)
+
+        guess = input("Guess a letter: ").lower()
+
+        if not is_valid_guess(guess):
+            print("Invalid guess. Please enter a lowercase letter.")
+            continue
+
+        if guess in guessed:
+            print("You've already guessed that letter.")
+            continue
+
+        guessed.add(guess)
+
+        if guess not in secret_word:
+            attempts += 1
+            print("Incorrect guess. Attempts remaining:", max_attempts - attempts)
+        elif all(letter in guessed for letter in secret_word):
+            print("Congratulations! You've guessed the word:", secret_word)
+            break
+
+    if attempts == max_attempts:
+        print("Sorry, you've run out of attempts. The word was:", secret_word)
+
+    play_again = input("Do you want to play again? (Y/N): ").lower()
+    if play_again == "y":
+        main()
+    else:
+        print("Thanks for playing!")
+
+
+if __name__ == "__main__":
+    main()
+
+```
+
+
+---
+
+
+## 행맨 게임 (변형)
+
+
+📁 **폴더:** `Hangman_Game`
+
+
+또 다른 버전의 행맨 게임입니다. 다양한 단어 목록과 함께 즐길 수 있습니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Hangman_Game"
+python hangman.py
+```
+
+
+### 소스 코드
+
+
+`hangman.py`:
+
+
+```python
+import random
+
+
+def hangman():
+    word = random.choice(
+        ["tiger", "superman", "thor", "doraemon", "avenger", "water", "stream"]
+    )
+    validletter = "abcdefghijklmnopqrstuvwxyz"
+    turns = 10
+    guessmade = ""
+    while len(word) > 0:
+        main = ""
+        missed = 0
+        for letter in word:
+            if letter in guessmade:
+                main = main + letter
+            else:
+                main = main + "_" + " "
+        if main == word:
+            print(main)
+            print("You win!")
+            break
+        print("Guess the word:", main)
+        guess = input().casefold()
+
+        if guess in validletter:
+            guessmade = guessmade + guess
+        else:
+            print("Enter a valid character")
+            guess = input()
+        if guess not in word:
+            turns = turns - 1
+        if turns == 9:
+            print("9 turns left")
+            print("  --------  ")
+        if turns == 8:
+            print("8 turns left")
+            print("  ---------  ")
+            print("      O      ")
+        if turns == 7:
+            print("7 turns left")
+            print("  ---------  ")
+            print("      O      ")
+            print("      |      ")
+        if turns == 6:
+            print("6 turns left")
+            print("  ---------  ")
+            print("      O      ")
+            print("      |      ")
+            print("     /       ")
+        if turns == 5:
+            print("5 turns left")
+            print("  ---------  ")
+            print("       O      ")
+            print("       |      ")
+            print(r"     / \     ")
+        if turns == 4:
+            print("4 turns left")
+            print("  ---------  ")
+            print(r"     \ O      ")
+            print("        |      ")
+            print(r"      / \     ")
+        if turns == 3:
+            print("3 turns left")
+            print("  ---------  ")
+            print(r"    \ O /    ")
+            print("       |      ")
+            print(r"     / \     ")
+        if turns == 2:
+            print("2 turns left")
+            print("  ---------  ")
+            print(r"    \ O /|   ")
+            print("       |      ")
+            print(r"     / \     ")
+        if turns == 1:
+            print("1 turns left")
+            print("Last breaths counting. Take care!")
+            print("  ---------  ")
+            print(r"    \ O_|/   ")
+            print("       |      ")
+            print(r"     / \     ")
+
+        if turns == 0:
+            print("You lose")
+            print("You let a kind man die")
+            print("  ---------  ")
+            print("       O_|    ")
+            print(r"     /|\     ")
+            print(r"     / \     ")
+            break
+
+
+name = input("Enter your name: ")
+print(f"Welcome {name}")
+print("=====================")
+print("Try to guess it less than 10 attempts")
+hangman()
+print()
+
+```
+
+
+---
+
+
+## 퐁 게임
+
+
+📁 **폴더:** `Lazy_Pong`
+
+
+클래식 퐁(Pong) 게임의 간단한 버전입니다. turtle 모듈을 사용하여 구현되었습니다.
+
+
+### 필요한 패키지
+
+
+turtle
+
+
+### 실행 방법
+
+
+```bash
+cd "Lazy_Pong"
+python pong.py
+```
+
+
+### 소스 코드
+
+
+`tempCodeRunnerFile.py`:
+
+
+```python
+Pushed a my first ever PyGame program which is  a Pong game 
+
+# issue-no
+
+# - #### **Lazy Pong** 
+
+# - #### **A pong game at its Simplest form. Was challenge to do this in 1 hour with having little to no knowledge in pygame. So this is its first version that I will try to update in the following days since I'm on a 100 days coding challenge** 
+
+# # Checklist:
+# Please tick all the boxes that are fulfilled by your Pull Request.
+
+# - [✔ ] I have named my files and folder, according to this project's guidelines.
+# - [ ✔] My code follows the style guidelines of this project.
+# - [✔ ] I have commented on my code, particularly in hard-to-understand areas.
+# - [✔ ] I have created a helpful and easy to understand `README.md`, according to the given [`README_TEMPLATE.`](https://github.com/nduongthucanh/python-mini-project/blob/master/README_TEMPLATE.md)
+# - [ ✔] My changes do not produce any warnings.
+
+```
+
+
+---
+
+
+## 매드립스
+
+
+📁 **폴더:** `Madlibs`
+
+
+단어를 입력받아 재미있는 이야기를 만드는 게임입니다. 명사, 동사, 형용사 등을 입력하면 웃긴 이야기가 완성됩니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Madlibs"
+python madlibs.py
+```
+
+
+### 소스 코드
+
+
+`madlibs.py`:
+
+
+```python
+import random
+
+print("Title : Eat, Drink, And Be Sick")
+noun = []
+for i in range(4):
+    n = input("Enter noun : ")
+    noun.append(n)
+plural = []
+for i in range(6):
+    pn = input("Enter plural noun : ")
+    plural.append(pn)
+adjective = []
+for i in range(2):
+    a = input("Enter adjective : ")
+    adjective.append(a)
+adverb = input("Enter adverb : ")
+letter = input("Enter any letter : ")
+body_part = input("Enter any body part : ")
+print(
+    "An inspector from the Department of Health and ",
+    random.choice(noun),
+    " Services paid a surprise visit to our ",
+    random.choice(adjective),
+    " school cafeteria.",
+)
+print(
+    "The lunch special, prepared by our ",
+    random.choice(adjective),
+    "dietician, was spaghetti and ",
+    random.choice(noun),
+    " balls with a choice of either a ",
+    random.choice(noun),
+    " salad or French ",
+    random.choice(plural),
+    ".",
+)
+print(
+    "The inspector found the meat-",
+    random.choice(plural),
+    " to be overcooked and discovered a live ",
+    random.choice(noun),
+    " in the fries,causing him to have a " + body_part + " ache.",
+)
+print("In response, he threw up all over his ", random.choice(plural), ".")
+print(
+    "In his report, the inspector "
+    + adverb
+    + " recommended that the school cafeteria serve only nutritious ",
+    random.choice(plural),
+    " as well as low-calorie ",
+    random.choice(plural),
+    " and that all of the saturated ",
+    random.choice(plural),
+    " be eliminated.",
+)
+print("He rated the cafeteria a " + letter + "-minus.")
+
+```
+
+
+---
+
+
+## 수학 게임
+
+
+📁 **폴더:** `Math_Game`
+
+
+수학 문제를 풀어보는 교육용 게임입니다. 다양한 난이도의 연산 문제가 출제됩니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Math_Game"
+python math_game.py
+```
+
+
+### 소스 코드
+
+
+`math_game.py`:
+
+
+```python
+import random
+import operator
+
+
+def errorHandle(problem_answer):
+    switch = False
+    validated_guess = 0.0
+    while switch == False:
+        try:
+            validated_guess = float(input("Please enter a valid answer: "))
+            if type(validated_guess) is float:
+                switch = True
+                break
+        except ValueError:
+            pass
+    return validated_guess
+
+
+def random_problem():
+    operators = {
+        "+": operator.add,
+        "-": operator.sub,
+        "*": operator.mul,
+        "/": operator.truediv,
+    }
+
+    num_1 = random.randint(1, 10)
+    num_2 = random.randint(1, 10)
+    operation = random.choice(list(operators.keys()))
+    answer = float(round(operators.get(operation)(num_1, num_2), 3))
+    print(f"What is {num_1} {operation} {num_2}")
+    return answer
+
+
+def ask_question():
+    answer = random_problem()
+    try:
+        guess = float(input("Enter you answer: "))
+    except ValueError:
+        guess = errorHandle(answer)
+    return guess == answer
+
+
+def game():
+    score = 0
+    while True:
+        if ask_question() == True:
+            score += 1
+            print("Correct !")
+        else:
+            print("Incorrect")
+            break
+    print(f"======== Game Over ========\nYou score is {score}\nKeep going!")
+
+
+game()
+
+```
+
+
+---
+
+
+## 매치메이커
+
+
+📁 **폴더:** `Matchmaker`
+
+
+두 사람 사이의 궁합을 확인하는 재미있는 게임입니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Matchmaker"
+python Matchmaker.py
+```
+
+
+### 소스 코드
+
+
+`Matchmaker.py`:
+
+
+```python
+import random
+import time
+from tkinter import Tk, Button, DISABLED
+
+
+def show_symbol(x, y):
+    global first
+    global previousx, previousy
+    buttons[x, y]["text"] = button_symbols[x, y]
+    buttons[x, y].update_idletasks()
+
+    if first:
+        previousx = x
+        previousy = y
+        first = False
+    elif previousx != x or previousy != y:
+        if buttons[previousx, previousy]["text"] != buttons[x, y]["text"]:
+            time.sleep(0.5)
+            buttons[previousx, previousy]["text"] = " "
+            buttons[x, y]["text"] = " "
+        else:
+            buttons[previousx, previousy]["command"] = DISABLED
+            buttons[x, y]["command"] = DISABLED
+        first = True
+
+
+win = Tk()
+win.title("Matchmaker")
+win.resizable(width=False, height=False)
+first = True
+previousx = 0
+previousy = 0
+buttons = {}
+button_symbols = {}
+symbols = [
+    "\u2702",
+    "\u2705",
+    "\u2708",
+    "\u2709",
+    "\u270a",
+    "\u270b",
+    "\u270c",
+    "\u270f",
+    "\u2712",
+    "\u2714",
+    "\u2716",
+    "\u2728",
+    "\u2702",
+    "\u2705",
+    "\u2708",
+    "\u2709",
+    "\u270a",
+    "\u270b",
+    "\u270c",
+    "\u270f",
+    "\u2712",
+    "\u2714",
+    "\u2716",
+    "\u2728",
+]
+
+random.shuffle(symbols)
+
+
+for x in range(6):
+    for y in range(4):
+        button = Button(command=lambda x=x, y=y: show_symbol(x, y), width=10, height=8)
+        button.grid(column=x, row=y)
+        buttons[x, y] = button
+        button_symbols[x, y] = symbols.pop()
+
+win.mainloop()
+
+```
+
+
+---
+
+
+## 지뢰찾기
+
+
+📁 **폴더:** `Minesweeper_game`
+
+
+클래식 지뢰찾기 퍼즐 게임입니다. 지뢰를 피하면서 안전한 칸을 모두 열어야 합니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Minesweeper_game"
+python minesweeper.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `Minesweeper_game/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## 미니언 게임
+
+
+📁 **폴더:** `minionGame`
+
+
+'The Minion Game'에 기반한 단어 게임 프로젝트입니다. 모음과 자음으로 시작하는 부분 문자열의 개수를 비교합니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "minionGame"
+python game.py
+```
+
+
+### 소스 코드
+
+
+`game.py`:
+
+
+```python
+def is_vowel(char):
+    """
+    Checks if a character is a vowel.
+    Args:
+        char (str): The character to check.
+    Returns:
+        bool: True if the character is a vowel, False otherwise.
+    """
+    return char.lower() in 'aeiou'
+
+def minion_game(s):
+    """
+    Plays the Minion Game to determine the winner based on substrings.
+
+    Args:
+        s (str): The input string for the game.
+                 Assumed to be a single word without spaces.
+    """
+    # Game rules are already displayed to the user before this function is called.
+    # Player names are not strictly needed for the game logic itself,
+    # but we'll keep them for personalized output.
+    stuart_name = input("Enter name of player 1 (Stuart, forms words starting with consonants): \n")
+    kevin_name = input("Enter name of player 2 (Kevin, forms words starting with vowels): \n")
+
+    s = s.upper()  # Ensure string is uppercase for consistent indexing and comparison
+    n = len(s)
+    stuart_score = 0
+    kevin_score = 0
+
+    # Iterate through each possible starting position for substrings
+    for i in range(n):
+        if is_vowel(s[i]):
+            # If the character at index i is a vowel, Kevin gets points
+            # The number of substrings starting with s[i] is n - i
+            kevin_score += (n - i)
+        else:
+            # If the character at index i is a consonant, Stuart gets points
+            # The number of substrings starting with s[i] is n - i
+            stuart_score += (n - i)
+
+    print("\n--- Overall Score ---")
+    print(f"{stuart_name} (Consonants): {stuart_score} points")
+    print(f"{kevin_name} (Vowels): {kevin_score} points")
+    print("---------------------\n")
+
+    if stuart_score > kevin_score:
+        print(f"🥳 {stuart_name} wins with a score of {stuart_score}!")
+    elif kevin_score > stuart_score:
+        print(f"🥳 {kevin_name} wins with a score of {kevin_score}!")
+    else:
+        print("🤝 It's a Draw!")
+
+# --- Game Start ---
+instruction = """
+Welcome to the Minion Game!
+
+**Game Rules:**
+1. Both players are given the same string (a single, capital word without spaces).
+2. Both players create substrings using letters from this string.
+3. Stuart makes words starting with **consonants**.
+4. Kevin makes words starting with **vowels**.
+5. The game ends when all possible substrings have been considered.
+
+A player gets +1 point for each **occurrence** of a valid substring in the original string.
+"""
+
+print(instruction)
+initial_string = input("Please enter a single word (capital letters, no spaces): \n")
+minion_game(initial_string)
+```
+
+
+---
+
+
+## 오셀로/리버시
+
+
+📁 **폴더:** `Othello-Reversi-Game`
+
+
+오셀로(리버시) 보드 게임을 구현한 프로젝트입니다. 상대방의 돌을 뒤집어 더 많은 돌을 확보하세요.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Othello-Reversi-Game"
+python main.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `Othello-Reversi-Game/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## 가위바위보 (리자드 스팍)
+
+
+📁 **폴더:** `Rock_Paper_Scissors_Spock`
+
+
+빅뱅이론에 나오는 확장된 가위바위보 게임입니다. 가위, 바위, 보에 도마뱀과 스팍이 추가되었습니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Rock_Paper_Scissors_Spock"
+python main.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `Rock_Paper_Scissors_Spock/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## 뱀 게임
+
+
+📁 **폴더:** `Snake_game`
+
+
+클래식 아케이드 뱀 게임입니다. 먹이를 먹으면서 뱀을 길게 키우되, 벽이나 자신의 몸에 부딪히지 마세요.
+
+
+### 필요한 패키지
+
+
+pygame
+
+
+### 실행 방법
+
+
+```bash
+cd "Snake_game"
+python snake.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `Snake_game/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## 텍스트 어드벤처
+
+
+📁 **폴더:** `TEXTVENTURE`
+
+
+텍스트 기반의 모험 게임입니다. 선택지를 골라가며 이야기를 진행하세요.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "TEXTVENTURE"
+python main.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `TEXTVENTURE/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## 틱택토
+
+
+📁 **폴더:** `Tic_Tac_Toe`
+
+
+고전적인 틱택토(OX 게임)입니다. 3x3 격자에서 먼저 한 줄을 완성하세요.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Tic_Tac_Toe"
+python main.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `Tic_Tac_Toe/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## 단어 뒤섞기
+
+
+📁 **폴더:** `Word_Jumble`
+
+
+컴퓨터가 단어의 글자를 뒤섞고, 플레이어가 원래 단어를 맞추는 게임입니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Word_Jumble"
+python word_jumble.py
+```
+
+
+### 소스 코드
+
+
+`word_jumble.py`:
+
+
+```python
+import random
+
+
+def jumble_word(word):
+    # Convert the word into a list of characters and shuffle them
+    jumbled_word = list(word)
+    random.shuffle(jumbled_word)
+    return "".join(jumbled_word)
+
+
+def play_word_jumble():
+    words = [
+        "python",
+        "hangman",
+        "computer",
+        "keyboard",
+        "mouse",
+        "gamer",
+        "programming",
+    ]
+    word_to_guess = random.choice(words)
+    jumbled_word = jumble_word(word_to_guess)
+
+    print("Welcome to Word Jumble!")
+    print("Unscramble the letters to form a word.")
+    print("Jumbled word:", jumbled_word)
+
+    guess = input("Your guess: ").lower()
+
+    while guess != word_to_guess:
+        print("Incorrect guess. Try again!")
+        guess = input("Your guess: ").lower()
+
+    print("Congratulations! You've guessed the word correctly:", word_to_guess)
+
+
+play_word_jumble()
+
+```
+
+
+---
+
+
+## 워들 도우미
+
+
+📁 **폴더:** `Wordle_Aid`
+
+
+인기 퍼즐 게임 Wordle을 풀 때 도움을 주는 도구입니다. 가능한 단어 조합을 보여줍니다.
+
+
+### 필요한 패키지
+
+
+time
+
+
+### 실행 방법
+
+
+```bash
+cd "Wordle_Aid"
+python main.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `Wordle_Aid/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## 좀비 게임
+
+
+📁 **폴더:** `Zombie_Game`
+
+
+파이썬으로 만든 간단한 좀비 생존 퀴즈 게임입니다. 선택에 따라 생존 여부가 결정됩니다.
+
+
+### 필요한 패키지
+
+
+random
+
+
+### 실행 방법
+
+
+```bash
+cd "Zombie_Game"
+python zombie.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+import pandas as pd
+import plotly.express as px
+import plotly.io as pio
+
+pio.templates.default = "plotly_dark"
+
+covid_data = pd.read_csv(
+    "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-19-2020.csv"
+)
+grouped = (
+    covid_data.groupby("Last Update")["Last Update", "Confirmed", "Deaths"]
+    .sum()
+    .reset_index()
+)
+fig = px.line(
+    grouped,
+    x="Last Update",
+    y="Confirmed",
+    title="Worldwide Confirmed Novel Coronavirus(COVID-19) Cases Over Time",
+)
+fig.show()
+
+```
+
+
+---
+
+
+## 일반상식 퀴즈
+
+
+📁 **폴더:** `GK_Maestro`
+
+
+다양한 분야의 일반상식 퀴즈 게임입니다. 질문에 답하며 지식을 테스트하세요.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "GK_Maestro"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+"""
+This game tests your general knowledge skills!
+You just need to answer the 10 questions correctly to become the winner!
+"""
+
+from question_bank import easy_question, hard_question
+from answer_bank import answer
+from random import randint, choice
+from art import *
+
+
+# Main functionality
+def main():
+    # Counter for questions
+    ques_count = 1
+
+    # Store the score
+    score = 0
+
+    # Loop till 10 questions are asked
+    while ques_count <= 10:
+        # Store question number and the question
+        question_tuple = generate_question()
+
+        # Store the question
+        question = question_tuple[1]
+
+        # Display the question on the screen
+        print(f"Question No. {ques_count}: {question}")
+
+        # Increase question count by 1
+        ques_count += 1
+
+        # Record user answer
+        user_answer = input("Answer: ")
+
+        # Generate and store correct answer
+        correct_answer = generate_answer(question_tuple[0])
+
+        # Update score by 1 if the answer matches, and display the score
+        if user_answer.lower() == correct_answer.lower():
+            score += 1
+            print(f"Correct Answer. Your Score: {score}")
+        # Alert about wrong answer, and display the score
+        else:
+            print(f"Wrong Answer. Your Score: {score}")
+
+    # Display final score on the screen
+    print(f"Your final score: {score}")
+
+    # Display congratulations message on the screen, If all 10 questions are answered correctly
+    if score == 10:
+        tprint("Congratulations!")
+        print("You have answered all 10 questions correctly!")
+
+
+# Generates question for the user
+def generate_question():
+    # List the question numbers and their difficulty level
+    easy_qlist = [2, 3, 4, 8, 9, 14, 15, 16]
+    hard_qlist = [1, 5, 6, 7, 10, 11, 12, 13]
+
+    # Choose a random value - 1 or 2
+    difficulty = randint(1, 2)
+
+    # Difficulty level: easy
+    if difficulty == 1:
+        # Select a random question from the choices
+        random_choice = choice(easy_qlist)
+        ques = easy_question(random_choice)
+    # Difficulty level: hard
+    elif difficulty == 2:
+        # Select a random question from the choices
+        random_choice = choice(hard_qlist)
+        ques = hard_question(random_choice)
+
+    # Return question number and the question
+    return random_choice, ques
+
+
+# Generate and match answer of the user
+def generate_answer(num):
+    actual_answer = answer(num)
+    return actual_answer
+
+
+# When the program is run, main function is called
+if __name__ == "__main__":
+    main()
+
+```
+
+
+---

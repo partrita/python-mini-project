@@ -1,0 +1,871 @@
+# 🖼️ 미디어 및 이미지 처리
+
+
+이미지 처리, 멀티미디어, 시각적 콘텐츠를 다루는 프로젝트들입니다.
+
+
+## 이미지 비교기
+
+
+📁 **폴더:** `image_comparator`
+
+
+두 이미지의 유사도를 비교하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+PIL, opencv
+
+
+### 실행 방법
+
+
+```bash
+cd "image_comparator"
+python image_comparison.py
+```
+
+
+### 소스 코드
+
+
+`image_comparison.py`:
+
+
+```python
+import cv2
+
+
+def compare_images(image1_path, image2_path):
+    # Read the images
+    image1 = cv2.imread(image1_path)
+    image2 = cv2.imread(image2_path)
+    # Check if the images were loaded successfully
+    if image1 is None or image2 is None:
+        print("Failed to load the images.")
+        return
+    # Resize the images to the same dimensions for comparison
+    image1 = cv2.resize(image1, (500, 500))
+    image2 = cv2.resize(image2, (500, 500))
+
+    # calculating difference between two images
+    difference = cv2.subtract(image1, image2)
+    b, g, r = cv2.split(difference)
+    # If the images are identical, the difference should be black (all zeros)
+    if (
+        cv2.countNonZero(b) == 0
+        and cv2.countNonZero(g) == 0
+        and cv2.countNonZero(r) == 0
+    ):
+        print("The images are identical.")
+    else:
+        # color the mask red
+        conv_hsv_gray = cv2.cvtColor(difference, cv2.COLOR_BGR2GRAY)
+        ret, mask = cv2.threshold(
+            conv_hsv_gray, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU
+        )
+        difference[mask != 255] = [0, 0, 255]
+
+        # add the red mask to the images to make the differences obvious
+        image1[mask != 255] = [0, 0, 255]
+        image2[mask != 255] = [0, 0, 255]
+        diff = "diff.png"
+        cv2.imwrite(diff, difference)
+        print("The images are different.")
+
+
+# Provide the paths to the two images you want to compare
+image1_path = "image1.jpg"
+image2_path = "image2.jpg"
+# Call the function to compare the images
+compare_images(image1_path, image2_path)
+
+```
+
+
+---
+
+
+## 이미지 압축기
+
+
+📁 **폴더:** `Image_compressor`
+
+
+이미지 파일 크기를 줄이면서 품질을 유지하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+PIL
+
+
+### 실행 방법
+
+
+```bash
+cd "Image_compressor"
+python image_compressor.py
+```
+
+
+### 소스 코드
+
+
+`image_compressor.py`:
+
+
+```python
+from PIL import Image
+import os
+import easygui
+from easygui import *
+
+
+def resizer():
+    print("Please select the image you want to compress")
+    image_file = easygui.fileopenbox()
+    filepath = os.path.join(os.getcwd(), image_file)
+
+    filename, filextension = os.path.splitext(image_file)
+    img = Image.open(filepath)
+    text = "Enter quality on a scale of 10 to 100 (default value is 50)"
+
+    if filextension == ".jpeg" or filextension == ".jpg":
+        qual = integerbox(text, 50, lowerbound=10, upperbound=100)
+        img.save(
+            filename + "_compressed" + ".jpeg", "JPEG", optimize=True, quality=qual
+        )
+        msgbox("Your compressed image has been saved in the orignal image folder")
+
+    elif filextension == ".png":
+        img.convert("P", palette=Image.ADAPTIVE, colors=256)
+        img.save(filename + "_compressed" + ".png", optimize=True, quality=10)
+        msgbox(
+            "Please note that due to the file format being png it may not get compressed much"
+        )
+        msgbox("Your compressed image has been saved in the orignal image folder")
+
+    else:
+        print("Invalid filetype")
+
+    return
+
+
+resizer()
+
+```
+
+
+---
+
+
+## 이미지→ASCII 아트
+
+
+📁 **폴더:** `img_to_ascii`
+
+
+이미지를 ASCII 아트로 변환하는 프로젝트입니다.
+
+
+### 필요한 패키지
+
+
+PIL
+
+
+### 실행 방법
+
+
+```bash
+cd "img_to_ascii"
+python img_to_ascii.py
+```
+
+
+### 소스 코드
+
+
+`img_to_ascii.py`:
+
+
+```python
+# the below program converts an image to ascii text
+import pywhatkit as kt
+
+
+# enter the image location
+# input the image location -- for ease please place the image file in the same directory
+img_loc = input("Enter the image location: ")
+kt.image_to_ascii_art(img_loc, "ascii_text.txt")
+
+```
+
+
+---
+
+
+## 이미지 크기 조절
+
+
+📁 **폴더:** `Simple_Image_resize`
+
+
+이미지를 특정 크기로 변환하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+PIL
+
+
+### 실행 방법
+
+
+```bash
+cd "Simple_Image_resize"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+from PIL import Image
+import os
+
+# Assign directory
+directory = "source"
+compressed_directory = "resized"
+compression_ratio = 1
+
+# Ensure the compressed directory exists
+if not os.path.exists(compressed_directory):
+    os.makedirs(compressed_directory)
+
+
+def is_image(file_path):
+    try:
+        # Try to open the file with Pillow
+        Image.open(file_path)
+        return True
+    except IOError:
+        # If an error occurs, it's likely not an image
+        return False
+
+
+for filename in os.listdir(directory):
+    f = os.path.join(directory, filename)
+    # Check if it is a file
+    if os.path.isfile(f) and is_image(f):
+        try:
+            im = Image.open(f)
+            filename_without_ext = os.path.splitext(filename)[0]
+            ext = os.path.splitext(filename)[1]
+
+            # Resize the image
+            resized_im = im.resize(
+                (
+                    round(im.size[0] * compression_ratio),
+                    round(im.size[1] * compression_ratio),
+                )
+            )
+
+            # Save the resized image
+            resized_im.save(
+                os.path.join(compressed_directory, f"{filename_without_ext}{ext}")
+            )
+        except Exception as e:
+            print(f"Error processing {filename}: {e}")
+
+```
+
+
+---
+
+
+## 팬시 텍스트 생성기
+
+
+📁 **폴더:** `Fancy_Text_Generator`
+
+
+일반 텍스트를 스타일이 적용된 장식 텍스트로 변환합니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Fancy_Text_Generator"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+import sys
+import pyfiglet
+
+
+# Banner maker
+def ascii_maker():
+    print("-" * 70)
+    ascii_banner = pyfiglet.figlet_format("A C I I banner").upper()
+    print(ascii_banner)
+    print("-" * 70)
+
+    text = input("\nEnter Your Text: ")
+    banner = pyfiglet.figlet_format(f"{text}").upper()
+    print(banner)
+
+
+# Ending message
+def ending():
+    print("\n\nThanks for using the code :)\n")
+    a = input("Do you want to run the program again? (y for yes) (any key for no): ")
+    if a.lower() == "y":
+        return True
+    else:
+        sys.exit()
+
+
+# Main loop
+def run_loop():
+    while True:
+        ascii_maker()
+        if not ending():
+            break
+
+
+run_loop()
+
+```
+
+
+---
+
+
+## QR 코드 생성기
+
+
+📁 **폴더:** `QR Code Generator`
+
+
+텍스트나 URL로부터 QR 코드를 생성합니다.
+
+
+### 필요한 패키지
+
+
+qrcode
+
+
+### 실행 방법
+
+
+```bash
+cd "QR Code Generator"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`qrGenerator.py`:
+
+
+```python
+import qrcode
+from tkinter import *
+from tkinter import filedialog
+import os
+
+
+# This Function is responsible to take the input -> Convert it to Image Code -> Convert Image code to png.
+def get_code():
+    data_var = data.get()
+    qr = qrcode.make(str(data_var))
+    # This will ask for the directory the user wants to store the code and save it there.
+    base.loc = filedialog.askdirectory()
+    os.chdir(base.loc)
+    save_as = name_to_save.get()
+    label = Label(base, text="Done", bg="red")
+    label.place(x=80, y=150)
+    qr.save(f"{save_as}.png")
+
+
+# Get a Tk window of 400 * 200
+base = Tk()
+base.geometry("400x200")
+base.title("QR Code Generator")
+
+# variable to store text for QR Code
+data = StringVar()
+name_to_save = StringVar()
+# Field to input text
+# Get the name to be saved as
+label_1 = Label(base, text="SAVE_AS").place(x=80, y=10)
+dataEntry = Entry(textvariable=name_to_save, width="30")
+dataEntry.place(x=80, y=30)
+
+# What is suppose to be in the qrcode when scanned
+label_1 = Label(base, text="INSIDE QRCODE").place(x=80, y=50)
+
+dataEntry = Entry(textvariable=data, width="30")
+dataEntry.place(x=80, y=70)
+
+
+# Call get_code() on click
+button = Button(
+    base, text="Get Code", command=get_code, width="30", height="2", bg="grey"
+)
+button.place(x=80, y=100)
+
+base.mainloop()
+
+```
+
+
+---
+
+
+## 로고가 있는 QR 코드
+
+
+📁 **폴더:** `qr_with_logo`
+
+
+중앙에 로고가 삽입된 QR 코드를 생성합니다.
+
+
+### 필요한 패키지
+
+
+qrcode, PIL
+
+
+### 실행 방법
+
+
+```bash
+cd "qr_with_logo"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`qr.py`:
+
+
+```python
+import qrcode
+from PIL import Image
+
+
+# import requests
+
+# Load the logo image
+# Logo_link = 'https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_1280.png'
+# logo_response = requests.get(Logo_link, stream=True)
+# logo_response.raise_for_status()  # Raise an exception for HTTP errors
+# logo_img = Image.open(logo_response.raw)
+
+"""
+if you want to take an image which is already hosted on web comment lines 18,19 and use the above method
+"""
+
+# Path to the logo image file on user's machine
+logo_path = "github-logo.png"
+logo_img = Image.open(logo_path)
+
+url = "https://github.com/shashank-amireddy"
+
+# Ensure the logo has an alpha channel (transparency)
+logo_img = logo_img.convert("RGBA")
+
+# Resize the logo to fit within the QR code
+basewidth = 100
+wpercent = basewidth / float(logo_img.size[0])
+hsize = int(float(logo_img.size[1]) * float(wpercent))
+logo_img = logo_img.resize((basewidth, hsize), Image.LANCZOS)
+
+# Generate QR code
+QRcode = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
+QRcode.add_data(url)
+QRcode.make()
+
+# Create QR code image with a mode that supports color
+QRimg = QRcode.make_image(fill_color="black", back_color="white").convert("RGBA")
+
+# Calculate position to paste the logo
+logo_position = (
+    (QRimg.size[0] - logo_img.size[0]) // 2,
+    (QRimg.size[1] - logo_img.size[1]) // 2,
+)
+
+# Paste the logo onto the QR code
+QRimg.paste(logo_img, logo_position, logo_img)
+
+# Save the final QR code image
+QRimg.save("qr_with_logo.png")
+print("QR code generated!")
+
+```
+
+
+---
+
+
+## NASA 이미지 추출
+
+
+📁 **폴더:** `NASA_Image_Extraction`
+
+
+NASA API에서 이미지를 가져와 표시하는 프로젝트입니다.
+
+
+### 필요한 패키지
+
+
+requests
+
+
+### 실행 방법
+
+
+```bash
+cd "NASA_Image_Extraction"
+python main.py
+```
+
+
+---
+
+
+## Folium 지리 시각화
+
+
+📁 **폴더:** `Geo_Plot_Using_Folium`
+
+
+Folium 라이브러리를 사용하여 인터랙티브 지도에 지리 데이터를 시각화합니다.
+
+
+### 필요한 패키지
+
+
+folium
+
+
+### 실행 방법
+
+
+```bash
+cd "Geo_Plot_Using_Folium"
+python main.py
+```
+
+
+---
+
+
+## 데이터 시각화
+
+
+📁 **폴더:** `Plotter`
+
+
+다양한 데이터 시각화 차트를 만드는 도구입니다.
+
+
+### 필요한 패키지
+
+
+matplotlib
+
+
+### 실행 방법
+
+
+```bash
+cd "Plotter"
+python main.py
+```
+
+
+---
+
+
+## 오디오 다운로드
+
+
+📁 **폴더:** `Download Audio`
+
+
+다양한 소스에서 오디오를 다운로드하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+pytube 등
+
+
+### 실행 방법
+
+
+```bash
+cd "Download Audio"
+python 'Download Audio.py'
+```
+
+
+### 소스 코드
+
+
+`Download Audio.py`:
+
+
+```python
+import os
+import pytube
+from moviepy.editor import *
+
+# Define the YouTube video URL
+youtube_url = "https://www.youtube.com/watch?v=E6eKvji_BoE"
+
+# Create a PyTube object and get the audio stream
+yt = pytube.YouTube(youtube_url)
+audio_stream = yt.streams.filter(only_audio=True).first()
+
+# Download the audio stream as a temporary file
+temp_file = audio_stream.download()
+
+# Convert the audio stream to an MP3 file using MoviePy
+audio_clip = AudioFileClip(temp_file)
+mp3_file = os.path.join("Give Your own path", "Name.mp3")
+audio_clip.write_audiofile(mp3_file)
+
+# Clean up the temporary file
+os.remove(temp_file)
+
+print("Audio extracted and saved as MP3 file to", mp3_file)
+
+```
+
+
+---
+
+
+## 음악 플레이어
+
+
+📁 **폴더:** `Music-Player`
+
+
+오디오 파일을 재생하는 기본 음악 플레이어 애플리케이션입니다.
+
+
+### 필요한 패키지
+
+
+pygame
+
+
+### 실행 방법
+
+
+```bash
+cd "Music-Player"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`music_player.py`:
+
+
+```python
+import glob
+import tkinter as tk
+from tkinter import *
+import vlc
+
+
+def last(list):
+    return list[-1]
+
+
+def music_name():
+    global my_music, music_number
+    return last(my_music[music_number].split("/"))
+
+
+def play_music():
+    global music_number, my_music, player, instance
+    to_play = my_music[music_number]
+    media = instance.media_new(to_play)
+    player.set_media(media)
+    player.play()
+
+
+def pause_music():
+    player.pause()
+
+
+def next_music():
+    global music_number, my_music, music_label
+    if music_number < len(my_music) - 1:
+        music_number += 1
+    music_label.config(text=str(music_name()))
+
+
+def previous_music():
+    global music_number, my_music, music_label
+    if music_number > 0:
+        music_number -= 1
+    music_label.config(text=str(music_name()))
+
+
+music_number = 0
+
+window = Tk()
+window.geometry("330x120")
+window.resizable(False, False)
+window.title("Mp3 Player")
+
+instance = vlc.Instance()
+player = instance.media_player_new()
+
+my_music = glob.glob("/home/shitij_agrawal/Music/*.mp3")  # path to music folder
+
+play_image = PhotoImage(file="images/play.png")
+pause_image = PhotoImage(file="images/pause.png")
+forward_image = PhotoImage(file="images/forward.png")
+backward_image = PhotoImage(file="images/backward.png")
+stop_image = PhotoImage(file="images/stop.png")
+
+music_label = tk.Label(window, text=music_name())
+
+play = tk.Button(window, image=play_image, command=play_music)
+pause = tk.Button(window, image=pause_image, command=pause_music)
+forward = tk.Button(window, image=forward_image, command=next_music)
+backward = tk.Button(window, image=backward_image, command=previous_music)
+stop = tk.Button(window, image=stop_image, command=lambda: sys.exit())
+
+play.place(x=130, y=50)
+pause.place(x=10, y=50)
+forward.place(x=190, y=50)
+backward.place(x=70, y=50)
+stop.place(x=250, y=50)
+music_label.place(x=10, y=0)
+
+window.mainloop()
+
+```
+
+
+---
+
+
+## 유튜브 영상 다운로드
+
+
+📁 **폴더:** `Youtube_video_download`
+
+
+유튜브에서 동영상이나 오디오를 다운로드하는 도구입니다. pytube 라이브러리를 사용합니다.
+
+
+### 필요한 패키지
+
+
+pytube
+
+
+### 실행 방법
+
+
+```bash
+cd "Youtube_video_download"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+from tkinter import *
+from pytube import YouTube
+
+root = Tk()
+root.geometry("450x300")
+# root.resizable(0, 0)
+root.title("Youtube Video Downloader")  # Title of the program
+
+Label(
+    root, text="Youtube Video Downloader", font="arial 15 bold"
+).pack()  # Title of the program
+
+link = StringVar()  # Variable for save link of video
+filename = StringVar()  # Variable for save link of video
+
+Label(root, text="Paste Link Here:", font="arial 13 bold").place(x=160, y=40)
+link_enter = Entry(root, width=45, textvariable=link).place(
+    x=50, y=90
+)  # Input for add the link
+
+
+def Download():  # Function for download video
+    Label(root, text="Downloading", font="arial 13").place(x=180, y=210)
+
+    url = YouTube(str(link.get()))
+
+    video = url.streams.get_highest_resolution()
+
+    video.download()
+
+    Label(root, text="Downloaded", font="arial 15").place(x=180, y=210)
+
+
+Button(root, text="Download", font="arial 15 bold", padx=2, command=Download).place(
+    x=180, y=150
+)
+
+root.mainloop()
+
+```
+
+
+---

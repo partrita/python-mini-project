@@ -1,0 +1,844 @@
+# 🗣️ 텍스트 및 음성 처리
+
+
+텍스트 변환, 번역, 음성 인식 및 합성과 관련된 프로젝트들입니다.
+
+
+## 동물의 숲 번역기
+
+
+📁 **폴더:** `Animalese_translator`
+
+
+텍스트를 동물의 숲(Animal Crossing) 스타일의 소리로 변환하는 재미있는 프로젝트입니다.
+
+
+### 필요한 패키지
+
+
+없음
+
+
+### 실행 방법
+
+
+```bash
+cd "Animalese_translator"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+import os
+# it lets the user interact with the native OS Python is currently running on.
+
+# pprint enables printing in situations where errors wouldn't let them print... or something like that
+
+from playsound import playsound
+# playsound needs 1 argument in order to work: the sound file path.
+
+from scipy.io import wavfile
+# scipy.io (Input/Output)
+
+from scipy.io.wavfile import write
+# import the function of writing a soundfile from a 1D or 2D Numpy array of either integer or float data-type.
+
+import numpy as np
+# if you pip install scipy numpy will come too
+
+voice_path = "/home/wilson/Documentos/git_repo/python-mini-project/Animalese_translator/voices/guy3"
+files = os.listdir(voice_path)
+# lists the containing names of the entries of the specified directory
+
+files.sort()
+# lists voices from A to Z
+
+sounds = {}
+for file in files:
+    print(file)
+    raw_name = file.split(".")[0]
+    # will return 'a' from 'a.wav'
+
+    fp = os.path.join(voice_path, file)
+    # will do 'pathname/a' to find the file
+
+    rate, data = wavfile.read(fp)
+    # x = 48000
+    # [[-38  24]
+    #  [-21  20]
+    #  [-30  23]
+    #      ...
+    #  [ 40  71]
+    #  [ 26 108]
+    #  [ 57 226]]
+
+    channel_one = data[:, 0]
+    # [-38 -21 -30 ...  40  26  57]
+
+    sounds[raw_name] = channel_one
+# pprint(sounds)
+
+sample_rate = 48000
+speed_multiplier = 2.2
+advance = 0.15 * sample_rate
+space_skip = 0.4 * advance
+
+# say_this = "This is a test of the animal crossing style talking machine"
+# say_this = "mestr lokee i mess yu bro"
+# say_this = "ha"
+# say_this = "pastee luuk at des"
+# say_this = "kil haw es yor de goeng"
+# say_this = "weleam haw was yor de"
+say_this = "i med somteng kul"
+# say_this = "ame  i lov yuu vere alat"
+# say_this = "ef yu wurk hard yu wel hav a gud lif"
+
+say = say_this.lower().strip()
+# lowercased, removes leading/trailing whitespaces.
+
+cursor = 0
+notes = []
+for char in say:
+    notes.append((char, cursor))
+    if char == " ":
+        cursor += space_skip
+    else:
+        cursor += advance
+# advance the cursor by the length of the last note
+last_char = say[-1]
+last_note = sounds[last_char]
+last_note_length = last_note.shape[0]
+cursor += last_note_length
+
+end_pad = sample_rate * 1.0
+buffer_length = int(cursor + end_pad)
+base = np.zeros(buffer_length, dtype=np.int16)
+
+for note in notes:
+    char = note[0]
+    cursor = note[1]
+    if char not in sounds:
+        continue
+    sound = sounds[char]
+    start = int(cursor)
+    end = int(start + sound.shape[0])
+    print(f"Adding {char} from {start} to {end}")
+    selection = base[start:end]
+    print(selection.shape)
+    print(sound.shape)
+    base[start:end] += sound
+
+output_dir = "output"
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
+
+name = say_this.replace(" ", "_")
+file_path = os.path.join(output_dir, name + ".wav")
+write_rate = int(sample_rate * speed_multiplier)
+write(file_path, write_rate, base.astype(np.int16))
+playsound(file_path)
+# for file in files:
+#     playsound(voice_path + "/" + file)
+
+```
+
+
+---
+
+
+## 중국어 플래시카드
+
+
+📁 **폴더:** `Chinese_FlashCard`
+
+
+중국어 학습을 위한 tkinter 플래시카드 앱입니다. HSK1 단어 목록에서 한자, 병음, 뜻을 보여줍니다.
+
+
+### 필요한 패키지
+
+
+beautifulsoup4, requests, tkinter
+
+
+### 실행 방법
+
+
+```bash
+cd "Chinese_FlashCard"
+cd app && python main.py
+```
+
+
+---
+
+
+## 디지털 사전
+
+
+📁 **폴더:** `Dictionary`
+
+
+간단한 디지털 사전입니다. 영어 단어의 뜻을 검색할 수 있습니다.
+
+
+### 필요한 패키지
+
+
+json
+
+
+### 실행 방법
+
+
+```bash
+cd "Dictionary"
+python dictionary.py
+```
+
+
+### 소스 코드
+
+
+`dictionary.py`:
+
+
+```python
+import json
+import tkinter as tk
+from tkinter import messagebox
+from difflib import get_close_matches
+
+
+data = json.load(open("data.json"))
+
+# Use the absolute path to the data.json file
+file_path = "Enter the path of json file "
+
+
+def access_data(file_path):
+    try:
+        with open(file_path, "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        print("Error: !!Oops... I guess you missed to keep things in same folder!!")
+        return {}
+    except json.JSONDecodeError:
+        print(
+            "Error: !!Oops... I think I am old i cant decode this file is it really json file you programi...!!"
+        )
+        return {}
+
+
+# finding correct match
+def translate(word, file):
+    word = word.lower()
+    if word in file:
+        return file[word], None
+    elif word.title() in file:
+        return file[word.title()], None
+    elif word.upper() in file:
+        return file[word.upper()], None
+    else:
+        matches = get_close_matches(word, file.keys())
+        if len(matches) > 0:
+            return f"Did you mean '{matches[0]}' instead?", matches[0]
+        else:
+            return "The word does not exist. Please double-check it.", None
+
+
+def on_search():
+    word = entry.get().strip()
+    if word:
+        output, suggestion = translate(word, file)
+        if isinstance(output, list):
+            result_text = " \n".join(output)
+        else:
+            result_text = output
+        result_label.config(text=result_text)
+
+        if suggestion:
+
+            def suggest():
+                suggested_output = translate(suggestion, file)[0]
+                result_label.config(text=suggested_output)
+                suggest_button.pack_forget()
+
+            suggest_button.config(command=suggest, text=f"Search for '{suggestion}'")
+            suggest_button.pack()
+        else:
+            suggest_button.pack_forget()
+    else:
+        messagebox.showwarning("Input Error", "Please enter a word to search.")
+
+
+# for data access
+file = access_data(file_path)
+
+# setting up GUI
+root = tk.Tk()
+root.title("Dictionary")
+
+frame = tk.Frame(root, padx=10, pady=10)
+frame.pack(padx=10, pady=10)
+
+label = tk.Label(frame, text="Enter a word:")
+label.pack()
+
+entry = tk.Entry(frame, width=50)
+entry.pack(pady=5)
+
+search_button = tk.Button(frame, text="Search", command=on_search)
+search_button.pack(pady=5)
+
+result_label = tk.Label(frame, text="", wraplength=400, justify="left")
+result_label.pack(pady=10)
+
+suggest_button = tk.Button(frame, text="", wraplength=400, justify="left")
+
+root.mainloop()
+
+
+# main body of the program
+def main():
+    word = input("Enter the word you want to search: ")
+    output = translate(word, file)
+    if type(output) == list:
+        for item in output:
+            print(item)
+    else:
+        print(output)
+
+
+# setting default focus to main function
+if __name__ == "__main__":
+    main()
+
+```
+
+
+---
+
+
+## 구글 번역
+
+
+📁 **폴더:** `Google_Translate`
+
+
+Google Translate API를 활용한 번역 인터페이스입니다.
+
+
+### 필요한 패키지
+
+
+googletrans
+
+
+### 실행 방법
+
+
+```bash
+cd "Google_Translate"
+python translate.py
+```
+
+
+### 소스 코드
+
+
+`translate.py`:
+
+
+```python
+from googletrans import Translator, LANGUAGES
+
+translator = Translator()
+
+language_options = LANGUAGES.items()
+language_codes = []
+language_names = []
+
+
+def errors():
+    print("Unknown Language. Wisely choose from this")
+    print(f"Language Codes {language_codes}\n")
+    print(f"Or from Language Names \n {language_names}")
+
+
+for options in language_options:
+    language_codes.append(options[0])
+    language_names.append(options[1].lower())
+
+
+translating_from = input("Enter the language you want to translate from\n").lower()
+word = input("Enter the word\n").lower()
+translating_to = input("Enter the language you want to translate to\n").lower()
+
+try:
+    if translating_from and translating_to in language_codes or language_names:
+        translation = translator.translate(
+            word, src=translating_from, dest=translating_to
+        ).text
+
+        print(translation.capitalize())
+    else:
+        errors()
+except:
+    print("Something went wrong or \n")
+    errors()
+
+```
+
+
+---
+
+
+## 말하는 사전
+
+
+📁 **폴더:** `Speaking_Dictionary`
+
+
+단어의 뜻을 찾아 소리로 읽어주는 사전입니다.
+
+
+### 필요한 패키지
+
+
+pyttsx3
+
+
+### 실행 방법
+
+
+```bash
+cd "Speaking_Dictionary"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`Speaking_Dictionary.py`:
+
+
+```python
+
+```
+
+
+---
+
+
+## 말하는 위키백과
+
+
+📁 **폴더:** `Speaking_Wikipedia`
+
+
+위키백과 문서를 가져와 소리로 읽어주는 도구입니다.
+
+
+### 필요한 패키지
+
+
+wikipedia, pyttsx3
+
+
+### 실행 방법
+
+
+```bash
+cd "Speaking_Wikipedia"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`speaking_wikipedia.py`:
+
+
+```python
+import pyttsx3
+import wikipedia
+
+
+def page(title: str, sentences=2):
+    """
+    :param title: (str) the title of the Wikipedia page to summarize
+    :param sentences: (int) the number of sentences to include in the summary (optional, default is 2)
+    :return: (str) the summary of the Wikipedia page
+    """
+
+    content = wikipedia.summary(title, sentences=sentences)
+
+    return content
+
+
+def voicing_text(text):
+    """
+    Speaks the given text using the text-to-speech engine
+    :param text: (str) the text to speak
+    :return: (str) the input text
+    """
+
+    # Initialize the engine
+    engine = pyttsx3.init()
+
+    # Set the voice to be used
+    voices = engine.getProperty("voices")
+    engine.setProperty("voice", voices[0].id)
+
+    # Speak the text
+    engine.say(text)
+
+    engine.runAndWait()
+
+    # returns the input text in order to provide subtitles for the spoken audio
+    return text
+
+
+def main():
+    # Specify values:
+    wiki_page = input("Enter the name of the  wikipedia page: ")
+
+    specify_num_of_sentences = input(
+        "Do you want to specify the number of sentences (default is 2)? (y/n): "
+    )
+
+    if specify_num_of_sentences == "y" or specify_num_of_sentences == "Y":
+        num_of_sentences = input(
+            "Enter the number of sentences to include in the summary: "
+        )
+
+        print(voicing_text(page(wiki_page, num_of_sentences)))
+    else:
+        print(voicing_text(page(wiki_page)))
+
+
+if __name__ == "__main__":
+    main()
+
+```
+
+
+---
+
+
+## 음성→텍스트
+
+
+📁 **폴더:** `Speech_To_Text`
+
+
+음성을 인식하여 텍스트로 변환하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+speech_recognition
+
+
+### 실행 방법
+
+
+```bash
+cd "Speech_To_Text"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`Speech_To_Text.py`:
+
+
+```python
+import speech_recognition as sr
+import pyttsx3
+
+# Initializing the recognizer
+r = sr.Recognizer()
+
+
+# Function to convert text to speech
+def SpeakText(command):
+    # Initializing the engine
+    engine = pyttsx3.init()
+    engine.say(command)
+    engine.runAndWait()
+
+
+# Looping infinitely for user to speak
+
+while 1:
+    # Exception handling to handle exceptions at the runtime
+    try:
+        # using the microphone as source for input.
+        with sr.Microphone() as source2:
+            # wait for a second to let the recognizer
+            # adjust the energy threshold based on
+            # the surrounding noise level
+            r.adjust_for_ambient_noise(source2, duration=0.2)
+
+            # listens for the user's input
+            audio2 = r.listen(source2)
+
+            # Using google to recognize audio
+            MyText = r.recognize_google(audio2)
+            MyText = MyText.lower()
+            enable_automatic_punctuation = True
+            print(MyText)
+            SpeakText(MyText)
+
+    except sr.RequestError as e:
+        print("Could not request results; {0}".format(e))
+
+    except sr.UnknownValueError:
+        print("unknown error occurred")
+
+```
+
+
+---
+
+
+## 텍스트→음성
+
+
+📁 **폴더:** `TextToSpeech`
+
+
+텍스트를 음성으로 변환하는 TTS(Text-to-Speech) 도구입니다.
+
+
+### 필요한 패키지
+
+
+pyttsx3/gTTS
+
+
+### 실행 방법
+
+
+```bash
+cd "TextToSpeech"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`Text_To_Speech.py`:
+
+
+```python
+import pyttsx3
+import tkinter as tk
+
+# saytext = input("What should I say? ")
+
+
+class GUI:
+    def __init__(self):
+        self.root = tk.Tk()
+
+        self.root.title("Text To Speech")
+        self.root.geometry("500x500")
+
+        self.label = tk.Label(
+            self.root, text="Type what you want me to say!", font=("Arial", 16)
+        )
+        self.label.pack(padx=10, pady=10)
+
+        self.textbox = tk.Entry(font=("Arial", 16))
+        self.textbox.pack(padx=10, pady=10)
+
+        self.button = tk.Button(
+            text="CLICK ME!", font=("Arial", 16), command=self.button_click
+        )
+        self.button.pack(padx=10, pady=10)
+
+        self.root.mainloop()
+
+    def button_click(self):
+        engine = pyttsx3.init()
+        engine.say(self.textbox.get())
+        engine.runAndWait()
+
+
+GUI()
+
+```
+
+
+---
+
+
+## 문자열 조작기
+
+
+📁 **폴더:** `string_manipulator`
+
+
+일반적인 문자열 변환 작업을 수행하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "string_manipulator"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`string_manipulator.py`:
+
+
+```python
+class StringManipulator:
+    def __init__(self, string):
+        self.string = string
+
+    def concatenate(self, other_string):
+        return self.string + other_string
+
+    def length(self):
+        return len(self.string)
+
+    def slice(self, start, end):
+        return self.string[start:end]
+
+    def repeat(self, times):
+        return self.string * times
+
+    def uppercase(self):
+        return self.string.upper()
+
+    def lowercase(self):
+        return self.string.lower()
+
+    def strip(self):
+        return self.string.strip()
+
+    def split(self, separator):
+        return self.string.split(separator)
+
+    def format(self, *args):
+        return self.string.format(*args)
+
+    def interpolate(self, **kwargs):
+        return self.string.format(**kwargs)
+
+```
+
+
+---
+
+
+## 타이핑 속도 측정
+
+
+📁 **폴더:** `TestTypingSpeed`
+
+
+정확한 타이핑 속도를 측정하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+없음
+
+
+### 실행 방법
+
+
+```bash
+cd "TestTypingSpeed"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`TestTypingSpeed.py`:
+
+
+```python
+import time
+from essential_generators import DocumentGenerator
+
+
+def typing_speed():
+    # Generating a random sentence
+    gen = DocumentGenerator()
+    String = gen.sentence()
+    wordcount = len(String.split())
+
+    # Typing Speed Calculation
+    print(String)
+    print("----------------------------------------")
+    startTime = time.time()
+    textInput = str(input("Type the sentence: "))
+    endTime = time.time()
+    accuracy = len(set(textInput.split()) & set(String.split()))
+    accuracy = accuracy / wordcount * 100
+    timeTaken = round(endTime - startTime, 2)
+    wpm = round((wordcount / timeTaken) * 60)
+    print("----------------------------------------")
+
+    # Showing the results
+    print("Your accuracy is: ", accuracy)
+    print("Time taken: ", timeTaken, "seconds")
+    print("Your typing speed is: ", wpm, "words per minute")
+
+    if accuracy < 50 or wpm < 30:
+        print("You need to practice typing more!")
+    elif accuracy < 80 or wpm < 60:
+        print("You are doing great!")
+    elif accuracy <= 100 or wpm <= 100:
+        print("You are a pro in typing!")
+    else:
+        print("You are a typing machine!")
+
+
+if __name__ == "__main__":
+    print("Let's Start")
+    typing_speed()
+
+    while True:
+        if input("Do you want to try again? (y/n): ") == "y":
+            print("\n")
+            typing_speed()
+        else:
+            break
+
+```
+
+
+---

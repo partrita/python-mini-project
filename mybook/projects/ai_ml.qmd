@@ -1,0 +1,880 @@
+# 🤖 인공지능 및 머신러닝
+
+
+인공지능, 머신러닝, 컴퓨터 비전과 관련된 프로젝트들입니다.
+
+
+## 숫자 인식기 (웹앱)
+
+
+📁 **폴더:** `digit-recognizer`
+
+
+웹 애플리케이션 형태의 숫자 인식기입니다. 사용자가 그린 숫자를 AI가 인식합니다.
+
+
+### 필요한 패키지
+
+
+flask, tensorflow
+
+
+### 실행 방법
+
+
+```bash
+cd "digit-recognizer"
+python app.py
+```
+
+
+### 소스 코드
+
+
+`app.py`:
+
+
+```python
+from app import app
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug=True)
+
+```
+
+
+---
+
+
+## 얼굴 인식
+
+
+📁 **폴더:** `Face_Recognition`
+
+
+파이썬 라이브러리를 사용한 기본적인 얼굴 인식 프로젝트입니다.
+
+
+### 필요한 패키지
+
+
+opencv, face_recognition
+
+
+### 실행 방법
+
+
+```bash
+cd "Face_Recognition"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+import cv2
+
+cap = cv2.VideoCapture(0)
+
+face_cascade = cv2.CascadeClassifier(
+    cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+)
+body_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_fullbody.xml")
+
+while True:
+    _, frame = cap.read()
+
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+
+    for x, y, width, height in faces:
+        cv2.rectangle(frame, (x, y), (x + width, y + height), (255, 0, 0), 3)
+
+    cv2.imshow("Camera", frame)
+
+    if cv2.waitKey(1) == ord("q"):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+```
+
+
+---
+
+
+## 차선 인식
+
+
+📁 **폴더:** `Finding_Lanes`
+
+
+컴퓨터 비전을 활용하여 도로의 차선을 찾는 프로젝트입니다.
+
+
+### 필요한 패키지
+
+
+opencv, numpy
+
+
+### 실행 방법
+
+
+```bash
+cd "Finding_Lanes"
+python lanes.py
+```
+
+
+### 소스 코드
+
+
+`lanes.py`:
+
+
+```python
+import cv2
+import numpy as np
+
+
+# 1. convert the image to gray scale
+# 2. blur the image
+# 3. detect the edges
+# 4. create a mask
+# 5. apply the mask to the image
+# 6. detect the lines
+# 7. average the lines
+# 8. display the lines
+
+
+def make_coordinate(image, line_parameters):
+    slope, intercept = line_parameters
+    y1 = image.shape[0]
+    y2 = int(y1 * (3 / 5))
+    x1 = int((y1 - intercept) / slope)
+    x2 = int((y2 - intercept) / slope)
+    return np.array([x1, y1, x2, y2])
+
+
+def average_lines_intercept(image, lines):
+    left_fit = []
+    right_fit = []
+    for line in lines:
+        x1, y1, x2, y2 = line.reshape(4)
+        parameters = np.polyfit((x1, x2), (y1, y2), 1)
+        slope = parameters[0]
+        intercept = parameters[1]
+        if slope < 0:
+            left_fit.append((slope, intercept))
+        else:
+            right_fit.append((slope, intercept))
+    left_fit_average = np.average(left_fit, axis=0)
+    right_fit_average = np.average(right_fit, axis=0)
+    left_line = make_coordinate(image, left_fit_average)
+    right_line = make_coordinate(image, right_fit_average)
+    return np.array([left_line, right_line])
+
+
+def canny(image):
+    gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+    blur = cv2.GaussianBlur(gray, (5, 5), 0)
+    canny = cv2.Canny(blur, 50, 150)
+    return canny
+
+
+def display_lines(image, lines):
+    line_image = np.zeros_like(image)
+    if lines is not None:
+        for x1, y1, x2, y2 in lines:
+            cv2.line(line_image, (x1, y1), (x2, y2), (0, 0, 255), 10)
+    return line_image
+
+
+def roi(image):
+    height = image.shape[0]
+    polygons = np.array([[(200, height), (1100, height), (550, 250)]])
+    mask = np.zeros_like(image)
+    cv2.fillPoly(mask, polygons, 255)
+    masked_image = cv2.bitwise_and(image, mask)
+    return masked_image
+
+
+cap = cv2.VideoCapture("Finding_Lanes/video.mp4")
+
+while cap.isOpened():
+    _, frame = cap.read()
+    canny_image = canny(frame)
+    cropped_image = roi(canny_image)
+    lines = cv2.HoughLinesP(
+        cropped_image, 2, np.pi / 180, 100, np.array([]), minLineLength=40, maxLineGap=5
+    )
+    averaged_lines = average_lines_intercept(frame, lines)
+    line_image = display_lines(frame, averaged_lines)
+    combo_image = cv2.addWeighted(frame, 0.8, line_image, 1, 1)
+    cv2.imshow("result", combo_image)
+    if cv2.waitKey(10) == ord("q"):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+```
+
+
+---
+
+
+## MNIST 숫자 인식
+
+
+📁 **폴더:** `mnist_digit_recognizer`
+
+
+MNIST 데이터셋을 사용한 손글씨 숫자 인식 머신러닝 모델입니다.
+
+
+### 필요한 패키지
+
+
+tensorflow, keras
+
+
+### 실행 방법
+
+
+```bash
+cd "mnist_digit_recognizer"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+import os
+import keras
+
+os.environ["keras_backend"] = "tensorflow"
+
+# Loading Data
+(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+print(
+    "Shape of x_train, y_train, x_test, y_test: ",
+    x_train.shape,
+    y_train.shape,
+    x_test.shape,
+    y_test.shape,
+)
+
+# Reshaping Data
+x_train = x_train.reshape((x_train.shape[0], 28 * 28))
+x_test = x_test.reshape((x_test.shape[0], 28 * 28))
+print(
+    "Shape of x_train, y_train, x_test, y_test after reshaping: ",
+    x_train.shape,
+    y_train.shape,
+    x_test.shape,
+    y_test.shape,
+)
+
+# Normalize the data to scale down the values between 0 and 1
+x_train = x_train.astype("float32") / 255
+x_test = x_test.astype("float32") / 255
+
+# Creating model
+model = keras.models.Sequential(
+    [
+        keras.layers.InputLayer(input_shape=(28 * 28,)),
+        keras.layers.Dense(512, activation="relu"),
+        keras.layers.Dropout(0.2),
+        keras.layers.Dense(10, activation="softmax"),
+    ]
+)
+
+print(model.summary())
+
+model.compile(
+    optimizer=keras.optimizers.Adam(learning_rate=1e-3),
+    loss=keras.losses.SparseCategoricalCrossentropy(),
+    metrics=[keras.metrics.SparseCategoricalAccuracy(name="accuracy")],
+)
+
+# Training the model
+batch_size = 64
+epochs = 20
+
+# To stop the training process if validation loss is not improving continuously for 3 epochs
+callbacks = [keras.callbacks.EarlyStopping(monitor="val_loss", patience=3)]
+
+model.fit(
+    x_train,
+    y_train,
+    batch_size=batch_size,
+    epochs=epochs,
+    validation_split=0.2,
+    callbacks=callbacks,
+)
+
+# Evaluating on test data
+test_loss, test_accuracy = model.evaluate(x_test, y_test)
+print("Test Loss: ", test_loss)
+print("Test Accuracy: ", test_accuracy)
+
+```
+
+
+---
+
+
+## 움직임 감지
+
+
+📁 **폴더:** `Motion_Detection`
+
+
+웹캠 피드를 통해 움직임을 감지하는 프로젝트입니다.
+
+
+### 필요한 패키지
+
+
+opencv
+
+
+### 실행 방법
+
+
+```bash
+cd "Motion_Detection"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+import cv2
+import mediapipe as mp
+import time
+
+mpDraw = mp.solutions.drawing_utils
+mpPose = mp.solutions.pose
+pose = mpPose.Pose()
+
+cap = cv2.VideoCapture("workout.mp4")
+pTime = 0
+
+while True:
+    success, img = cap.read()
+
+    height, width, _ = img.shape
+    max_width = 1000
+    max_height = 800
+    scale = min(max_width / width, max_height / height)
+    img = cv2.resize(img, None, fx=scale, fy=scale)
+
+    imgRGB = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+    result = pose.process(imgRGB)
+    if result.pose_landmarks:
+        mpDraw.draw_landmarks(
+            img,
+            result.pose_landmarks,
+            mpPose.POSE_CONNECTIONS,
+            landmark_drawing_spec=mpDraw.DrawingSpec(
+                color=(0, 255, 0), thickness=2, circle_radius=2
+            ),
+            connection_drawing_spec=mpDraw.DrawingSpec(color=(0, 255, 0), thickness=2),
+        )
+
+    # FPS frames per second
+    cTime = time.time()
+    fps = 1 / (cTime - pTime)
+    pTime = cTime
+    cv2.putText(
+        img, f"FPS : {int(fps)}", (20, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 255, 0), 2
+    )
+
+    cv2.imshow("Image", img)
+    if cv2.waitKey(10) & 0xFF == ord("q"):
+        break
+
+```
+
+
+---
+
+
+## 객체 탐지
+
+
+📁 **폴더:** `Object_Detection`
+
+
+AI를 사용하여 이미지나 영상에서 객체를 식별하는 프로젝트입니다.
+
+
+### 필요한 패키지
+
+
+opencv, tensorflow
+
+
+### 실행 방법
+
+
+```bash
+cd "Object_Detection"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`object-detection.py`:
+
+
+```python
+import cv2
+import torch
+from ultralytics import YOLO
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+
+def main():
+    # Load YOLOv9 model
+    model = YOLO("yolov9c.pt")
+    model.to(device)
+
+    # Initialize video capture (0 for default camera)
+    cap = cv2.VideoCapture(0)
+
+    # Check if the video capture device is opened
+    if not cap.isOpened():
+        print("Error: Could not open video capture device")
+        return
+
+    while True:
+        # Capture frame-by-frame
+        ret, frame = cap.read()
+
+        if not ret:
+            print("Error: Could not read frame")
+            break
+
+        # Use YOLOv9 model to make predictions
+        results = model(frame)
+
+        # Process the results
+        for result in results:
+            # Loop through each detected object
+            for box in result.boxes:
+                # Get coordinates and class label
+                x1, y1, x2, y2 = box.xyxy[0]
+                label_id = int(box.cls[0].item())
+                confidence = box.conf[0].item()
+
+                # Get the class label from YOLO model
+                class_label = model.names[label_id]
+
+                # Create the label text
+                label_text = f"{class_label}: {confidence:.2f}"
+
+                # Draw bounding box on the frame
+                cv2.rectangle(
+                    frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2
+                )
+
+                # Draw the label text on the frame above the bounding box
+                cv2.putText(
+                    frame,
+                    label_text,
+                    (int(x1), int(y1) - 5),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.5,
+                    (0, 255, 0),
+                    1,
+                )
+
+        # Display the frame with bounding boxes and labels
+        cv2.imshow("Real-Time Object Detection", frame)
+
+        # Exit the loop if the user presses 'q'
+        if cv2.waitKey(1) & 0xFF == ord("q"):
+            break
+
+    # Release the video capture device and close the window
+    cap.release()
+    cv2.destroyAllWindows()
+
+
+if __name__ == "__main__":
+    main()
+
+```
+
+
+---
+
+
+## ANN 회귀 분석
+
+
+📁 **폴더:** `Regression using ANN`
+
+
+인공 신경망을 사용한 회귀 분석 프로젝트입니다.
+
+
+### 필요한 패키지
+
+
+tensorflow, keras
+
+
+### 실행 방법
+
+
+```bash
+cd "Regression using ANN"
+python main.py
+```
+
+
+---
+
+
+## 도형 인식
+
+
+📁 **폴더:** `Shape_Recognition`
+
+
+이미지에서 기하학적 도형을 식별하는 프로젝트입니다.
+
+
+### 필요한 패키지
+
+
+opencv
+
+
+### 실행 방법
+
+
+```bash
+cd "Shape_Recognition"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+import cv2
+
+IMAGE = cv2.imread("shape.jpg")
+GREYSCALE = cv2.cvtColor(IMAGE, cv2.COLOR_BGR2GRAY)
+h, w, channels = IMAGE.shape
+
+PARAM, PARAM2 = cv2.threshold(GREYSCALE, 50, 255, 0)
+
+CONTOURS, _ = cv2.findContours(PARAM2, 1, 1)
+
+RECTANGLES = 0
+SQUARES = 0
+
+for cnt in CONTOURS:
+    x1, y1 = cnt[0][0]
+    approx = cv2.approxPolyDP(cnt, 0.01 * cv2.arcLength(cnt, True), True)
+    if len(approx) == 4:
+        x, y, w, h = cv2.boundingRect(cnt)
+        ratio = float(w) / h
+        if ratio >= 0.9 and ratio <= 1.1:
+            IMAGE = cv2.drawContours(IMAGE, [cnt], -1, (0, 255, 0), 3)
+            SQUARES = SQUARES + 1
+        else:
+            IMAGE = cv2.drawContours(IMAGE, [cnt], -1, (0, 255, 0), 3)
+            RECTANGLES = RECTANGLES + 1
+
+cv2.putText(
+    IMAGE,
+    "Number of SQUARES: " + str(SQUARES),
+    (h + 500, 50),
+    cv2.FONT_HERSHEY_SIMPLEX,
+    0.6,
+    (0, 255, 0),
+    2,
+)
+cv2.putText(
+    IMAGE,
+    "Number of RECTANGLES: " + str(RECTANGLES),
+    (h + 500, 200),
+    cv2.FONT_HERSHEY_SIMPLEX,
+    0.6,
+    (0, 255, 0),
+    2,
+)
+
+cv2.imshow("Shapes", IMAGE)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+```
+
+
+---
+
+
+## 텍스트 예측
+
+
+📁 **폴더:** `Text_Predication`
+
+
+기본적인 예측 텍스트 알고리즘입니다. 다음에 올 단어를 예측합니다.
+
+
+### 필요한 패키지
+
+
+없음
+
+
+### 실행 방법
+
+
+```bash
+cd "Text_Predication"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`text_prediction.py`:
+
+
+```python
+import pandas as pd
+from nltk import bigrams
+from nltk.lm.preprocessing import pad_both_ends
+from nltk.tokenize import WordPunctTokenizer
+from nltk.lm import Vocabulary
+from nltk.lm import Laplace
+
+
+def remove_html_tags(text):
+    # Function to remove HTML tags from text
+    import re
+
+    clean = re.compile("<.*?>")
+    return re.sub(clean, "", text)
+
+
+def remap_corpus(path):
+    # Read CSV file, preprocess the 'Body' column, and tokenize the text
+    df_corpus = pd.read_csv(path)
+    df_corpus["Body"] = df_corpus["Body"].apply(lambda x: remove_html_tags(x))
+    df_corpus["Body_tokenized"] = df_corpus["Body"].apply(
+        lambda x: WordPunctTokenizer().tokenize(x)
+    )
+    return df_corpus
+
+
+def padding_corpus(corpus):
+    # Pad both ends of each sentence in the corpus
+    corpus_padding = []
+    for sentence in corpus:
+        corpus_padding.append(
+            list(
+                pad_both_ends(
+                    sentence,
+                    pad_left=True,
+                    left_pad_symbol="<s>",
+                    pad_right=True,
+                    right_pad_symbol="</s>",
+                    n=2,
+                )
+            )
+        )
+    return corpus_padding
+
+
+def remap_bigram(corpus):
+    # Extract bigrams from each sentence in the corpus
+    corpus_bigram = []
+    for sentence in corpus:
+        corpus_bigram.append(list(bigrams(sentence)))
+    return corpus_bigram
+
+
+def vocab(corpus):
+    # Create a vocabulary list from the corpus
+    voc_list = []
+    for sentence in corpus:
+        for word in sentence:
+            voc_list.append(word)
+    return Vocabulary(voc_list, unk_cutoff=3)
+
+
+def prediction(train, prefix):
+    # Perform next-word prediction using Laplace smoothing
+    train = padding_corpus(train)
+    voc = vocab(train)
+    LaplaceModel = Laplace(2, vocabulary=voc)
+    train = remap_bigram(train)
+    LaplaceModel.fit(train)
+    score_list = {}
+    for word in voc:
+        score_list[word] = LaplaceModel.score(word, [prefix])
+    sorted_dict = dict(
+        sorted(score_list.items(), key=lambda item: item[1], reverse=True)
+    )
+    my_dict = {k: round(sorted_dict[k], 2) for k in list(sorted_dict.keys())[:3]}
+    return my_dict
+
+
+if __name__ == "__main__":
+    # Main execution
+    print("Text Prediction using Laplace Smoothing")
+    print("--------------------------------------")
+    print("Reading training data...")
+
+    path_train = "corpus/train.csv"
+    corpus_train = remap_corpus(path_train)["Body_tokenized"]
+    print("Training data is ready!")
+    print("--------------------------------------")
+    user_input = input("Enter a prefix for next-word prediction: ")
+    print("--------------------------------------")
+    print("Performing next-word prediction...")
+
+    prediction_result = prediction(corpus_train, user_input)
+    print("------- Result of Prediction ---------")
+    for i in prediction_result:
+        print(f"Next word predictionc can be : {i}")
+
+```
+
+
+---
+
+
+## 간단한 챗봇
+
+
+📁 **폴더:** `simple-chatbot`
+
+
+규칙 기반의 기본적인 대화형 AI입니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "simple-chatbot"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`chatbot.py`:
+
+
+```python
+import tkinter as tk
+from tkinter import Entry, scrolledtext
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+# Load the model and tokenizer
+tokenizer = AutoTokenizer.from_pretrained("microsoft/phi-1_5")
+model = AutoModelForCausalLM.from_pretrained(
+    "microsoft/phi-1_5", trust_remote_code=True
+)
+
+# Function to generate a response from the model
+
+
+def generate_response(message):
+    inputs = tokenizer(message, return_tensors="pt", truncation=True)
+    outputs = model.generate(
+        **inputs, max_length=150, pad_token_id=tokenizer.eos_token_id
+    )
+    response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    return response
+
+
+# Function to handle when the user sends a message
+
+
+def on_send(event=None):  # event is passed by binders.
+    message = user_input.get()
+    if message:  # Only process if there's a message
+        # Display user message in the chat window
+        chat_window.configure(state=tk.NORMAL)  # Temporarily make it editable
+        chat_window.insert(tk.END, f"You: {message}\n")
+        chat_window.configure(state=tk.DISABLED)  # Make it read-only again
+
+        # Clear the user input field
+        user_input.delete(0, tk.END)
+
+        # Generate and display chatbot response
+        response = generate_response(message)
+        chat_window.configure(state=tk.NORMAL)
+        chat_window.insert(tk.END, f"WebIdeasBot: {response}\n")
+        chat_window.configure(state=tk.DISABLED)
+
+
+# Create the main window
+window = tk.Tk()
+window.title("WebIdeasBot")
+
+# Create the chat window
+chat_window = scrolledtext.ScrolledText(window, width=80, height=20, state=tk.DISABLED)
+chat_window.pack()
+
+# Create the user input field
+user_input = Entry(window, width=80)
+user_input.pack()
+user_input.focus_set()  # Set focus to the input field
+
+# Bind the Enter key to the on_send function
+user_input.bind("<Return>", on_send)
+
+# Start the Tkinter event loop
+window.mainloop()
+
+```
+
+
+---

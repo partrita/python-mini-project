@@ -1,0 +1,721 @@
+# 📊 자료구조 및 알고리즘
+
+
+컴퓨터 과학의 기본 자료구조와 알고리즘을 파이썬으로 구현한 프로젝트들입니다.
+
+
+## 이진 탐색 트리
+
+
+📁 **폴더:** `Binary_Search_Tree`
+
+
+이진 탐색 트리(BST) 자료구조를 구현한 프로젝트입니다. 삽입, 검색, 삭제 등의 기본 연산을 지원합니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Binary_Search_Tree"
+python bst.py
+```
+
+
+### 소스 코드
+
+
+`bst.py`:
+
+
+```python
+class BST:
+    def __init__(self, val, left, right):
+        self.val = val
+        self.left = left
+        self.right = right
+
+    def addHelper(self, root, data):
+        # case for reaching current leafs, base cases
+        if root.val < data and root.right == None:
+            root.right = BST(data, None, None)
+            return "insertion completed"
+        elif root.val > data and root.left == None:
+            root.left = BST(data, None, None)
+            return "insertion completed"
+
+        # else we continue tracing downwards
+        if root.val < data:
+            return self.add(root.right, data)
+        elif root.val > data:
+            return self.add(root.left, data)
+        else:
+            return "insertion failed: duplicate value"
+
+    def add(self, root, data):
+        if root == None:
+            return "insertion failed: empty root"
+        return self.addHelper(root, data)
+
+    def restructdata(self, root):
+        # base case: we reach a leaf
+        if root == None or (root.left == None and root.right == None):
+            root = None
+            return "restructure finished"
+
+        # need dummy nodes to compare target value to children value
+        v1 = float("-inf")
+        v2 = float("inf")
+        if root.left != None:
+            v1 = root.left.val
+        if root.right != None:
+            v2 = root.right.val
+
+        temp = root.val
+        if v1 > v2 or v2 == float("inf"):
+            root.val = root.left.val
+            root.left.val = temp
+            return self.restructdata(root.left)
+        else:
+            root.val = root.right.val
+            root.right.val = temp
+            return self.restructdata(root.right)
+
+    def removeHelper(self, root, data):
+        if root == None:
+            return "deletion failed: could not find value"
+
+        # adhering to typical bst properties
+        if root.val < data:
+            return self.removeHelper(root.right, data)
+        elif root.val > data:
+            return self.removeHelper(root.left, data)
+        else:
+            temp = root.val
+            v1 = float("-inf")
+            v2 = float("inf")
+            if root.left != None:
+                v1 = root.left.val
+            elif root.right != None:
+                v2 = root.right.val
+
+            if v1 > v2 or v2 == float("inf"):
+                root.val = root.left.val
+                root.left.val = temp
+                return self.restructdata(root.left)
+            else:
+                root.val = root.right.val
+                root.right.val = temp
+                return self.restructdata(root.right)
+
+    def remove(self, root, data):
+        if root == None:
+            return "deletion failed: deleting from an empty tree"
+        return self.removeHelper(root, data)
+
+```
+
+
+---
+
+
+## 이진 트리
+
+
+📁 **폴더:** `Binary_tree`
+
+
+일반적인 이진 트리를 구현한 프로젝트입니다. 노드와 트리 클래스를 사용합니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Binary_tree"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+from tree import Tree
+
+
+# Start the program
+
+tree = Tree()
+tree.add(3)
+tree.add(4)
+tree.add(0)
+tree.add(8)
+tree.add(2)
+tree.printTree()
+
+```
+
+
+---
+
+
+## 연결 리스트
+
+
+📁 **폴더:** `linked_lists`
+
+
+단일 연결 리스트, 이중 연결 리스트, 연결 스택, 연결 큐, 연결 덱 등 다양한 연결 리스트 자료구조를 구현합니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "linked_lists"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+from linked_deque import LinkedDeque
+from linked_queue import LinkedQueue
+from linked_stack import LinkedStack
+
+
+def main():
+    my_linked_deque = LinkedDeque()
+    my_linked_queue = LinkedQueue()
+    my_linked_stack = LinkedStack()
+
+```
+
+
+---
+
+
+## 접두사 트라이
+
+
+📁 **폴더:** `Prefix_Trie`
+
+
+효율적인 문자열 검색을 위한 트라이(Trie) 자료구조를 구현합니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Prefix_Trie"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+from trie import Trie
+
+trie = Trie()
+trie.insert("apple")
+trie.search("apple")  # return True
+trie.search("app")  # return False
+trie.starts_with("app")  # return True
+trie.insert("app")
+trie.search("app")  # return True
+
+```
+
+
+---
+
+
+## 스택 자료구조
+
+
+📁 **폴더:** `Stack_structure`
+
+
+스택(Stack) 자료구조를 파이썬으로 구현한 프로젝트입니다. LIFO(후입선출) 원칙을 따릅니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Stack_structure"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+class Stack:
+    def __init__(self):
+        self.top = None
+
+    def push(self, data):
+        print(f"Adding {data} to the top of the stack")
+
+        # If there is no data, we add the value in the top element and return
+        if self.top == None:
+            self.top = Node(data)
+            return
+        new_node = Node(data)
+        new_node.next = self.top
+        self.top = new_node
+
+    def pop(self):
+        # If there is no data in the top node, we return
+        if self.top == None:
+            print("There is no item on the stack to unstack")
+            return
+
+        print(f"Unstack {self.top.data}")
+        self.top = self.top.next
+
+    def printData(self):
+        print("Printing stack: ")
+
+        # Step through the stack and print values
+        tmp_node = self.top
+
+        while tmp_node != None:
+            print(f"[{tmp_node.data}]", end="")
+            tmp_node = tmp_node.next
+
+        print("")
+
+
+stack = Stack()
+stack.push("a")
+stack.push("b")
+stack.push("c")
+stack.push("d")
+stack.printData()
+stack.pop()
+stack.push("Hello")
+stack.printData()
+stack.pop()
+stack.pop()
+
+```
+
+
+---
+
+
+## 스도쿠 풀기
+
+
+📁 **폴더:** `Sudoku_solver`
+
+
+스도쿠 퍼즐을 자동으로 풀어주는 알고리즘입니다. 백트래킹 기법을 사용합니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Sudoku_solver"
+python main.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `Sudoku_solver/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## 하노이의 탑
+
+
+📁 **폴더:** `Tower-of_Hanoi`
+
+
+하노이의 탑 퍼즐을 풀어주는 재귀 알고리즘입니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Tower-of_Hanoi"
+python main.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `Tower-of_Hanoi/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## 중위/후위 계산기
+
+
+📁 **폴더:** `infix_postfix_calculator`
+
+
+중위 표기법을 후위 표기법으로 변환하고 수학 식을 계산합니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "infix_postfix_calculator"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+def parse_infix(input):
+    ret = ""
+    for i, tmp in enumerate(input):
+        if tmp == ".":
+            ret += tmp
+        elif tmp.isdigit():
+            ret += tmp
+            if i < len(input) - 1:
+                if not input[i + 1].isdigit() and input[i + 1] != ".":
+                    ret += " "
+        else:
+            ret += tmp + " "
+    return ret
+
+
+def convert_to_postfix(infix):
+    ret = ""
+    infix = infix.strip()
+    infix_arr = infix.split(" ")
+    s = []
+    for token in infix_arr:
+        if token == "(":
+            s.append(token)
+        elif token == "+":
+            while s and s[-1] in ["+", "-", "*", "/"]:
+                ret += s.pop() + " "
+            s.append(token)
+        elif token == "-":
+            while s and s[-1] in ["+", "-", "*", "/"]:
+                ret += s.pop() + " "
+            s.append(token)
+        elif token == "*":
+            while s and s[-1] in ["*", "/"]:
+                ret += s.pop() + " "
+            s.append(token)
+        elif token == "/":
+            while s and s[-1] in ["*", "/"]:
+                ret += s.pop() + " "
+            s.append(token)
+        elif token == ")":
+            while s and s[-1] != "(":
+                ret += s.pop() + " "
+            if s and s[-1] == "(":
+                s.pop()
+        else:
+            ret += token + " "
+    while s:
+        ret += s.pop() + " "
+    return ret
+
+
+def calculate_postfix(postfix):
+    ret = ""
+    s = []
+    postfix = postfix.strip()
+    postfix_arr = postfix.split(" ")
+    for token in postfix_arr:
+        if token in ["+", "-", "*", "/"]:
+            b = s.pop()
+            a = s.pop()
+            if token == "+":
+                s.append(a + b)
+            elif token == "-":
+                s.append(a - b)
+            elif token == "*":
+                s.append(a * b)
+            elif token == "/":
+                s.append(a / b)
+        else:
+            s.append(float(token))
+    ret = str(s.pop())
+    return ret
+
+
+from tkinter import *
+
+root = Tk()
+root.title("Calculator")
+root.geometry("300x300")
+
+app = Frame(root)
+app.pack()
+
+lbl = Label(app, text="Calculator")
+lbl.pack()
+
+lbl_infix = Label(app, text="Infix")
+lbl_infix.pack()
+infix = Entry(app)
+infix.pack()
+
+lbl_tempinfix = Label(app, text="Temp Infix")
+lbl_tempinfix.pack()
+tempinfix = Entry(app)
+tempinfix.pack()
+
+lbl_postfix = Label(app, text="Postfix")
+lbl_postfix.pack()
+postfix = Entry(app)
+postfix.pack()
+
+lbl_result = Label(app, text="Result")
+lbl_result.pack()
+result = Entry(app)
+result.pack()
+
+btn = Button(app, text="Calculate")
+btn.pack()
+
+
+def calculate():
+    infix_str = infix.get()
+    tempinfix_str = parse_infix(infix_str)
+    postfix_str = convert_to_postfix(tempinfix_str)
+    result_str = calculate_postfix(postfix_str)
+    tempinfix.delete(0, END)
+    tempinfix.insert(0, tempinfix_str)
+    postfix.delete(0, END)
+    postfix.insert(0, postfix_str)
+    result.delete(0, END)
+    result.insert(0, result_str)
+
+
+btn["command"] = calculate
+root.mainloop()
+
+```
+
+
+---
+
+
+## 별 피라미드
+
+
+📁 **폴더:** `Star_Pyramid`
+
+
+별(`*`) 문자를 사용하여 다양한 피라미드 패턴을 생성합니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Star_Pyramid"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`star_pyramid.py`:
+
+
+```python
+cont = "y"
+print("Welcome to star pyramid generator !")
+print()
+while cont == "y":
+    num = int(input("Enter a numbber : "))
+
+    t = 0
+    i = 1
+    k = num
+
+    while i < (num + 1):
+        print(" " * k, end="")
+        j = 0
+
+        while j <= t:
+            print("*", "", end="")
+            j = j + 1
+
+        i = i + 1
+        t = t + 1
+        k = k - 1
+
+        print()
+
+    cont = input(
+        "Are you want to continue? (Enter 'y' to continue or 'q' to quit : "
+    ).lower()
+
+```
+
+
+---
+
+
+## 콘웨이의 생명 게임
+
+
+📁 **폴더:** `Convoys_GameofLife`
+
+
+콘웨이의 생명 게임(Game of Life) 시뮬레이션입니다. 셀의 생존과 소멸을 관찰할 수 있습니다.
+
+
+### 필요한 패키지
+
+
+curses
+
+
+### 실행 방법
+
+
+```bash
+cd "Convoys_GameofLife"
+python GameOfLife.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `Convoys_GameofLife/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## 회전 도넛
+
+
+📁 **폴더:** `Spinning Donut`
+
+
+터미널에서 3D 도넛을 렌더링하는 프로젝트입니다. 수학적 계산으로 3D 효과를 만듭니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Spinning Donut"
+python main.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `Spinning Donut/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---

@@ -2,13 +2,24 @@ project:
   type: book
 
 book:
-  title: "Python Mini Projects"
-  author: "ndleah"
-  date: "2/19/2026"
+  title: "파이썬 미니 프로젝트 모음"
+  author: "ndleah & 기여자들"
+  date: "2026-02-19"
   chapters:
     - index.qmd
     - intro.qmd
-    - projects.qmd
+    - part: "프로젝트"
+      chapters:
+        - projects/games.qmd
+        - projects/tools.qmd
+        - projects/security.qmd
+        - projects/data_structures.qmd
+        - projects/web_network.qmd
+        - projects/media_image.qmd
+        - projects/ai_ml.qmd
+        - projects/text_speech.qmd
+        - projects/automation.qmd
+        - projects/other.qmd
     - summary.qmd
     - references.qmd
 
@@ -17,6 +28,3 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
-
-
-

@@ -1,0 +1,691 @@
+# ⚡ 자동화 및 봇
+
+
+작업 자동화, 메시징 봇, 시스템 제어와 관련된 프로젝트들입니다.
+
+
+## 자동 메일링
+
+
+📁 **폴더:** `Automated_Mailing`
+
+
+이메일 전송 과정을 자동화하는 프로젝트입니다. 대량의 이메일을 효율적으로 보낼 수 있습니다.
+
+
+### 필요한 패키지
+
+
+smtplib
+
+
+### 실행 방법
+
+
+```bash
+cd "Automated_Mailing"
+python mail.py
+```
+
+
+### 소스 코드
+
+
+`mail.py`:
+
+
+```python
+import pandas as pd
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+
+from_addr = "ENTER_SENDERS_MAILID"
+
+data = pd.read_csv("abc.csv")  # Enter path of CSV files containing emails
+to_addr = data["email"].tolist()  # Change'email' to column name containg emailids
+name = data["name"].tolist()
+
+l = len(name)
+email = ""  # Enter Your email id here
+password = ""  # Enter your Password
+
+for i in range(l):
+    msg = MIMEMultipart()
+    msg["From"] = from_addr
+    msg["To"] = to_addr[i]
+    msg["Subject"] = "Just to Check"
+
+    body = name[i] + "Enter your content here"
+
+    msg.attach(MIMEText(body, "plain"))
+
+    mail = smtplib.SMTP("smtp.gmail.com", 587)
+    mail.ehlo()
+    mail.starttls()
+    mail.login(email, password)
+    text = msg.as_string()
+    mail.sendmail(from_addr, to_addr[i], text)
+    mail.quit()
+
+```
+
+
+---
+
+
+## 데스크톱 어시스턴트
+
+
+📁 **폴더:** `desktopassistant`
+
+
+음성 명령으로 제어하는 데스크톱 어시스턴트입니다. 위키백과 검색, 웹 열기, 시간 확인 등의 기능을 제공합니다.
+
+
+### 필요한 패키지
+
+
+pyttsx3, speech_recognition, wikipedia, pywhatkit
+
+
+### 실행 방법
+
+
+```bash
+cd "desktopassistant"
+python index.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `desktopassistant/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## 전화번호/이메일 추출
+
+
+📁 **폴더:** `ExtractPhoneNumberEmail`
+
+
+텍스트에서 전화번호와 이메일 주소를 자동으로 추출하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+re
+
+
+### 실행 방법
+
+
+```bash
+cd "ExtractPhoneNumberEmail"
+python PhoneEmailExtraction.py
+```
+
+
+### 소스 코드
+
+
+`PhoneEmailExtraction.py`:
+
+
+```python
+import pyperclip  # Clipboard module
+import re  # Regular expression module
+
+# Get the text from the clipboard
+text = str(pyperclip.paste())
+
+# Empty list to store matches
+matches = []
+
+
+def PhoneNumCheck():
+    # Regular expression for matching phone numbers
+    PhnNumregex = re.compile(
+        r"""
+        (\(?(\+?\d{1,3})\)?  # area code
+        [\s_.-]?)             # separator or space
+        (\d{3})                # first three digits
+        [\s_.-]?               # separator or space
+        (\d{3})                # second three digits
+        [\s_.-]?               # separator or space
+        (\d{4,5})              # last four/five digits
+    """,
+        re.VERBOSE,
+    )  # VERBOSE is used to ignore whitespace and comments inside the regex string
+
+    # Loop through the phone numbers found in the text
+    for num in PhnNumregex.findall(text):
+        if num[1] != "":
+            PhoneNum = "(" + num[1] + ")"  # Add area code in brackets
+        else:
+            PhoneNum = ""
+        PhoneNum += "-".join([num[2], num[3], num[4]])  # Join the digits with dashes
+        matches.append(PhoneNum)
+
+
+def EmailCheck():
+    # Regular expression for matching email addresses
+    emailCheck = re.compile(
+        r"""
+        ([a-zA-Z0-9._%-]+        # username
+        @                        # @ character
+        [a-zA-Z0-9_-]+           # domain name
+        \.                       # .(dot)
+        [a-zA-Z]{2,3}            # domain type
+        (\.[a-zA-Z]{2,3})?)      # second domain type like co.in 
+    """,
+        re.VERBOSE,
+    )
+
+    # Loop through the email addresses found in the text
+    for emails in emailCheck.findall(text):
+        matches.append(emails[0])
+
+
+# Print the output from matches list
+def PrintMatches():
+    if len(matches) > 0:
+        print("Found matches: " + str(len(matches)))
+        for i in range(0, len(matches)):
+            print(matches[i])
+    else:
+        print("***No Phone Number or Email Address found.***")
+
+
+def main():
+    # Call functions to check for phone numbers and email addresses
+    PhoneNumCheck()
+    EmailCheck()
+
+    # Print the matches
+    PrintMatches()
+
+
+if __name__ == "__main__":
+    main()
+
+```
+
+
+---
+
+
+## 메일 확인기
+
+
+📁 **폴더:** `Mail_Checker`
+
+
+이메일 주소가 존재하는지, 접근 가능한지 확인하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+validate_email
+
+
+### 실행 방법
+
+
+```bash
+cd "Mail_Checker"
+python mail_checker.py
+```
+
+
+### 소스 코드
+
+
+`mail_checker.py`:
+
+
+```python
+# This script gives you the subject of mails received from a given list of mail addresses
+import imaplib
+
+
+user = "Your Gamil address"
+password = "Your password"
+
+mail = imaplib.IMAP4_SSL("imap.gmail.com")
+mail.login(user, password)
+mail.list()
+
+mail.select(
+    "inbox"
+)  # connects to your inbox, change the argument to access different categories.
+
+
+def readMails(address):
+    result, data = mail.search(
+        None, "(FROM " + '"' + address + '")'
+    )  # If you would like to view mails that are sent to another mail, change FROM into TO
+
+    ids = data[0]  # data is a list.
+    id_list = ids.split()
+    latest_email_id = id_list[-1]  # gets the latest mail from the particular user
+
+    result, data = mail.fetch(latest_email_id, "(RFC822)")
+
+    basic_email = data[0][1]
+    # contains all information including payloads and html content
+
+    index_start1 = basic_email.index(b"Subject")  # Starting index for your subject
+    index_end1 = (
+        index_start1 + 40
+    )  # Change the value of 40 into any other value to suit your preferences
+
+    subject = basic_email[
+        index_start1:index_end1
+    ]  # seperating the subject alone from the rest of the basic email
+
+    subject = subject.strip(
+        b"b'Subject:"
+    )  # removing additional unneccessary data from the subject
+    subject_end = subject.index(b"\r")
+
+    print("-------FROM " + address + "-------\n\n")  # Printing the emails
+    print("Subject: ", subject[0:subject_end], "\n\n")
+
+
+listOfMails = [
+    "mail1@gmail.com",
+    "mail2@gmail.com",
+]  # Modify the list contents here to suit you. If you would like to view mails
+#  from say, 'abc@gmail.com' change 'mail1@gmail.com' to 'abc@gmail.com'
+for addresses in listOfMails:
+    readMails(addresses)
+
+```
+
+
+---
+
+
+## 스크린 펫
+
+
+📁 **폴더:** `Screenpet`
+
+
+데스크톱에 귀여운 디지털 펫을 표시하는 재미있는 프로젝트입니다.
+
+
+### 필요한 패키지
+
+
+tkinter
+
+
+### 실행 방법
+
+
+```bash
+cd "Screenpet"
+python main.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `Screenpet/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## 스팸 봇
+
+
+📁 **폴더:** `spam_bot`
+
+
+반복적인 메시지 전송을 자동화하는 프로젝트입니다 (교육 목적).
+
+
+### 필요한 패키지
+
+
+pyautogui
+
+
+### 실행 방법
+
+
+```bash
+cd "spam_bot"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`bot1.py`:
+
+
+```python
+import pyautogui as pyg
+import keyboard as kbd
+import time
+
+string = input("Enter Here What you want to spammm... : \n")
+for i in range(3, 1):
+    print(i)
+
+
+def spammingBot(string):
+    while True:
+        if kbd.is_pressed("q"):
+            break
+        pyg.typewrite(string)
+        pyg.press("enter")
+        time.sleep(2)
+
+```
+
+
+---
+
+
+## WhatsApp 봇
+
+
+📁 **폴더:** `Whatsapp_Bot`
+
+
+WhatsApp 메시지를 자동으로 보내는 봇입니다.
+
+
+### 필요한 패키지
+
+
+pywhatkit
+
+
+### 실행 방법
+
+
+```bash
+cd "Whatsapp_Bot"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+# noob (me), you need to install pywhatkit first
+# in order to import pywhatkit...
+
+import pywhatkit
+
+PHONE_NUMBER = input("Enter Phone Number: ")
+# Must include all number info about region (and '+' sign).
+
+MESSAGE = input("Enter Message: ")
+
+HR = int(input("Enter Hour: "))
+# 24 Hour Format
+
+MIN = int(input("Enter Minutes:"))
+
+pywhatkit.sendwhatmsg(PHONE_NUMBER, MESSAGE, HR, MIN)
+# Send a message at HR:MIN.
+# (Doesn't send until then)
+# (Doesn't close currrent tab, if called again will open another)
+
+pywhatkit.sendwhatmsg_instantly(PHONE_NUMBER, MESSAGE, tab_close=True)
+# Same, but sends instantly
+# optional args tab_close closes the current tab after sent
+
+pywhatkit.image_to_ascii_art("folders/name.jpeg", "ascii")
+# tricky, because WhatsApp characters does not align properly
+
+```
+
+
+---
+
+
+## 윈도우 종료
+
+
+📁 **폴더:** `Windows_Shutdown`
+
+
+시스템 종료를 예약하거나 트리거하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+os
+
+
+### 실행 방법
+
+
+```bash
+cd "Windows_Shutdown"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`shutdown.py`:
+
+
+```python
+import os
+
+
+def shutdown():
+    os.system("shutdown /s /t 0")
+
+
+shutdown()
+
+```
+
+
+---
+
+
+## 주사위 시뮬레이터
+
+
+📁 **폴더:** `Dice_Rolling_Stimulator`
+
+
+하나 이상의 주사위를 굴리는 시뮬레이터입니다. 무작위 숫자를 생성합니다.
+
+
+### 필요한 패키지
+
+
+random
+
+
+### 실행 방법
+
+
+```bash
+cd "Dice_Rolling_Stimulator"
+python dice_stimulator.py
+```
+
+
+### 소스 코드
+
+
+`dice_stimulator.py`:
+
+
+```python
+import random
+# CATEGORIZING OUTCOME INTO A LIST
+
+one = """ 
+            ("===========")
+            ("|         |")
+            ("|    O    |")
+            ("|         |")
+            ("===========")\n  
+        
+        """
+
+two = """ 
+            ("===========")
+            ("|         |")
+            ("| O     O |")
+            ("|         |")
+            ("===========")\n  
+        
+        """
+
+
+three = """ 
+            ("===========")
+            ("|    O    |")
+            ("|    O    |")
+            ("|    O    |")
+            ("===========")\n  
+        
+        """
+
+four = """ 
+            ("===========")
+            ("|  O    O |")
+            ("|     0   |")
+            ("|  O    O |")
+            ("===========")\n  
+        
+        """
+
+five = """ 
+            ("===========")
+            ("| O     O |")
+            ("|    0    |")
+            ("| O     O |")
+            ("===========")\n  
+        
+        """
+
+six = """
+            ("===========") 
+            ("| O     O |")
+            ("| O     O |")
+            ("| O     O |")
+            ("===========") \n      
+        """
+
+
+outcomes_list = [one, two, three, four, five, six]
+
+
+print("This is a dice stimulator")
+x = "y"
+while x == "y":
+    randon_outcome = random.sample(outcomes_list, 2)
+    for outcome in randon_outcome:
+        print(outcome)
+
+    x = input("Press y to roll again ")
+
+```
+
+
+---
+
+
+## 간단한 주사위
+
+
+📁 **폴더:** `Simple_dice`
+
+
+최소한의 코드로 구현한 주사위 굴리기 도구입니다.
+
+
+### 필요한 패키지
+
+
+random
+
+
+### 실행 방법
+
+
+```bash
+cd "Simple_dice"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`dice.py`:
+
+
+```python
+from tkinter import *
+import random
+
+
+def roll():
+    r = random.randint(1, 6)
+    s = str(r)
+    e.delete(0, END)
+    e.insert(0, s)
+
+
+def on_enter(event):
+    button1.config(fg="black")
+
+
+def on_leave(event):
+    button1.config(fg="green")
+
+
+root = Tk()
+root.geometry("99x117+1153+210")
+root.title("Dice")
+label = Label(root, text="Simple Dice", wraplength=100)
+e = Entry(root, width=5)
+button1 = Button(root, text="Roll", command=roll, wraplength=100)
+
+button1.bind("<Enter>", on_enter)
+button1.bind("<Leave>", on_leave)
+
+
+label.grid(row=0, sticky=N)
+e.grid(row=2, sticky=N)
+button1.grid(row=4, sticky=S)
+
+root.mainloop()
+
+```
+
+
+---

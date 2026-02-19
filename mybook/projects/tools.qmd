@@ -1,0 +1,1585 @@
+# 🔧 유틸리티 도구
+
+
+일상적인 작업을 자동화하거나 편리하게 만들어주는 도구 프로젝트들입니다.
+
+
+## 주소 유효성 검사기
+
+
+📁 **폴더:** `Address Validator`
+
+
+이메일 또는 물리적 주소의 유효성을 검사하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Address Validator"
+python AddressValidator.py
+```
+
+
+### 소스 코드
+
+
+`AddressValidator.py`:
+
+
+```python
+def addressVal(address):
+    dot = address.find(".")
+    at = address.find("@")
+    if dot == -1:
+        print("Invalid")
+    elif at == -1:
+        print("Invalid")
+    else:
+        print("Valid")
+
+
+print("This program will decide if your input is a valid email address")
+while True:
+    print("A valid email address needs an '@' symbol and a '.'")
+    x = input("Input your email address:")
+
+    addressVal(x)
+
+```
+
+
+---
+
+
+## Cat 명령어
+
+
+📁 **폴더:** `Cat_command`
+
+
+리눅스의 `cat` 명령어를 파이썬으로 구현한 것입니다. 지정된 파일을 읽어 콘솔에 출력합니다.
+
+
+### 필요한 패키지
+
+
+argparse, pathlib
+
+
+### 실행 방법
+
+
+```bash
+cd "Cat_command"
+python cat.py [경로]
+```
+
+
+### 소스 코드
+
+
+`cat.py`:
+
+
+```python
+#!/usr/bin/python
+
+import argparse
+from pathlib import Path
+
+
+class CatError(Exception):
+    pass
+
+
+class Logger:
+    def __init__(self, verbosity=False):
+        self.verbose = verbosity
+
+    def error(self, message):
+        print(f"ERROR: {message}")
+
+
+logger = Logger()
+
+"""
+    Read the selected text file 
+
+    Example:
+    your/path/file.txt
+"""
+
+
+def readFile(src: Path):
+    """
+    if the given path is a directory
+    ERROR the path is a directory
+    """
+    if src.is_dir():
+        logger.error(f"The path {src}: is a directory")
+
+    else:
+        with open(src, "r") as f:
+            for lines in f:
+                print(lines, end="")
+
+
+def cli() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        prog="cat",
+        description="cat command implementation in python",
+        epilog="Example: your/path/file.txt",
+    )
+
+    parser.add_argument("source", type=Path, help="Source file")
+
+    return parser.parse_args()
+
+
+def main():
+    args = cli()
+
+    try:
+        readFile(args.source)
+
+    except CatError as e:
+        logger.error(e)
+
+        exit(1)
+
+    except KeyboardInterrupt:
+        logger.error("\nInterrupt")
+
+
+"""
+    Start the program
+"""
+if __name__ == "__main__":
+    main()
+
+```
+
+
+---
+
+
+## 단위 변환기
+
+
+📁 **폴더:** `Converter`
+
+
+다양한 단위를 변환할 수 있는 간단한 변환기 앱입니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Converter"
+python converter.py
+```
+
+
+### 소스 코드
+
+
+`converter.py`:
+
+
+```python
+from converter_values import *  # import required files
+
+
+def main():
+    print(options["help"])  # prints help menu
+    res = input("Response: ")
+
+    while res.lower() != "q":  # program loop
+        try:
+            res = res.strip().split(" ")
+
+            if len(res) == 1:
+                display_help(res[0])  # display help menu
+            elif len(res) == 4:
+                perform_conversion(res)  # perform unit conversion
+            else:
+                print("Invalid command")
+
+        except Exception as e:
+            print("Error:", e)
+
+        res = input("\nResponse: ")
+
+
+def display_help(command):
+    """Display help menu."""
+    print(options[command])
+
+
+def perform_conversion(res):
+    """Perform unit conversion."""
+    for i in res[3].split(","):
+        value = round(
+            eval("{} * {}['{}'] / {}['{}']".format(res[2], res[0], i, res[0], res[1])),
+            6,
+        )  # calculating
+        print("{} \t : {}".format(i, value))  # displaying
+
+
+if __name__ == "__main__":
+    main()
+
+```
+
+
+---
+
+
+## 로마 숫자 변환기
+
+
+📁 **폴더:** `Converting_Roman_to_Integer`
+
+
+로마 숫자를 정수로 변환하는 CLI 스크립트입니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Converting_Roman_to_Integer"
+python Converting_Roman_to_Integer.py
+```
+
+
+### 소스 코드
+
+
+`Converting_Roman_to_Integer.py`:
+
+
+```python
+import sys
+
+
+romanStr = sys.argv[1]
+romanStr = str(romanStr)
+dict = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+
+num = 0
+
+romanStr = romanStr.replace("IV", "IIII")
+romanStr = romanStr.replace("IX", "VIIII")
+romanStr = romanStr.replace("XL", "XXXX")
+romanStr = romanStr.replace("XC", "LXXXX")
+romanStr = romanStr.replace("CD", "CCCC")
+romanStr = romanStr.replace("CM", "DCCCC")
+myStr = list(romanStr)
+for char in myStr:
+    num = num + dict[char]
+
+print(num)
+
+```
+
+
+---
+
+
+## CSV→JSON 변환기
+
+
+📁 **폴더:** `csv_to_json`
+
+
+CSV 파일을 JSON 파일로 변환하는 스크립트입니다.
+
+
+### 필요한 패키지
+
+
+csv, json
+
+
+### 실행 방법
+
+
+```bash
+cd "csv_to_json"
+python csv_to_json.py
+```
+
+
+### 소스 코드
+
+
+`csv_to_json.py`:
+
+
+```python
+import csv
+import json
+
+
+# Function to convert csv to json
+def csv_to_json(file_name):
+    with open(file_name, "r") as csv_file:
+        csv_data = csv.DictReader(csv_file)
+        data_list = [row for row in csv_data]
+        json_data = json.dumps(data_list, indent=4)
+
+    with open("data.json", "w") as json_file:
+        json_file.write(json_data)
+
+
+# main function
+def main():
+    file_name = input()
+    csv_to_json(file_name)
+
+
+if __name__ == "__main__":
+    main()
+
+```
+
+
+---
+
+
+## PDF 분할기
+
+
+📁 **폴더:** `Demerge_pdfs`
+
+
+큰 PDF 파일을 여러 개의 작은 PDF 파일로 분할하는 프로그램입니다.
+
+
+### 필요한 패키지
+
+
+PyPDF2
+
+
+### 실행 방법
+
+
+```bash
+cd "Demerge_pdfs"
+python demerging_pdf.py
+```
+
+
+### 소스 코드
+
+
+`demerging_pdfs.py`:
+
+
+```python
+import PyPDF2
+import re
+
+
+def check_valid_filename(filename):
+    invalid_chars = r'[/\\:*?"<>|]'
+    if re.search(invalid_chars, filename):
+        print('A file name cannot contain any of these characters / \\ : * ? " < > |')
+        return False
+    else:
+        return True
+
+
+# Note: here instead of Python.pdf you should give the whole path to the pdf if the pdf is not present in the same directory where python program is present
+merged_pdf = open("Python.pdf", mode="rb")
+
+
+pdf = PyPDF2.PdfFileReader(merged_pdf)
+
+(u, ctr, x) = tuple([0] * 3)
+for i in range(1, pdf.numPages + 1):
+    if u >= pdf.numPages:
+        print("Successfully done!")
+        exit(0)
+
+    while True:
+        name = input("Enter the name of the pdf: ")
+        if check_valid_filename(name) == True:
+            break
+
+    while True:
+        ctr = input(f"Enter the number of pages for {name}: ")
+        try:
+            ctr = int(ctr)
+            if ctr > 0:
+                break
+            else:
+                raise ValueError
+        except ValueError:
+            print("Page number must be a positive integer")
+
+    u += ctr
+    if u > pdf.numPages:
+        print("Limit exceeded! ")
+        break
+
+    # Note: In the braces you should give the desired path of where new files should be stored
+    base_path = "{}.pdf"
+    # If you want to store the new pdfs in the same directory, then leave the braces empty
+    path = base_path.format(name)
+    f = open(path, mode="wb")
+    pdf_writer = PyPDF2.PdfFileWriter()
+
+    for j in range(x, x + ctr):
+        page = pdf.getPage(j)
+        pdf_writer.addPage(page)
+
+    x += ctr
+
+    pdf_writer.write(f)
+    f.close()
+
+
+merged_pdf.close()
+print("Successfully done!")
+
+```
+
+
+---
+
+
+## 파일 비교 도구
+
+
+📁 **폴더:** `Diff_Utility`
+
+
+두 파일을 비교하여 차이점을 보여주는 유틸리티입니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Diff_Utility"
+python diff.py
+```
+
+
+### 소스 코드
+
+
+`diff.py`:
+
+
+```python
+#!/usr/bin/env python3
+
+# sys: for reading command-line arguments.
+# rich: for coloring the text.
+import sys
+from rich import print
+
+# Print Usage message if enough arguments are not passed.
+if len(sys.argv) < 3:
+    print("Usage:")
+    print("\tMust provide two file names as command-line arguments.")
+    print("\tdiff.py <orignal_file> <changed_file>")
+    exit(1)
+
+orignal = sys.argv[1]
+changed = sys.argv[2]
+
+# Read the contents of the files in lists.
+orignal_contents = open(orignal, "r").readlines()
+changed_contents = open(changed, "r").readlines()
+
+color = "green"
+symbol = f"[bold {color}][+]"
+
+print()
+
+# Determine which file has changed much.
+if len(changed_contents) <= len(orignal_contents):
+    color = "red"
+    symbol = f"[bold {color}][-]"
+    smallest_sloc, largest_sloc = changed_contents, orignal_contents
+else:
+    smallest_sloc, largest_sloc = orignal_contents, changed_contents
+
+# Go over all the lines to check the changes.
+for line in range(0, len(smallest_sloc)):
+    if orignal_contents[line] == changed_contents[line]:
+        # Ignore if the lines are same.
+        continue
+    else:
+        # Display the changes on the respective lines of the files.
+        print(
+            f"[bold red][-] Line {line + 1}:[/bold red] {orignal_contents[line]}",
+            end="",
+        )
+        print(f"[bold green][+] Line {line + 1}:[/bold green] {changed_contents[line]}")
+
+        # Show the additions [+] or deletions [-] for the file that is the largest.
+        if line == len(smallest_sloc) - 1:
+            for new_line in range(line + 1, len(largest_sloc)):
+                print(
+                    f"{symbol} Line {new_line + 1}:[/bold {color}] {largest_sloc[new_line]}"
+                )
+
+```
+
+
+---
+
+
+## 클립보드 관리자
+
+
+📁 **폴더:** `Clip_Organizer`
+
+
+클립보드의 내용을 정리하고 관리하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+없음
+
+
+### 실행 방법
+
+
+```bash
+cd "Clip_Organizer"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+import os
+from moviepy.editor import *
+
+# Create array for clips
+videos = []
+# Assign directory
+directory = "clips"
+
+# Iterate over files in
+# that directory and add them
+# to the array
+for filename in sorted(os.listdir(directory)):
+    f = os.path.join(directory, filename)
+    # checking if it is a file
+    if os.path.isfile(f):
+        print(f)
+        videos.append(f)
+
+# Print list of clips for debugging purposes
+print(videos)
+
+# Setup first clip and initialize array
+# for updated clips to be put in
+start = os.path.getmtime(videos[0])
+concated = []
+
+# For each clip, update its start and end time so that
+# they play relative to the time they were recoreded
+for path in videos:
+    print(path)
+    print(os.path.getmtime(path) - start)
+    concated.append(
+        VideoFileClip(path, audio=True).set_start(os.path.getmtime(path) - start)
+    )
+
+# Combine clips into one video
+output = CompositeVideoClip(concated)
+
+# Output
+output.write_videofile(
+    "output.mp4",
+    codec="libx264",
+    audio_codec="aac",
+    temp_audiofile="temp-audio.m4a",
+    remove_temp=True,
+)
+
+```
+
+
+---
+
+
+## 이메일 분리기
+
+
+📁 **폴더:** `Email Slicer`
+
+
+이메일 주소에서 사용자 이름과 도메인을 추출하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Email Slicer"
+python EmailSlicer.py
+```
+
+
+### 소스 코드
+
+
+`EmailSlicer.py`:
+
+
+```python
+import re
+
+
+def isValidEmail(email):
+    # Regular expression for validating an Email
+    regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
+
+    if re.fullmatch(regex, email):
+        return True
+    else:
+        return False
+
+
+email = input("Enter your email id - ")
+
+if isValidEmail(email):
+    username = email[0 : email.index("@")]
+    domain = email[email.index("@") + 1 :]
+    print("Username - ", username)
+    print("Domain - ", domain)
+else:
+    print("Invalid Email!")
+
+```
+
+
+---
+
+
+## 셸 명령어 실행기
+
+
+📁 **폴더:** `Execute Shell Command`
+
+
+파이썬에서 직접 셸 명령어를 실행하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+subprocess
+
+
+### 실행 방법
+
+
+```bash
+cd "Execute Shell Command"
+python execute_shell_command.py
+```
+
+
+### 소스 코드
+
+
+`execute_shell_command_reference.py`:
+
+
+```python
+import execute_shell_command as shell
+import sys
+
+if __name__ == "__main__":
+    # Shell command to execute
+    command = "echo Khanna"
+
+    # Call execute_shell_command function from execute_shell_command.py script, result will have result return from shell command, status will have status of that command
+    result, status = shell.execute_shell_command(command)
+
+    # Check status of command ran, status != 0 means command failed
+    if status != 0:
+        print("Exception in running shell command")
+        sys.exit(1)
+    else:
+        # Take required action on result return after running shell command
+        command_result = result.decode("utf8").rstrip("\r\n")
+        print(command_result)
+
+```
+
+
+---
+
+
+## 지출 추적기
+
+
+📁 **폴더:** `Expense_Tracker`
+
+
+일일 지출과 예산을 추적하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Expense_Tracker"
+python expense_tracker.py
+```
+
+
+### 소스 코드
+
+
+`expense_tracker.py`:
+
+
+```python
+class ExpenseTracker:
+    def __init__(self):
+        self.expenses = {}
+        self.categories = {}
+
+    def add_expense(self, date, amount, category):
+        if category not in self.expenses:
+            self.expenses[category] = []
+        self.expenses[category].append((date, amount))
+
+    def add_category(self, category):
+        if category not in self.categories:
+            self.categories[category] = 0
+
+    def view_expenses(self):
+        for category, items in self.expenses.items():
+            total_amount = sum(amount for _, amount in items)
+            print(f"{category}: ${total_amount}")
+
+    def view_categories(self):
+        print("Categories:")
+        for category in self.expenses.keys():
+            print(category)
+
+
+# Sample usage
+tracker = ExpenseTracker()
+
+while True:
+    print("\nExpense Tracker Menu:")
+    print("1. Add Expense")
+    print("2. Add Category")
+    print("3. View Expenses")
+    print("4. View Categories")
+    print("5. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        date = input("Enter date (YYYY-MM-DD): ")
+        amount = float(input("Enter amount: $"))
+        category = input("Enter category: ")
+        tracker.add_expense(date, amount, category)
+    elif choice == "2":
+        category = input("Enter category: ")
+        tracker.add_category(category)
+    elif choice == "3":
+        tracker.view_expenses()
+    elif choice == "4":
+        tracker.view_categories()
+    elif choice == "5":
+        print("Exiting Expense Tracker. Goodbye!")
+        break
+    else:
+        print("Invalid choice. Please try again.")
+
+```
+
+
+---
+
+
+## 재무 추적기
+
+
+📁 **폴더:** `Finance_Tracker`
+
+
+개인 재무를 더 세밀하게 추적하는 고급 도구입니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Finance_Tracker"
+python main.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `Finance_Tracker/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## 투자 계산기
+
+
+📁 **폴더:** `Investment Calculator`
+
+
+투자 수익률을 계산하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Investment Calculator"
+python Calc.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `Investment Calculator/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## 삼각형 계산기
+
+
+📁 **폴더:** `Triangle Calculator`
+
+
+삼각형의 다양한 속성(넓이, 둘레 등)을 계산하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Triangle Calculator"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`TriangleCalculator.py`:
+
+
+```python
+s1 = float(input("Enter the first side of the triangle: "))
+s2 = float(input("Enter the second side of the triangle: "))
+s3 = float(input("Enter the third side of the triangle: "))
+
+# Calculate the semi-perimeter
+sp = (s1 + s2 + s3) / 2
+
+# Calculate the area
+area = (sp * (sp - s1) * (sp - s2) * (sp - s3)) ** 0.5
+
+print("The area of the triangle is %0.4f" % area)
+
+```
+
+
+---
+
+
+## Lorem Ipsum 생성기
+
+
+📁 **폴더:** `lorem_in_python`
+
+
+Lorem Ipsum 자리 표시자 텍스트를 생성하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+lorem
+
+
+### 실행 방법
+
+
+```bash
+cd "lorem_in_python"
+python lorem.py
+```
+
+
+### 소스 코드
+
+
+`lorem.py`:
+
+
+```python
+import random
+import os
+
+def generate_lorem_ipsum(num_lines, output_dir="generated_text", filename="lorem.txt", line_length=70):
+    """
+    Generates a specified number of lines of random characters, mimicking Lorem Ipsum.
+
+    Args:
+        num_lines (int): The number of lines to generate in the output file.
+        output_dir (str): The directory where the output file will be saved.
+                          Defaults to "generated_text".
+        filename (str): The name of the output text file. Defaults to "lorem.txt".
+        line_length (int): The maximum number of characters per line. Defaults to 70.
+    """
+    # Using string.ascii_lowercase for a cleaner character set
+    # Adding a space at the beginning to ensure spaces appear frequently
+    # No need for extra spaces, random.choice will handle distribution
+    characters = " " + "abcdefghijklmnopqrstuvwxyz"
+
+    # Create the output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+
+    file_path = os.path.join(output_dir, filename)
+
+    try:
+        with open(file_path, "w") as f:
+            for _ in range(num_lines): # Use '_' for unused loop variable
+                # Use random.choices for a list of characters, then join them
+                # This is often more efficient for building strings than repeated concatenation
+                line = ''.join(random.choices(characters, k=line_length))
+                f.write(line + "\n")
+        print(f"Successfully generated {num_lines} lines to '{file_path}'")
+    except IOError as e:
+        print(f"Error writing to file '{file_path}': {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
+
+if __name__ == "__main__":
+    try:
+        num_rows = int(input("Enter the number of rows (lines) for your paragraph:\n"))
+        if num_rows <= 0:
+            print("Please enter a positive number of rows.")
+        else:
+            # You can customize these arguments if needed
+            generate_lorem_ipsum(num_rows)
+    except ValueError:
+        print("Invalid input. Please enter a valid integer for the number of rows.")
+```
+
+
+---
+
+
+## 스마트 계산기
+
+
+📁 **폴더:** `Smart_Calculator`
+
+
+고급 기능을 갖춘 계산기입니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Smart_Calculator"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`calculator.py`:
+
+
+```python
+from tkinter import *
+
+
+def add(a, b):
+    return a + b
+
+
+def sub(a, b):
+    return a - b
+
+
+def mul(a, b):
+    return a * b
+
+
+def div(a, b):
+    return a / b
+
+
+def mod(a, b):
+    return a % b
+
+
+def lcm(a, b):
+    if a < 0 or b < 0:
+        return
+    L = a if a > b else b
+    while L <= a * b:
+        if L % a == 0 and L % b == 0:
+            return L
+        L += 1
+
+
+def hcf(a, b):
+    if a < 0 or b < 0:
+        return
+    H = a if a < b else b
+    while H >= 1:
+        if a % H == 0 and b % H == 0:
+            return H
+        H -= 1
+
+
+def extract_from_text(text):
+    l = []
+    for t in text.split(" "):
+        try:
+            l.append(float(t))
+        except ValueError:
+            pass
+    return l
+
+
+def calculate():
+    text = textin.get()
+    for word in text.split(" "):
+        if word.upper() in operations.keys():
+            try:
+                l = extract_from_text(text)
+                r = operations[word.upper()](l[0], l[1])
+                list.delete(0, END)
+                list.insert(END, r)
+            except:
+                list.delete(0, END)
+                list.insert(END, "something went wrong please enter again")
+            finally:
+                break
+        elif word.upper() not in operations.keys():
+            list.delete(0, END)
+            list.insert(END, "something went wrong please enter again")
+
+
+operations = {
+    "ADD": add,
+    "ADDITION": add,
+    "SUM": add,
+    "PLUS": add,
+    "SUB": sub,
+    "DIFFERENCE": sub,
+    "MINUS": sub,
+    "SUBTRACT": sub,
+    "DIFF": sub,
+    "LCM": lcm,
+    "HCF": hcf,
+    "PRODUCT": mul,
+    "MULTIPLICATION": mul,
+    "MULTIPLY": mul,
+    "DIVISION": div,
+    "DIV": div,
+    "DIVIDE": div,
+    "MOD": mod,
+    "REMAINDER": mod,
+    "MODULUS": mod,
+}
+
+
+win = Tk()
+win.title("Smart Calculator")
+win.geometry("500x300")
+win.configure(bg="lightskyblue")
+
+win.resizable(0, 0)
+win.columnconfigure(0, weight=1)
+win.columnconfigure(1, weight=2)
+win.columnconfigure(2, weight=1)
+
+l1 = Label(win, text="I am a smart calculator", width=20)
+l1.grid(column=1, row=1, padx=5, pady=10)
+
+l2 = Label(win, text="My name is Leah", width=20)
+l2.grid(column=1, row=2, padx=5, pady=10)
+
+l3 = Label(win, text="What can I help you?", width=20)
+l3.grid(column=1, row=3, padx=5, pady=10)
+
+textin = StringVar()
+e1 = Entry(win, width=30, textvariable=textin)
+e1.grid(column=1, row=4, padx=5, pady=10)
+
+b1 = Button(win, text="Just this", command=calculate)
+b1.grid(column=1, row=5, padx=5, pady=10)
+
+list = Listbox(win, width=40, height=3)
+list.grid(column=1, row=6, padx=5, pady=10)
+
+win.mainloop()
+
+```
+
+
+---
+
+
+## 행성별 몸무게 계산기
+
+
+📁 **폴더:** `Weights_on_different_planets`
+
+
+태양계의 다른 행성에서의 몸무게를 계산하는 재미있는 도구입니다.
+
+
+### 필요한 패키지
+
+
+없음 (표준 라이브러리)
+
+
+### 실행 방법
+
+
+```bash
+cd "Weights_on_different_planets"
+python main.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `Weights_on_different_planets/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## XLS→XLSX 변환기
+
+
+📁 **폴더:** `xls_to_xlsx`
+
+
+구형 Excel 파일(.xls)을 최신 형식(.xlsx)으로 변환하는 스크립트입니다.
+
+
+### 필요한 패키지
+
+
+pywin32
+
+
+### 실행 방법
+
+
+```bash
+cd "xls_to_xlsx"
+python xls_to_xlsx.py
+```
+
+
+### 소스 코드
+
+
+`xls_to_xlsx.py`:
+
+
+```python
+import os
+from pathlib import Path
+from win32com.client import Dispatch
+
+
+def convert_xls_to_xlsx(file_path: str, file_format: int = 51):
+    """Convert an Excel file from '.xls' to '.xlsx' format.
+
+    Args:
+    - file_path (str): The path to the input '.xls' file.
+    - file_format (int, optional): The file format code for '.xlsx'.
+    Default is 51.
+    """
+    excel_app = Dispatch("Excel.Application")
+    excel_app.Visible = False
+    output_path = str(file_path) + "x"
+    workbook = excel_app.Workbooks.Open(file_path)
+    workbook.SaveAs(output_path, FileFormat=file_format)
+    workbook.Close()
+    excel_app.Quit()
+
+
+def remove_old_file(file_path: str):
+    """Delete the old 'xls' file.
+
+    Args:
+    - file_path (str): The path to the old 'xls' file.
+    """
+    Path(file_path).unlink(missing_ok=False)
+
+
+def main():
+    file_path = str(input("Input the '.xls' file path:\n"))
+    convert_xls_to_xlsx(file_path=file_path)
+
+    file_name = os.path.basename(file_path)
+    print(f"Successfully converts {file_name}")
+
+    is_delete = str(
+        input(f"Do you want to delete the old {file_name} file (y/n)? ")
+    ).lower()
+
+    if is_delete == "y":
+        remove_old_file(file_path=file_path)
+        print(f"Successfully removes {file_name}")
+    else:
+        pass
+
+
+if __name__ == "__main__":
+    main()
+
+```
+
+
+---
+
+
+## 이미지→PDF 변환기
+
+
+📁 **폴더:** `images_to_pdf_converter`
+
+
+여러 장의 이미지를 하나의 PDF 문서로 변환합니다.
+
+
+### 필요한 패키지
+
+
+없음
+
+
+### 실행 방법
+
+
+```bash
+cd "images_to_pdf_converter"
+python Images_to_pdf.py
+```
+
+
+### 소스 코드
+
+
+`Images_to_pdf.py`:
+
+
+```python
+import os
+import img2pdf
+
+
+def images_to_pdf(image_folder_path):
+    # Verifying the give path exists or not
+
+    if os.path.exists(image_folder_path):
+        print("Given images folder path verified -- processing")
+    else:
+        print("Given images folder Not exist ")
+        return
+
+    images = [
+        imgs
+        for imgs in os.listdir(image_folder_path)
+        if imgs.endswith((".jpg", ".jpeg", ".png", ".gif"))
+    ]
+
+    images.sort()
+
+    # List to store image bytes of images present in the directory
+    images_bytes = list()
+
+    # converting all the images to image-bytes and appending them to a list for further processing
+    for i in images:
+        with open(os.path.join(image_folder_path, i), "rb") as im:
+            images_bytes.append(im.read())
+
+    # To convert image bytes to bytes for pdf
+    pdf_image_bytes = img2pdf.convert(images_bytes)
+    with open("Output.pdf", "wb") as pdfFile:
+        pdfFile.write(pdf_image_bytes)
+
+
+# Call the function to convert the images folder to pdf
+images_to_pdf(folder_path)
+
+```
+
+
+---
+
+
+## 운동 타이머
+
+
+📁 **폴더:** `Exercise-Timer`
+
+
+운동 루틴에 특화된 타이머 도구입니다.
+
+
+### 필요한 패키지
+
+
+없음
+
+
+### 실행 방법
+
+
+```bash
+cd "Exercise-Timer"
+python exercise_cli.py
+```
+
+
+### 소스 코드
+
+
+`exercise_cli.py`:
+
+
+```python
+import click
+import time as t
+import os
+
+os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
+import pygame
+
+pygame.mixer.init()
+
+
+def play_audio_start():
+    start_audio = pygame.mixer.Sound("beep_start.mp3")
+    start_audio.play()
+    pygame.time.wait(int(start_audio.get_length() * 1000))
+
+
+def play_audio_stop():
+    stop_audio = pygame.mixer.Sound("beep_stop.mp3")
+    stop_audio.play()
+    pygame.time.wait(int(stop_audio.get_length() * 1000))
+
+
+@click.command()
+@click.option("--time", "-t", default=10, help="Time you want to exercise")
+@click.option("--interval", "-i", default=3, help="Interval you want for exercise")
+@click.option("--reps", "-r", default=5, help="Reps you want to do")
+def exercise(time: int, interval: int, reps: int):
+    for _ in range(reps):
+        print("Interval")
+        t.sleep(interval)
+        print("Start")
+        play_audio_start()
+        t.sleep(time)
+        print("Stop")
+        play_audio_stop()
+        t.sleep(interval)
+        reps -= 1
+        if reps != 0:
+            print(f"Reps left: {reps}")
+        else:
+            print("Finished")
+            finish_audio = pygame.mixer.Sound("beep_finish.mp3")
+            finish_audio.play()
+            pygame.time.wait(int(finish_audio.get_length() * 1500))
+
+
+if __name__ == "__main__":
+    exercise()
+
+```
+
+
+---
+
+
+## 할일 관리 앱
+
+
+📁 **폴더:** `Todo_App`
+
+
+할 일을 관리하는 생산성 도구입니다.
+
+
+### 필요한 패키지
+
+
+없음
+
+
+### 실행 방법
+
+
+```bash
+cd "Todo_App"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+from flask import Flask, request, render_template, redirect, url_for
+from flask_bootstrap import Bootstrap
+
+# create the app
+app = Flask(__name__)
+bootstrap = Bootstrap(app)
+
+# the database
+todos = []
+
+
+# routes
+@app.route("/")
+def index():
+    return render_template("index.html", todos=todos)
+
+
+@app.route("/add", methods=["POST"])
+def add():
+    task = request.form["todo"]
+    todos.append({"task": task, "done": False})
+    return redirect(url_for("index"))
+
+
+@app.route("/remove/<int:index>", methods=["GET"])
+def remove(index):
+    del todos[index]
+    return redirect(url_for("index"))
+
+
+@app.route("/edit/<int:index>", methods=["GET", "POST"])
+def edit(index):
+    if request.method == "GET":
+        todo = todos[index]
+        return render_template("edit.html", todo=todo, index=index)
+    else:
+        task = request.form["todo"]
+        todo = todos[index]
+        todo["task"] = task
+        return redirect(url_for("index"))
+
+
+# run the app
+app.run(debug=True)
+
+```
+
+
+---

@@ -1,0 +1,1441 @@
+# 🌐 웹 및 네트워크
+
+
+웹 스크래핑, 서버 구축, 네트워크 프로그래밍과 관련된 프로젝트들입니다.
+
+
+## Flask CRUD 앱
+
+
+📁 **폴더:** `Crud_in_flask`
+
+
+Flask 웹 프레임워크를 사용한 간단한 CRUD(생성, 조회, 수정, 삭제) 애플리케이션입니다.
+
+
+### 필요한 패키지
+
+
+flask
+
+
+### 실행 방법
+
+
+```bash
+cd "Crud_in_flask"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+import sqlite3
+from flask import Flask, render_template, request, url_for, flash, redirect, abort
+
+app = Flask(__name__)
+app.config["SECRET_KEY"] = "sqlite"
+
+
+def get_db_connection():
+    conn = sqlite3.connect("database.db")
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
+def get_products(products_id):
+    conn = get_db_connection()
+    products = conn.execute(
+        "SELECT * FROM products WHERE id = ?", (products_id,)
+    ).fetchone()
+    conn.close()
+    if products is None:
+        abort(404)
+    return products
+
+
+@app.route("/create/", methods=("GET", "POST"))
+def create():
+    if request.method == "POST":
+        title = request.form["title"]
+        price = request.form["price"]
+
+        if not title:
+            flash("Title is required!")
+        elif not price:
+            flash("Content is required!")
+        else:
+            conn = get_db_connection()
+            conn.execute(
+                "INSERT INTO products (title, price) VALUES (?, ?)", (title, price)
+            )
+            conn.commit()
+            conn.close()
+            return redirect(url_for("index"))
+    return render_template("create.html")
+
+
+@app.route("/<int:id>/edit/", methods=("GET", "POST"))
+def edit(id):
+    products = get_products(id)
+
+    if request.method == "POST":
+        title = request.form["title"]
+        price = request.form["price"]
+
+        if not title:
+            flash("Title is required!")
+
+        elif not price:
+            flash("Content is required!")
+
+        else:
+            conn = get_db_connection()
+            conn.execute(
+                "UPDATE products SET title = ?, price = ? WHERE id = ?",
+                (title, price, id),
+            )
+            conn.commit()
+            conn.close()
+            return redirect(url_for("index"))
+
+    return render_template("edit.html", products=products)
+
+
+@app.route("/<int:id>/delete/", methods=("POST",))
+def delete(id):
+    products = get_products(id)
+    conn = get_db_connection()
+    conn.execute("DELETE FROM products WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+    flash('"{}" was successfully deleted!'.format(products["title"]))
+    return redirect(url_for("index"))
+
+
+@app.route("/")
+def index():
+    conn = get_db_connection()
+    products = conn.execute("SELECT * FROM products").fetchall()
+    conn.close()
+    return render_template("index.html", products=products)
+
+```
+
+
+---
+
+
+## 환율 변환기
+
+
+📁 **폴더:** `Currency_Converter`
+
+
+다양한 국가의 통화를 실시간 환율로 변환하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+requests
+
+
+### 실행 방법
+
+
+```bash
+cd "Currency_Converter"
+python currency-converter.py
+```
+
+
+### 소스 코드
+
+
+`currency-converter.py`:
+
+
+```python
+from forex_python.converter import CurrencyRates, CurrencyCodes
+from requests.exceptions import ConnectionError
+from sys import argv
+
+converter = CurrencyRates()
+codes = CurrencyCodes()
+
+
+def parse_arguments():
+    amount = 1
+    try:
+        amount = float(argv[1])
+        del argv[1]
+
+    except ValueError:
+        # no amount entered
+        # default amount
+        pass
+
+    # argv:
+    # [0] - program name
+    # [1] - SRC
+    # [2] - 'to'
+    # [3] - DST
+    if len(argv) != 4 or argv[2] != "to":
+        raise Exception
+
+    return amount, argv[1].upper(), argv[3].upper()
+
+
+# main
+# parse arguments
+usage = "[<amount>] <BASE> to <DESTINATION>"
+try:
+    amount, base, dest = parse_arguments()
+except:
+    print("usage:")
+    print(usage)
+    exit(1)
+
+# convert
+try:
+    base_symbol = codes.get_symbol(base)
+    dest_symbol = codes.get_symbol(dest)
+
+    # validate currencies
+    if base_symbol is None:
+        raise Exception(f"Currency {base} is invalid")
+    if dest_symbol is None:
+        raise Exception(f"Currency {dest} is invalid")
+
+    result = converter.convert(base_cur=base, dest_cur=dest, amount=amount)
+    result = round(result, 3)
+
+    print(f"{amount}{base_symbol} equals to {result}{dest_symbol}")
+
+except ConnectionError:
+    print("Connection error")
+    exit(1)
+
+except Exception as e:
+    print(e.args[0])
+    exit(1)
+
+```
+
+
+---
+
+
+## Firebase 인증 (Flask)
+
+
+📁 **폴더:** `Firebase_Authentication_Using_Flask`
+
+
+Flask 앱에 Firebase 인증을 연동한 프로젝트입니다. 회원가입, 로그인 기능을 구현합니다.
+
+
+### 필요한 패키지
+
+
+flask, firebase
+
+
+### 실행 방법
+
+
+```bash
+cd "Firebase_Authentication_Using_Flask"
+python run.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+# Importing Flask and other important functions
+from flask import (
+    Flask,
+    render_template,
+    request,
+    redirect,
+    abort,
+    flash,
+    session,
+    url_for,
+)
+
+# Importing firebase auth from db.py
+from db import auth
+
+app = Flask(__name__)
+app.secret_key = "somesecretkey"
+
+exempted_endpoints = ["signup", "login", "static"]
+
+"""
+Signup Route
+"""
+
+
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    if request.method == "POST":
+        name = request.form.get("name")
+        username = request.form.get("email")
+        password = request.form.get("password")
+        repassword = request.form.get("repassword")
+        if password == repassword:
+            if len(password) >= 6:
+                try:
+                    # Creating User in firebase using create_user_with_email_and_password method of firebase/auth
+                    _user_ = auth.create_user_with_email_and_password(
+                        username, password
+                    )
+                    flash("User has been created successfully! Please Login")
+                    return redirect("/")
+                except Exception as e:
+                    abort(500, {"message": str(e)})
+            else:
+                flash("Password is less than 6 characters!")
+                return redirect("/signup")
+        else:
+            flash("Both Passwords do not match!")
+            return redirect("/signup")
+    return render_template("signup.html")
+
+
+"""
+Login Route
+"""
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        data = dict(request.form)
+        email = data.get("email")
+        password = data.get("password")
+        try:
+            # Signing User in firebase using sign_in_with_email_and_password method of firebase/auth
+            user = auth.sign_in_with_email_and_password(email, password)
+            print(user)
+            session["user"] = user["localId"]
+            session["email"] = user["email"]
+            return redirect("/")
+        except Exception as e:
+            abort(500, {"message": str(e)})
+
+    if "user" in session:
+        return redirect("/")
+    return render_template("login.html")
+
+
+"""
+Main dashboard route which has to be protected
+"""
+
+
+@app.route("/", methods=["GET", "POST"])
+def start():
+    return render_template("index.html", user=session["email"])
+
+
+"""
+Logout Route
+"""
+
+
+@app.route("/logout", methods=["GET", "POST"])
+def logout():
+    session.pop("user")
+    session.pop("email")
+    flash("User logged out successfully!")
+    return redirect("/")
+
+
+"""This is an important middleware that run before any request made to flask application and checks
+when user is authenticated or not!
+"""
+
+
+@app.before_request
+def before_request_func():
+    if request.endpoint in exempted_endpoints:
+        return
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+```
+
+
+---
+
+
+## IP 위치 추적기
+
+
+📁 **폴더:** `IP_Locator`
+
+
+IP 주소의 지리적 위치를 찾아주는 도구입니다.
+
+
+### 필요한 패키지
+
+
+requests
+
+
+### 실행 방법
+
+
+```bash
+cd "IP_Locator"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+# Import necessary modules
+import subprocess
+import LocateIP
+
+
+def Display_Menu():
+    header = """
+    __________________________
+    |       IP Locater        |
+    |       IP Finder         |
+    |___________   ___________|
+                \  \ 
+                ^_ _^
+                (o o)\_________
+                (_ _)\         )/\/
+                  U   ||----W||
+                      ||     ||
+    ### Tools:
+        [1] Locate an IP address
+        [2] Get the IP address of a domain
+        [3] Exit
+
+    * Type <clear> to clear previous commands
+    * Type <q> or to abort operation of a tool
+    """
+    print(header)
+
+
+def option_1():
+    """
+    Option 1 --> IP Locater
+    """
+    LocateIP.locate_ip()
+    Display_Menu()
+    Home()
+
+
+def option_2():
+    """
+    Option 2 --> IP Finder
+    """
+    LocateIP.get_ip()
+    Display_Menu()
+    Home()
+
+
+def option_3():
+    """
+    Option 3 --> Exit the program
+    """
+    quit()
+
+
+def Home():
+    """
+    Home of the program is selecting an option from available options.
+    """
+    # Available options' numbers as shown in the menu
+    available_options = (1, 2, 3)
+
+    # Get the option's number.
+    # If it is wrong, this while loop will run unless it gets
+    # a proper number that is related with one of the available options.
+    while True:
+        try:
+            selected_option = input("\nEnter your option\n>>> ")
+            # In order to clear the mess created by the previous commands,
+            # we define 'clear' command to clear up the screen from previous commands.
+            if selected_option == "clear":
+                subprocess.call("cls", shell=True)
+                Display_Menu()
+                continue
+            else:
+                selected_option = int(selected_option)
+        except ValueError:
+            print("Please enter the number of the option")
+            continue
+        else:
+            # If the given option number is not available, try to get an available option number.
+            if selected_option not in available_options:
+                print("The option is not available.\nTry another one.")
+                continue
+            else:
+                break
+
+    # Operate the option related to the given number
+    if selected_option == 1:
+        option_1()
+    elif selected_option == 2:
+        option_2()
+    elif selected_option == 3:
+        option_3()
+
+
+# Run the program
+def Start_Program():
+    Display_Menu()
+    Home()
+
+
+Start_Program()
+
+```
+
+
+---
+
+
+## 포트 스캐너
+
+
+📁 **폴더:** `Port Scanner`
+
+
+네트워크 호스트의 열린 포트를 확인하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+socket
+
+
+### 실행 방법
+
+
+```bash
+cd "Port Scanner"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`scan_port.py`:
+
+
+```python
+import socket
+
+# List of ports to scan
+ports = [
+    20,
+    21,
+    22,
+    23,
+    25,
+    42,
+    43,
+    53,
+    67,
+    69,
+    80,
+    110,
+    115,
+    123,
+    137,
+    138,
+    139,
+    143,
+    161,
+    179,
+    443,
+    445,
+    514,
+    515,
+    993,
+    995,
+    1080,
+    1194,
+    1433,
+    1702,
+    1723,
+    3128,
+    3268,
+    3306,
+    3389,
+    5432,
+    5060,
+    5900,
+    5938,
+    8080,
+    10000,
+    20000,
+]
+host = input("Enter the site name without http/https or IP address: ")
+print("Wait, there is a port scan!")
+
+for port in ports:
+    s = socket.socket()
+    # Setting the timeout to one second
+    s.settimeout(1)
+    # Ловим ошибки
+    try:
+        s.connect((host, port))
+    # If the connection caused an error
+    except socket.error:
+        # then we don't do anything
+        pass
+    else:
+        print(f"{host}: {port} port is active")
+        # Closing the connection
+        s.close
+print("The scan is complete!")
+
+```
+
+
+---
+
+
+## RSS 관리자
+
+
+📁 **폴더:** `RSS_Manager`
+
+
+RSS 뉴스 피드를 읽고 관리하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+feedparser
+
+
+### 실행 방법
+
+
+```bash
+cd "RSS_Manager"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+from fastapi import FastAPI, Form, Request
+from fastapi.templating import Jinja2Templates
+
+from utils import (
+    Feed,
+    add_feed_to_db,
+    delete_feed_from_db,
+    get_all_feeds,
+    get_articles_for_feed,
+)
+
+app = FastAPI()
+
+template_dir = Jinja2Templates(directory="templates")
+
+
+@app.get("/")
+async def index(request: Request):
+    return template_dir.TemplateResponse("index.html", {"request": request})
+
+
+@app.get("/addfeed")
+async def add_feed_page(request: Request):
+    return template_dir.TemplateResponse("add_feed.html", {"request": request})
+
+
+@app.post("/addfeed")
+async def add_feed_submit(url: str = Form(...), tag: str = Form(...)):
+    feed = Feed(url)
+    add_feed_to_db(url=url, title=feed.title, tag=tag, link=feed.link)
+    return {"message": "add successfully"}
+
+
+@app.get("/deletefeed")
+async def delete_feed_page(request: Request):
+    return template_dir.TemplateResponse("delete_feed.html", {"request": request})
+
+
+@app.post("/deletefeed")
+async def delete_feed_submit(url: str = Form(...)):
+    delete_feed_from_db(url)
+    return {"message": "add successfully"}
+
+
+@app.get("/feeds_list")
+async def get_rss_feeds(request: Request):
+    feeds = get_all_feeds()
+    return template_dir.TemplateResponse(
+        "feeds_list.html", {"request": request, "feeds": feeds}
+    )
+
+
+@app.get("/feeds_list/{feed_id}")
+async def get_feed_articles(request: Request, feed_id: int):
+    # feed = get_feed_by_id(feed_id)
+    articles = get_articles_for_feed(feed_id)
+    articles_sorted = sorted(
+        articles, key=lambda x: x["published_parsed"], reverse=True
+    )
+    return template_dir.TemplateResponse(
+        "articles_list.html", {"request": request, "articles_sorted": articles_sorted}
+    )
+
+```
+
+
+---
+
+
+## 간단한 HTTP 서버
+
+
+📁 **폴더:** `Simple_Http_Server`
+
+
+파이썬으로 작성한 기본적인 웹 서버입니다.
+
+
+### 필요한 패키지
+
+
+http.server
+
+
+### 실행 방법
+
+
+```bash
+cd "Simple_Http_Server"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`mhttp.py`:
+
+
+```python
+# mHTTP - A simple HTTP server
+# Written by M.V.Harish Kumar on 24/10/2023
+
+import sys
+import socket
+from pathlib import Path
+
+HOST = "0.0.0.0"
+PORT = 1997
+FOLDER = "." if len(sys.argv) < 2 else sys.argv[1]
+
+
+def get_content(path):
+    ext = "html"
+    if path == "/":
+        try:
+            with open(FOLDER + "/index.html", "r") as f:
+                content = f.read()
+        except FileNotFoundError:
+            content = "The Server is working! but there is no index.html file to render"
+    else:
+        try:
+            with open(FOLDER + path, "r") as f:
+                if Path(FOLDER + path).suffix != ".html":
+                    ext = "plain"
+                content = f.read()
+        except FileNotFoundError:
+            return 404, "File not found", ext
+    return 200, content, ext
+
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    try:
+        s.bind((HOST, PORT))
+        s.listen()
+
+        print("mHTTP: The Micro-HTTP Server")
+        print(f"Server Started running at {HOST}:{PORT}\n")
+        print("mhttp: waiting for connections...")
+
+        while True:
+            clnt, caddr = s.accept()
+            with clnt:
+                print(f"mhttp: got connection from {caddr[0]}:{caddr[1]}")
+                req = clnt.recv(1024).decode()
+                if not req:
+                    print("mhttp: connection closed unexpectedly", file=sys.stderr)
+                    break
+
+                req = req.split("\r\n")
+                print(f"mhttp: got request: {req[0]}")
+                path = req[0].split(" ")[1]
+
+                sts_cd, content, ftype = get_content(path)
+
+                resp = (
+                    f"HTTP/1.1 {sts_cd}\r\nContent-Type: text/{ftype}\r\n\r\n" + content
+                )
+
+                clnt.sendall(resp.encode())
+                print(f"mhttp: sent response({sts_cd}) to {caddr[0]}:{caddr[1]}")
+    except KeyboardInterrupt:
+        print("mhttp: Got Keyboard Interrupt", file=sys.stderr)
+        print("mhttp: Closing Connection.", file=sys.stderr)
+
+```
+
+
+---
+
+
+## 소켓 예제
+
+
+📁 **폴더:** `Socket_example`
+
+
+소켓을 통한 네트워크 통신을 시연하는 프로젝트입니다.
+
+
+### 필요한 패키지
+
+
+socket
+
+
+### 실행 방법
+
+
+```bash
+cd "Socket_example"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`server.py`:
+
+
+```python
+import socket
+
+HOST = "localhost"  # host where the server is located
+PORT = 3000  # port the server is on
+
+s = socket.socket()  # new socket with name s
+s.bind((HOST, PORT))  # bind host and port to socket
+s.listen()  # start the server to receive connections
+
+print("Server runing in port ", PORT)  # print port address
+
+while True:
+    conn, addr = s.accept()  # accept connections
+    res = conn.recv(1024)  # buffer size to receive the data sent from the client
+
+    print("New conection", addr)  # print the address of the current connection
+
+    print(res)  # print data receive from client
+
+    conn.send(b" Hello from server!")  # send data to client
+
+    conn.close()  # close the conection
+
+```
+
+
+---
+
+
+## URL 단축기
+
+
+📁 **폴더:** `Url_Shortener`
+
+
+긴 URL을 짧은 URL로 변환하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+pyshorteners
+
+
+### 실행 방법
+
+
+```bash
+cd "Url_Shortener"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`url_shortner.py`:
+
+
+```python
+import requests
+import json
+
+UI = input("Enter the long link: ")
+api_key = "You api key here"
+headers = {
+    "Authorization": f"Bearer {api_key}",
+    "Content-Type": "application/json",
+}
+
+data = {"long_url": UI}
+for i in range(3):
+    result = requests.post(
+        "https://api-ssl.bitly.com/v4/shorten", headers=headers, data=json.dumps(data)
+    )
+    if result.status_code == 200:
+        break
+if result.status_code == 200:
+    link = json.loads(result.content)["link"]
+    print(f"\nYour shortened link: {link}")
+else:
+    print("error occured")
+
+```
+
+
+---
+
+
+## 도서명 웹 스크래핑
+
+
+📁 **폴더:** `Web scraping for book names`
+
+
+온라인 서점에서 도서 제목을 추출하는 웹 스크래핑 프로젝트입니다.
+
+
+### 필요한 패키지
+
+
+beautifulsoup4, requests
+
+
+### 실행 방법
+
+
+```bash
+cd "Web scraping for book names"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`scraping.py`:
+
+
+```python
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+
+# a function for scraping content from url
+def scrape_url(url):
+    response = requests.get(url)
+    response = response.content
+    soup = BeautifulSoup(response, "html.parser")
+    return soup
+
+
+url = "https://books.toscrape.com/catalogue/category/books/mystery_3/index.html"
+print(scrape_url(url))
+
+
+# extracting data from the content
+data1 = []
+for i in range(1, 51):
+    url = f"https://books.toscrape.com/catalogue/page-{i}.html"
+    response = requests.get(url)
+    response = response.content
+    soup = BeautifulSoup(response, "html.parser")
+    ol = soup.find("ol")
+    articles = ol.find_all("article", class_="product_pod")
+
+    for article in articles:
+        title_element = article.find("h3")
+        title = title_element.get_text(strip=True)
+        price_element = soup.find("p", class_="price_color")
+        price = price_element.get_text(strip=True)
+        star_element = article.find("p")
+        star = star_element["class"][1] if star_element else None
+        data1.append({"title": title, " Price": price, "Star": star})
+# data stored in DataFrame to easy manipulate and preprocess
+df = pd.DataFrame(data1)
+
+```
+
+
+---
+
+
+## Flipkart iPhone 스크래핑
+
+
+📁 **폴더:** `Web Scraping IPhone from Flipkart`
+
+
+Flipkart에서 iPhone 정보를 스크래핑하는 프로젝트입니다.
+
+
+### 필요한 패키지
+
+
+beautifulsoup4, requests
+
+
+### 실행 방법
+
+
+```bash
+cd "Web Scraping IPhone from Flipkart"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`all functions.py`:
+
+
+```python
+import pandas as pd
+import requests
+from bs4 import BeautifulSoup
+
+base_url = "https://www.flipkart.com/mobiles/pr?sid=tyy%2C4io&otracker=categorytree&p%5B%5D=facets.brand%255B%255D%3DAPPLE&page="
+
+
+def mobile_name(doc_new):
+    prase = doc_new.find_all("div", class_="_4rR01T")
+    names = []
+    for tag in prase:
+        names.append(tag.text.strip())
+    return names
+
+
+def prices(doc_new):
+    price = doc_new.find_all("div", class_="_30jeq3 _1_WHN1")
+    price_link = []
+    for i in price:
+        price_link.append(i.text.strip())
+    return price_link
+
+
+def percentage_off(doc_new):
+    off = doc_new.find_all("div", class_="_3Ay6Sb")
+    off_link = []
+    for i in off:
+        off_link.append({"Percentage off": i.text.strip()})
+    return off_link
+
+
+def rating(doc_new):
+    ratings = doc_new.find_all("div", class_="_3LWZlK")
+    all_ratings = []
+    for i in ratings:
+        all_ratings.append(i.text.strip())
+    return all_ratings
+
+
+def mobile_description(doc_new):
+    mobile_description = doc_new.find_all("ul", class_="_1xgFaf")
+    mobile_info_link = []
+    for i in mobile_description:
+        mobile_info_link.append(i.text.strip())
+    return mobile_info_link
+
+
+def for_all_pages(page_no):
+    page_no_url = base_url + str(page_no)
+    response = requests.get(page_no_url)
+
+    if response.status_code != 200:
+        print("Status code:", response.status_code)
+        raise Exception("Failed to fetch web page " + page_no_url)
+
+    doc_new = BeautifulSoup(response.text)
+    mobile_names_new = mobile_name(doc_new)
+    all_prices_new = prices(doc_new)
+    all_ratings_new = rating(doc_new)
+    first_page_new = mobile_description(doc_new)
+    data_new = {
+        "Name": mobile_names_new,  # getting all the information in a dictionary
+        "Prices": all_prices_new,
+        "ratings": all_ratings_new,
+        "Description": first_page_new,
+    }
+
+    return pd.DataFrame(data_new)  # return directly a dataframe.
+
+
+# Below is our helper function to add all data frames.
+
+
+def all_info(num_of_page):
+    # define an empty list
+    all_df = []
+    # Run a loop from 1 to n+1
+    for i in range(1, num_of_page + 1):
+        all_df.append(for_all_pages(page_no=i))
+        # Outside the loop variable you can directly merge the df and return it in the same line.
+        merge = pd.concat(all_df)
+        csv = merge.to_csv("all info.csv", index=None)
+    return csv
+
+```
+
+
+---
+
+
+## 파이썬 채용공고 스크래핑
+
+
+📁 **폴더:** `web scraping- Find python jobs from a website`
+
+
+구직 사이트에서 파이썬 관련 채용 공고를 스크래핑합니다.
+
+
+### 필요한 패키지
+
+
+beautifulsoup4, requests
+
+
+### 실행 방법
+
+
+```bash
+cd "web scraping- Find python jobs from a website"
+python main.py
+```
+
+
+---
+
+
+## 웹사이트 빌더
+
+
+📁 **폴더:** `website-builder`
+
+
+HTML 웹사이트를 생성하는 간단한 도구입니다.
+
+
+### 필요한 패키지
+
+
+없음
+
+
+### 실행 방법
+
+
+```bash
+cd "website-builder"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`run.py`:
+
+
+```python
+from app import create_app
+
+# Create the Flask app using the app factory
+app = create_app()
+
+if __name__ == "__main__":
+    app.run()
+
+```
+
+
+---
+
+
+## Slideshare→PDF
+
+
+📁 **폴더:** `Slideshare to PDF`
+
+
+Slideshare 프레젠테이션을 PDF로 다운로드합니다.
+
+
+### 필요한 패키지
+
+
+requests
+
+
+### 실행 방법
+
+
+```bash
+cd "Slideshare to PDF"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`main.py`:
+
+
+```python
+# Built in modules
+import io
+from tkinter import *
+import pathlib
+
+# External Modules
+import requests
+from bs4 import BeautifulSoup
+import PIL.Image
+import validators
+
+# Get Current Working Directory path
+path = pathlib.Path().resolve()
+
+
+def get_pdf():
+    URL = url_var.get()
+
+    # Only perform scraping if the url is valid.
+    if validators.url(URL):
+        r = requests.get(URL)
+        soup = BeautifulSoup(r.content, "html5lib")
+        imgs = soup.find_all("img", class_="slide-image")
+
+        # Get every image with class slide-image
+        imgs = soup.find_all("img", class_="slide-image")
+
+        # Strip out preferred image resolution from the srcset of the img tag
+        imgSRC = [
+            x.get("srcset").split(",")[-1].strip().split(" ")[0].split("?")[0]
+            for x in imgs
+        ]
+
+        # List to store all the image objects
+        imagesJPG = []
+
+        for index, link in enumerate(imgSRC):
+            try:
+                # Get image content from the image url
+                im = requests.get(link)
+
+                # Convert that image content to a BytesIO file object which is in-memory object,
+                # so we don't have to download the image.
+                f = io.BytesIO(im.content)
+
+                # Converting that BytesIO object to Image Object for PIL to convert it in PDF
+                imgJPG = PIL.Image.open(f)
+                imagesJPG.append(imgJPG)
+
+            except Exception:
+                # Program will fail if the request isn't able to make a proper connection
+                info_label_2.configure(text="Some Connection ERROR")
+
+        # Appending all the images object after the first image and exporting it as a PDF in cwd.
+        imagesJPG[0].save(
+            f"{soup.title.string}.pdf", save_all=True, append_images=imagesJPG[1:]
+        )
+        info_label_2.configure(text=f"File Downloaded to\n{path}")
+    else:
+        info_label_2.configure(text="Please provide a valid link")
+
+
+# Basic Tkinter window setup
+base = Tk()
+base.geometry("300x300")
+base.title("Slideshare to PDF")
+base.resizable(False, False)
+base.configure(background="aliceblue")
+
+# Variable to store user's link and a  entry field,
+# a button and a label
+url_var = StringVar()
+val_entry = Entry(base, textvariable=url_var, width="30")
+val_entry.place(x=50, y=50)
+
+button = Button(
+    base, text="Get PDF", command=get_pdf, width="25", height="2", bg="grey"
+)
+button.place(x=50, y=100)
+info_label = Label(
+    base,
+    text="Enter the presentaion link\nMake sure to have a good internet connection.",
+)
+
+# label to show error and success message to the user
+info_label_2 = Label(base, text="")
+
+info_label.place(x=35, y=200)
+info_label_2.place(x=50, y=250)
+base.mainloop()
+
+```
+
+
+---
+
+
+## SQLite CRUD
+
+
+📁 **폴더:** `Sqlite-crud`
+
+
+SQLite를 사용한 간단한 CRUD 데이터베이스 작업입니다.
+
+
+### 필요한 패키지
+
+
+sqlite3
+
+
+### 실행 방법
+
+
+```bash
+cd "Sqlite-crud"
+python main.py
+```
+
+
+### 소스 코드
+
+
+전체 소스 코드는 `Sqlite-crud/` 폴더를 참조하세요. (코드가 너무 길어 생략)
+
+
+---
+
+
+## PostgreSQL 백업
+
+
+📁 **폴더:** `PostgreSQL_Dumper`
+
+
+PostgreSQL 데이터베이스를 백업하는 도구입니다.
+
+
+### 필요한 패키지
+
+
+psycopg2
+
+
+### 실행 방법
+
+
+```bash
+cd "PostgreSQL_Dumper"
+python main.py
+```
+
+
+### 소스 코드
+
+
+`script.py`:
+
+
+```python
+from datetime import datetime
+from os import getcwd
+from typing import Union
+
+import pexpect
+
+
+def dumper(
+    db_host: str,
+    db_port: Union[str, int],
+    db_user: str,
+    db_name: str,
+    db_password: Union[str, int],
+):
+    dump_name = f"{db_name}_{datetime.now().strftime('%Y%m%d')}.sql"
+
+    child = pexpect.spawn(
+        f"pg_dump -U {db_user} -h {db_host} -p {db_port} -d {db_name} -f {getcwd()}/{dump_name}"
+    )
+    expected_text = "Password: "
+    child.expect(expected_text)
+    child.sendline(str(db_password))
+    child.interact()
+
+
+# Just an example
+# dumper(db_host='localhost', db_port=5432, db_user='postgres', db_name='database', db_password=12345678)
+
+```
+
+
+---

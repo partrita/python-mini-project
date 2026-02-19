@@ -1,19 +1,33 @@
-# Introduction
+# 소개
 
-This book documents a collection of Python mini-projects. Each project is designed to be simple, educational, and easy to run.
+이 책은 100개 이상의 파이썬 미니 프로젝트를 담고 있습니다. 각 프로젝트는 간단하고, 교육적이며, 쉽게 실행할 수 있도록 설계되었습니다.
 
-## How to use this book
+## 이 책 사용법
 
-You can browse the [Projects list](projects.qmd) to find a project that interests you. Each project is located in its own directory in the GitHub repository.
+1. 관심 있는 카테고리를 선택하세요.
+2. 해당 카테고리의 프로젝트 목록을 살펴보세요.
+3. 각 프로젝트의 설명, 소스 코드, 실행 방법을 확인하세요.
+4. 직접 실행하고, 코드를 수정해보며 학습하세요!
 
-## Contributing
+## 프로젝트 실행 환경
 
-We welcome contributions from everyone! If you have a simple Python project you'd like to share:
+대부분의 프로젝트는 **Python 3**에서 실행됩니다. 일부 프로젝트는 추가 패키지가 필요하며, 각 프로젝트 페이지에서 필요한 패키지를 확인할 수 있습니다.
 
-1.  **Fork** the repository.
-2.  **Clone** your fork.
-3.  **Create a folder** for your project.
-4.  **Add your code** and a `README.md`.
-5.  **Submit a Pull Request**.
+```bash
+# 필요한 패키지 설치 예시
+uv pip install pygame
+uv pip install requests
+uv pip install beautifulsoup4
+```
 
-For more detailed instructions, please refer to the [repository README](https://github.com/ndleah/python-mini-project).
+## 기여하기
+
+이 프로젝트에는 누구나 기여할 수 있습니다! 아래 단계를 따라 시작하세요:
+
+1. 저장소를 **포크(Fork)** 합니다.
+2. **클론(Clone)** 합니다.
+3. 프로젝트 이름으로 **폴더를 생성**합니다.
+4. **코드**와 `README.md`를 추가합니다.
+5. **Pull Request**를 제출합니다.
+
+자세한 내용은 [GitHub 저장소](https://github.com/ndleah/python-mini-project)를 참고하세요.
