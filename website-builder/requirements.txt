@@ -113,7 +113,7 @@ Pygments==2.16.1
 pygtrie==2.5.0
 pylatexenc==2.10
 pyparsing==3.1.1
-pypdf==3.16.1
+pypdf==6.15.0
 python-dateutil==2.8.2
 python-dotenv==1.0.0
 python-editor==1.0.4
