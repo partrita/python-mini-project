@@ -70,7 +70,7 @@ librosa==0.10.1
 litellm==1.93.0
 llvmlite==0.40.1
 lsprotocol==2023.0.0b1
-lxml==4.9.3
+lxml==6.1.0
 Markdown==3.4.4
 markdown-it-py==3.0.0
 MarkupSafe==2.1.3
