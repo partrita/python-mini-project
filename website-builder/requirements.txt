@@ -67,7 +67,7 @@ langcodes==3.3.0
 language-tags==1.2.0
 lazy_loader==0.3
 librosa==0.10.1
-litellm==0.1.610
+litellm==1.93.0
 llvmlite==0.40.1
 lsprotocol==2023.0.0b1
 lxml==4.9.3
