@@ -6,14 +6,10 @@ def is_valid_guess(guess: str) -> bool:
     return guess.isalpha() and guess.islower() and len(guess) == 1
 
 
-# Function to display the current state of the word with placeholders for unguessed letters
+# Function to display the current state of the word without logging the secret word
 def display_word(secret_word: str, guessed: set[str]) -> None:
-    for letter in secret_word:
-        if letter in guessed:
-            print(letter, end=" ")
-        else:
-            print("_", end=" ")
-    print()
+    display = " ".join(letter if letter in guessed else "_" for letter in secret_word)
+    print(display)
 
 
 # Function to generate a random word from a file
@@ -52,11 +48,11 @@ def main() -> None:
             attempts += 1
             print("Incorrect guess. Attempts remaining:", max_attempts - attempts)
         elif all(letter in guessed for letter in secret_word):
-            print("Congratulations! You've guessed the word:", secret_word)
+            print("Congratulations! You've guessed the word.")
             break
 
     if attempts == max_attempts:
-        print("Sorry, you've run out of attempts. The word was:", secret_word)
+        print("Sorry, you've run out of attempts.")
 
     play_again = input("Do you want to play again? (Y/N): ").lower()
     if play_again == "y":
