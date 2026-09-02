@@ -6,10 +6,10 @@ def is_valid_guess(guess: str) -> bool:
     return guess.isalpha() and guess.islower() and len(guess) == 1
 
 
-# Function to display the current state of the word without logging the secret word
+# Function to display the current state without logging the secret word
 def display_word(secret_word: str, guessed: set[str]) -> None:
-    display = " ".join(letter if letter in guessed else "_" for letter in secret_word)
-    print(display)
+    print("_ " * len(secret_word))
+    print(f"Guessed letters: {len(guessed)}")
 
 
 # Function to generate a random word from a file
