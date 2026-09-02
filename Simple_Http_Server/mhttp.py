@@ -5,7 +5,7 @@ import sys
 import socket
 from pathlib import Path
 
-HOST = "0.0.0.0"
+HOST = "127.0.0.1"
 PORT = 1997
 FOLDER = "." if len(sys.argv) < 2 else sys.argv[1]
 

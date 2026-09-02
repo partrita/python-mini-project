@@ -35,9 +35,10 @@ def get_password(website):
             decrypted_password = decrypt_password(encrypted_password)
             print(f"Website: {website}")
             print(f"Username: {username}")
-            print(f"Password: {decrypted_password}")
-            return
+            print("Password: ********")
+            return decrypted_password
     print("Website not found")
+    return None
 
 
 with open("passwords.csv", mode="r") as file:

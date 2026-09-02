@@ -41,7 +41,7 @@ def main():
         args.use_numbers,
         args.use_symbols,
     )
-    print(f"Generated Password: {password}")
+    print(f"Generated a password with {len(password)} characters.")
 
 
 if __name__ == "__main__":

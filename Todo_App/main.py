@@ -40,5 +40,5 @@ def edit(index):
         return redirect(url_for("index"))
 
 
-# run the app
-app.run(debug=True)
+# run the app without the Flask debugger
+app.run()
