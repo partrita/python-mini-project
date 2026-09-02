@@ -166,7 +166,7 @@ tokenizers==0.13.3
 tokentrim==0.1.10
 torch==2.13.0
 torchvision==0.21.0
-tqdm==4.66.1
+tqdm==4.66.3
 traitlets==5.10.0
 transformers==5.10.1
 typeguard==3.0.2
