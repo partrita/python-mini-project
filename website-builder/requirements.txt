@@ -106,7 +106,7 @@ pyarrow==14.0.1
 PyAudio==0.2.13
 pycparser==2.21
 pyctcdecode==0.5.0
-pydantic==2.3.0
+pydantic==2.4.0
 pydantic_core==2.6.3
 pygls==1.0.2
 Pygments==2.20.0
