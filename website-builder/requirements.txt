@@ -130,7 +130,7 @@ rich==13.5.2
 rpds-py==0.9.2
 s3transfer==0.6.2
 safetensors==0.3.3
-sagemaker==3.4.0
+sagemaker==3.8.0
 sagemaker-huggingface-inference-toolkit==2.2.0
 sagemaker-inference==1.10.0
 schema==0.7.5
