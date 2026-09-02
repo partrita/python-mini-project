@@ -38,7 +38,7 @@ dlinfo==1.2.1
 einops==0.6.1
 fastapi==0.136.3
 fastjsonschema==2.18.0
-filelock==3.12.2
+filelock==3.20.3
 Flask==3.0.0
 Flask-Cors==4.0.2
 Flask-WTF==1.2.1
