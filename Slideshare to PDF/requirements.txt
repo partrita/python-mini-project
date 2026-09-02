@@ -5,10 +5,10 @@ charset-normalizer==2.0.10
 decorator==5.1.1
 html5lib==1.1
 idna==3.3
-Pillow==9.0.0
+Pillow==12.1.1
 requests==2.27.1
 six==1.16.0
 soupsieve==2.3.1
-urllib3==1.26.8
+urllib3==2.6.3
 validators==0.18.2
 webencodings==0.5.1
