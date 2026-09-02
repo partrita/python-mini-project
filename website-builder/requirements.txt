@@ -164,7 +164,7 @@ tiktoken==0.5.1
 tk==0.1.0
 tokenizers==0.13.3
 tokentrim==0.1.10
-torch==2.6.0
+torch==2.13.0
 torchvision==0.21.0
 tqdm==4.66.1
 traitlets==5.10.0
