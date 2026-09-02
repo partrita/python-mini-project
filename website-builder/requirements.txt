@@ -150,7 +150,7 @@ soupsieve==2.5
 soxr==0.3.6
 spacy==3.7.1
 spacy-legacy==3.0.12
-spacy-loggers==1.0.5
+spacy-loggers==3.0.0
 SpeechRecognition==3.10.0
 srsly==2.4.8
 starlette==1.6.0
