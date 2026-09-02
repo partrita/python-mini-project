@@ -100,7 +100,7 @@ pooch==1.7.0
 pox==0.3.3
 ppft==1.7.6.7
 preshed==3.0.9
-protobuf==4.25.8
+protobuf==5.29.6
 psutil==5.9.5
 pyarrow==14.0.1
 PyAudio==0.2.13
