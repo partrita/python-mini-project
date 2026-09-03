@@ -34,7 +34,7 @@ def get_password(website):
             encrypted_password = entry["password"]
             decrypted_password = decrypt_password(encrypted_password)
             print(f"Website: {website}")
-            print(f"Username: {username}")
+            print("Username: [REDACTED]")
             print("Password: ********")
             return decrypted_password
     print("Website not found")
