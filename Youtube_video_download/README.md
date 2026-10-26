@@ -43,7 +43,7 @@ use this for install pytube
 
 <!-- Modules required to be able to use the script successfully
 and how to install them.
-(If there are a lot of them, including a `requirements.txt` file will work better.) -->
+(If there are a lot of them, including a `pyproject.toml` file will work better.) -->
 
 ## 🌟 How to run
 

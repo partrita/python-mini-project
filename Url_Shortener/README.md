@@ -41,7 +41,7 @@ A cli url shortener.
 <!--Remove the below lines and add yours -->
 
   
-    pip install -r requirements.txt
+    uv sync
 
 
 ## 🌟 How to run

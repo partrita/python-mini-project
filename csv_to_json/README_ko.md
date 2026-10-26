@@ -13,7 +13,7 @@
 사용된 언어 - python3.
 필요한 패키지 - csv 및 json.
 아직 설치되지 않은 경우 pip3 install csv 및 pip3 install json을 사용하십시오.
-(많은 경우 `requirements.txt` 파일을 포함하는 것이 더 좋습니다.)
+(많은 경우 `pyproject.toml` 파일을 포함하는 것이 더 좋습니다.)
 
 ## 🌟 실행 방법
 <!--아래 줄을 삭제하고 원하는 내용을 추가하십시오-->

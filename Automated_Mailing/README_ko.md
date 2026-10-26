@@ -11,9 +11,9 @@
 
 필요한 모듈은 `os`, `email.mime`, `smtplib`, `pandas`입니다.
 
-이들은 `requirements.txt`에 나열되어 있습니다. 아래 명령을 사용하여 이러한 종속성을 설치하십시오.
+이들은 `pyproject.toml`에 나열되어 있습니다. 아래 명령을 사용하여 이러한 종속성을 설치하십시오.
 
-```pip install requirements.txt```
+```uv sync```
 
 ## 🌟 실행 방법
 

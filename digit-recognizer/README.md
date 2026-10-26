@@ -11,7 +11,7 @@ Handwritten digit recognition application implemented by TensorFlow2 + Keras and
 ```shell script
 $ git clone --depth 1 https://github.com/InnoFang/what-digit-you-write.git
 $ cd what-digit-you-write
-$ conda create --name <env> --file requirements.txt
+$ conda create --name <env> --file pyproject.toml
 $ conda activate <env>
 $ python app.py
 ```

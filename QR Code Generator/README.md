@@ -22,7 +22,7 @@ Made with `python`
 
 ## 🌟 How to run
 - Clone the Project
-- Run `pip install requirements.txt`
+- Run `uv sync`
 - Run `python qrGenerator.py`
 
 

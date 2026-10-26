@@ -29,7 +29,7 @@ Microsoft Excel '.xls' 파일을 '.xlsx' 파일로 변환하는 간단한 파이
 3. 필요한 종속성을 설치하려면 터미널을 열고 다음을 실행합니다.
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 4. 스크립트를 실행하기 전에 실행 중인 모든 Microsoft Excel 응용 프로그램을 닫았는지 확인합니다.

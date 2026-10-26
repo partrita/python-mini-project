@@ -1,0 +1,10 @@
+[project]
+name = "mnist-digit-recognizer"
+version = "0.1.0"
+description = "Mini project: mnist-digit-recognizer"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "keras==3.15.0",
+    "tensorflow==2.17.0",
+]

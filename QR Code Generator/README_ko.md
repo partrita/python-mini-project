@@ -22,7 +22,7 @@ GUI용 `tkinter` 모듈
 
 ## 🌟 실행 방법
 - 프로젝트 복제
-- `pip install requirements.txt` 실행
+- `uv sync` 실행
 - `python qrGenerator.py` 실행
 
 

@@ -1,0 +1,18 @@
+[project]
+name = "firebase-authentication-using-flask"
+version = "0.1.0"
+description = "Mini project: firebase-authentication-using-flask"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "firebase==3.0.1",
+    "Flask==3.1.3",
+    "gcloud==0.18.3",
+    "pycryptodome==3.19.1",
+    "python-jwt==4.0.0",
+    "requests-toolbelt==0.10.1",
+    "setuptools",
+    "sseclient==0.0.27",
+    "urllib3>=2.7.0",
+    "Werkzeug==3.1.6",
+]

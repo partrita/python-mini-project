@@ -11,7 +11,7 @@ Modules : pygame
 Running this game is pretty straight forward.
 
 ```sh
-pip install -r requirements.txt
+uv sync
 ```
 
 ```sh

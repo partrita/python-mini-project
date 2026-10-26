@@ -14,7 +14,7 @@ This project enables developers to implement secure user authentication features
 
 ## 🌟 How to run
  - ### Install all the requirements
-    Run `pip install -r requirements.txt` to install all the requirements.
+    Run `uv sync` to install all the requirements.
  - ### Firebase Setup for Project
 
    - Create a [firebase](https://firebase.google.com/) project, set up a web project and get all the `Project Configurations` from `Project Settings`.

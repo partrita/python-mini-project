@@ -11,9 +11,9 @@ This code helps automate the process of sending mail to large audience.It takes 
 
 Modules required are `os` , `email.mime` , `smtplib` , `pandas`.
 
-These are listed in `requirements.txt` . USe the below command to install these dependencies.
+These are listed in `pyproject.toml` . USe the below command to install these dependencies.
 
-```pip install requirements.txt```
+```uv sync```
  
 ## 🌟 How to run
 

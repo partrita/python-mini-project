@@ -22,7 +22,7 @@ An innovative web application where users interact with an AI chatbot to design 
  You can install the necessary modules using:
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 ## 🌟 How to Run
@@ -37,7 +37,7 @@ cd website-builder
 ### 2. Install the required modules:
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 ### 3. Run the application:

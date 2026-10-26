@@ -1,0 +1,9 @@
+[project]
+name = "url-shortener"
+version = "0.1.0"
+description = "Mini project: url-shortener"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "requests",
+]

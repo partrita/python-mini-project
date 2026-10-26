@@ -51,7 +51,7 @@ This Python project implements a text prediction system using the Laplace smooth
 1. **Instal** the required dependencies:
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 2. **Run** the code:

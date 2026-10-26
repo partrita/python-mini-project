@@ -13,7 +13,7 @@ This script helps to convert a csv file to a json file.
 language used - python3.
 Packages required - csv and json.
 if not already installed use pip3 install csv and pip3 install json.
-(If there are a lot of them, including a `requirements.txt` file will work better.)
+(If there are a lot of them, including a `pyproject.toml` file will work better.)
 
 ## 🌟 How to run
 <!--Remove the below lines and add yours -->

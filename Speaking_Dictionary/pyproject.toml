@@ -1,0 +1,13 @@
+[project]
+name = "speaking-dictionary"
+version = "0.1.0"
+description = "Mini project: speaking-dictionary"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "gtts",
+    "pyaudio",
+    "PyDictionary",
+    "pyttsx3",
+    "SpeechRecognition",
+]

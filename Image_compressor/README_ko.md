@@ -15,7 +15,7 @@
 스크립트를 성공적으로 사용하기 위해 필요한 모듈
 `pillow`, `os`, `easygui`
 
-이러한 모듈은 `requirements.txt`에 나열되어 있으며 다음 명령 `pip install requirements.txt`를 실행하여 설치할 수 있습니다.
+이러한 모듈은 `pyproject.toml`에 나열되어 있으며 다음 명령 `uv sync`를 실행하여 설치할 수 있습니다.
 
 ## 🌟 실행 방법
 <!--아래 줄을 삭제하고 원하는 내용을 추가하십시오-->

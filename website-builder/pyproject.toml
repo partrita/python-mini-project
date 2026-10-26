@@ -1,0 +1,15 @@
+[project]
+name = "website-builder"
+version = "0.1.0"
+description = "Mini project: website-builder"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "Flask>=3.0.0",
+    "Flask-WTF>=1.2.1",
+    "Flask-Cors>=4.0.0",
+    "Jinja2>=3.1.2",
+    "Werkzeug>=3.0.0",
+    "certifi>=2024.7.4",
+    "urllib3>=2.7.0",
+]

@@ -1,0 +1,9 @@
+[project]
+name = "fancy-text-generator"
+version = "0.1.0"
+description = "Mini project: fancy-text-generator"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pyfiglet",
+]

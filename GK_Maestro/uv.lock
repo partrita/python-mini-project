@@ -1,0 +1,23 @@
+version = 1
+revision = 5
+requires-python = ">=3.10"
+
+[[package]]
+name = "art"
+version = "6.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/0f/69/efa94b5f8a33fdb04c142f68830acd6e87d592c6e192254b3644a30e6f10/art-6.0.tar.gz", hash = "sha256:884ef1c10e900387cce97789e8668125720cbf4459206641b91fc298c859cda9", size = 660124, upload-time = "2023-06-14T16:33:59.468Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/52/29/8e0585897a9b1ae752598b10863716694716b115b1983770aa302948945d/art-6.0-py3-none-any.whl", hash = "sha256:882e6b5a4c6045c6dace31147c0b8522c8ca70177a5922f172733d116123a187", size = 599443, upload-time = "2023-06-14T16:34:02.511Z" },
+]
+
+[[package]]
+name = "gk-maestro"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "art" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "art", specifier = "==6.0" }]

@@ -11,7 +11,7 @@
 이 게임을 실행하는 것은 매우 간단합니다.
 
 ```sh
-pip install -r requirements.txt
+uv sync
 ```
 
 ```sh

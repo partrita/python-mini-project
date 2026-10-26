@@ -41,7 +41,7 @@ CLI URL 단축기입니다.
 <!--아래 줄을 삭제하고 당신의 것을 추가하세요 -->
 
 
-    pip install -r requirements.txt
+    uv sync
 
 
 ## 🌟 실행 방법

@@ -25,7 +25,7 @@ Go to project `IP_Locater`
 
 Install the required modules using pip:
 
-`pip install -r requirements.txt`
+`uv sync`
 
 run `main.py`
 

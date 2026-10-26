@@ -1,0 +1,8 @@
+[project]
+name = "hashed-and-salted-pass"
+version = "0.1.0"
+description = "Mini project: hashed-and-salted-pass"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+]

@@ -50,7 +50,7 @@
 1. **필수** 종속성을 설치합니다.
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 2. 코드를 **실행**합니다.

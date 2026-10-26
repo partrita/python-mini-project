@@ -1,0 +1,9 @@
+[project]
+name = "xls-to-xlsx"
+version = "0.1.0"
+description = "Mini project: xls-to-xlsx"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pywin32==306",
+]

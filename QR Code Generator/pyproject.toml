@@ -1,0 +1,10 @@
+[project]
+name = "qr-code-generator"
+version = "0.1.0"
+description = "Mini project: qr-code-generator"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pypng==0.0.21",
+    "PyQRCode==1.2.1",
+]

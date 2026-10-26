@@ -1,0 +1,10 @@
+[project]
+name = "ip-locator"
+version = "0.1.0"
+description = "Mini project: ip-locator"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pyfiglet",
+    "requests",
+]

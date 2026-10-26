@@ -29,7 +29,7 @@ This script requires [Python 3](https://www.python.org/downloads/) and [pywin32]
 3. To install the required dependencies, open a terminal and run:
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 4. Make sure you close all running Microsoft Excel applications before executing the script.

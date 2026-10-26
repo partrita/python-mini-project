@@ -25,7 +25,7 @@
 <!--아래 줄을 삭제하고 원하는 내용을 추가하십시오-->
 스크립트를 성공적으로 사용하기 위해 필요한 모듈
 그리고 설치 방법.
-(많은 경우 `requirements.txt` 파일을 포함하는 것이 더 좋습니다.)
+(많은 경우 `pyproject.toml` 파일을 포함하는 것이 더 좋습니다.)
 
 [pprint](https://docs.python.org/3/library/pprint.html)
 

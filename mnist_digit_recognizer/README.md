@@ -14,7 +14,7 @@ Neural network has been created to recognize digits.
 Open terminal and use the following command to install the required modules:
 
 ```sh 
-pip install -r requirements.txt
+uv sync
 ```
 
 ## 🌟 How to run

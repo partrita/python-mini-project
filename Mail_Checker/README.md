@@ -24,9 +24,9 @@ We only require 'imaplib' python library to run this, this package is built-in t
 
                           import imaplib
 
-I have attached a requirements.txt file that will install the neccessary python library needed for this script, in case if it turns out to be missing in your system. Run the command given below in the shell  to install the requirements!
+I have attached a pyproject.toml file that will install the neccessary python library needed for this script, in case if it turns out to be missing in your system. Run the command given below in the shell  to install the requirements!
 
-                    pip install -r requirements.txt 
+                    uv sync 
 
 
 Once you do  this your script should be ready to use, make sure to  add your account credentials and make other personalizations.

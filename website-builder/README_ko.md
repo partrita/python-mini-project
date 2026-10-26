@@ -22,7 +22,7 @@ AI 기반 웹사이트 빌더
  다음을 사용하여 필요한 모듈을 설치할 수 있습니다.
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 ## 🌟 실행 방법
@@ -37,7 +37,7 @@ cd website-builder
 ### 2. 필수 모듈 설치:
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 ### 3. 애플리케이션 실행:

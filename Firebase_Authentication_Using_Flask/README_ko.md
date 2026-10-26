@@ -14,7 +14,7 @@
 
 ## 🌟 실행 방법
  - ### 모든 요구 사항 설치
-    `pip install -r requirements.txt`를 실행하여 모든 요구 사항을 설치합니다.
+    `uv sync`를 실행하여 모든 요구 사항을 설치합니다.
  - ### 프로젝트를 위한 Firebase 설정
 
    - [firebase](https://firebase.google.com/) 프로젝트를 만들고 웹 프로젝트를 설정한 다음 `프로젝트 설정`에서 모든 `프로젝트 구성`을 가져옵니다.

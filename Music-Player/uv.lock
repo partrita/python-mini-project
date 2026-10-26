@@ -1,0 +1,23 @@
+version = 1
+revision = 5
+requires-python = ">=3.10"
+
+[[package]]
+name = "music-player"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "python-vlc" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "python-vlc", specifier = "==3.0.12118" }]
+
+[[package]]
+name = "python-vlc"
+version = "3.0.12118"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/6e/d7/216a63a732020da8fd668ebc8f4da29c53cd148a5a3263950e801ca99863/python-vlc-3.0.12118.tar.gz", hash = "sha256:566f2f7c303f6800851cacc016df1c6eeec094ad63e0a49d87db9d698094f1fb", size = 148685, upload-time = "2021-04-20T20:27:13.422Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/70/d1/2b0d4bd9cc6e1decc15e7c595f64e097e3a3f2dbcfa56af132bf72d6c105/python_vlc-3.0.12118-py3-none-any.whl", hash = "sha256:f88be06c6f819a4db2de1c586b193b5df1410ff10fca33b8c6f4e56037c46f7b", size = 79520, upload-time = "2021-04-20T20:27:02.846Z" },
+]

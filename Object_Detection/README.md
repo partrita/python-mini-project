@@ -12,7 +12,7 @@ This folder contains a Python script for a real-time object detection applicatio
 
 Open Command Prompt and use the following command to install the required modules:
 ``` bash
-pip install -r requirements.txt
+uv sync
 ```
 
 ## 🌟 How to run

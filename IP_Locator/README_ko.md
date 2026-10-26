@@ -25,7 +25,7 @@ git을 사용하여 프로젝트를 복제합니다.
 
 pip를 사용하여 필요한 모듈을 설치합니다.
 
-`pip install -r requirements.txt`
+`uv sync`
 
 `main.py` 실행
 

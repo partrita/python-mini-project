@@ -12,7 +12,7 @@
 
 명령 프롬프트를 열고 다음 명령을 사용하여 필요한 모듈을 설치하십시오.
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 ## 🌟 실행 방법
