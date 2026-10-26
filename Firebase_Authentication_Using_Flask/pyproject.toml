@@ -14,5 +14,5 @@ dependencies = [
     "setuptools",
     "sseclient==0.0.27",
     "urllib3>=2.7.0",
-    "Werkzeug==3.1.6",
+    "Werkzeug>=3.1.9",
 ]

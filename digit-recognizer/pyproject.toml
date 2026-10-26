@@ -3,13 +3,13 @@ name = "digit-recognizer"
 version = "0.1.0"
 description = "Mini project: digit-recognizer"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
     "flask>=1.1.2",
     "gunicorn==22.0.0",
     "matplotlib>=3.3.1",
     "numpy>=1.19.1",
-    "protobuf==5.29.6",
+    "protobuf>=6.31.1",
     "psycopg2==2.9.4",
-    "tensorflow==2.20.0",
+    "tensorflow>=2.21.0",
 ]

@@ -3,22 +3,22 @@ name = "python-mini-project"
 version = "0.1.0"
 description = "Mini project: python-mini-project"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11.5"
 dependencies = [
     "beautifulsoup4==4.12.2",
-    "blinker==1.7.0",
+    "blinker>=1.9.0",
     "certifi>=2024.7.4",
     "charset-normalizer==3.3.2",
     "click==8.5.0",
     "colorama==0.4.6",
-    "Flask==3.0.0",
-    "idna==3.6",
-    "itsdangerous==2.1.2",
+    "Flask>=3.1.3",
+    "idna>=3.20",
+    "itsdangerous>=2.2.0",
     "Jinja2==3.1.6",
     "MarkupSafe==2.1.3",
     "pyamaze==1.0.1",
     "requests==2.34.2",
-    "soupsieve==2.5",
+    "soupsieve>=3.0.4",
     "urllib3>=2.7.0",
-    "Werkzeug==3.0.1",
+    "Werkzeug>=3.1.9",
 ]

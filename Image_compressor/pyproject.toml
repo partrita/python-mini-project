@@ -3,8 +3,8 @@ name = "image-compressor"
 version = "0.1.0"
 description = "Mini project: image-compressor"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
     "easygui",
-    "pillow>=12.3.0",
+    "pillow>=13.0.0",
 ]
